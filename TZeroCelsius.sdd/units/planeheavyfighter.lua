@@ -28,7 +28,6 @@ unitDef = {
 	modelradius    = [[10]],
 	refuelturnradius = [[120]],
 
-	combat_slowdown = 0.5,
 	selection_scale = 1.4,
   },
 
@@ -42,7 +41,7 @@ unitDef = {
   idleAutoHeal           = 5,
   idleTime               = 1800,
   maxAcc                 = 0.6,
-  maxDamage              = 1400,
+  maxDamage              = 1420,
   maxRudder              = 0.006,
   maxVelocity            = 8.2,
   minCloakDistance       = 75,
@@ -71,7 +70,7 @@ unitDef = {
 
 	MISSILE = {
       name                    = [[Guided Missiles]],
-      areaOfEffect            = 64,
+      areaOfEffect            = 48,
       avoidFriendly           = true,
       canattackground         = false,
       cegTag                  = [[missiletrailblue]],
@@ -79,6 +78,8 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
       cylinderTargeting       = 6,
+	  burst					  = 2,
+	  burstRate				  = 0.25,
 
 	  customParams        	  = {
 		burst = Shared.BURST_RELIABLE,
@@ -88,9 +89,9 @@ unitDef = {
 	  },
 
       damage                  = {
-        default = 40,
-        planes  = 330,
-        subs    = 40,
+        default = 35,
+        planes  = 330.1,
+        subs    = 35,
       },
 
       explosionGenerator      = [[custom:WEAPEXP_PUFF]],

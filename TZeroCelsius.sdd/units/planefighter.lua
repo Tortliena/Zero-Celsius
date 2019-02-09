@@ -3,7 +3,7 @@ unitDef = {
   name                   = [[Swift]],
   description            = [[Multi-role Fighter]],
   brakerate              = 0.4,
-  buildCostMetal         = 100,
+  buildCostMetal         = 120,
   buildPic               = [[planefighter.png]],
   canFly                 = true,
   canGuard               = true,
@@ -25,9 +25,9 @@ unitDef = {
   customParams           = {
 
 	specialreloadtime = [[850]],
-	boost_speed_mult = 5,
-	boost_accel_mult = 6,
-	boost_duration = 30, -- frames
+	boost_speed_mult = 2,
+	boost_accel_mult = 4,
+	boost_duration = 150, -- frames
 
 	fighter_pullup_dist = 400,
 
@@ -47,9 +47,9 @@ unitDef = {
   idleTime               = 1800,
   maneuverleashlength    = [[1280]],
   maxAcc                 = 0.5,
-  maxDamage              = 330,
+  maxDamage              = 360,
   maxRudder              = 0.007,
-  maxVelocity            = 13,
+  maxVelocity            = 12,
   minCloakDistance       = 75,
   mygravity              = 1,
   noAutoFire             = false,
@@ -147,7 +147,6 @@ unitDef = {
       collideFriendly         = false,
       craterBoost             = 0,
       craterMult              = 0,
-      cylinderTargeting       = 6,
 
 	  customParams        	  = {
 		burst = Shared.BURST_RELIABLE,
