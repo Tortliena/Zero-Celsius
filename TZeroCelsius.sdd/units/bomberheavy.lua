@@ -41,9 +41,9 @@ unitDef = {
   idleTime            = 1800,
   maneuverleashlength = [[1280]],
   maxAcc              = 0.5,
-  maxDamage           = 4300,
+  maxDamage           = 3600,
   maxFuel             = 1000000,
-  maxVelocity         = 4,
+  maxVelocity         = 5.2,
   minCloakDistance    = 75,
   mygravity           = 1,
   noAutoFire          = false,
@@ -63,6 +63,9 @@ unitDef = {
       badTargetCategory  = [[GUNSHIP FIXEDWING]],
       onlyTargetCategory = [[SWIM LAND SINK TURRET FLOAT SHIP HOVER GUNSHIP FIXEDWING]],
     },
+	{
+      def = [[COR_SHIELD_SMALL]],
+    },
 
   },
 
@@ -78,7 +81,7 @@ unitDef = {
       cegTag                  = [[raventrail]],
       collideFriendly         = false,
       burst                   = 4,
-      burstRate               = 0.5,
+      burstRate               = 1,
       craterBoost             = 1,
       craterMult              = 2,
 
@@ -114,8 +117,35 @@ unitDef = {
       tracks                  = true,
       turnRate                = 30000,
       weaponAcceleration      = 200,
-      weaponType              = [[MissileLauncher]],
+      weaponType              = [[AircraftBomb]],
       weaponVelocity          = 400,
+    },
+	COR_SHIELD_SMALL = {
+      name                    = [[Energy Shield]],
+
+      damage                  = {
+        default = 10,
+      },
+
+      exteriorShield          = true,
+      shieldAlpha             = 0.2,
+      shieldBadColor          = [[1 0.1 0.1 1]],
+      shieldGoodColor         = [[0.1 0.1 1 1]],
+      shieldInterceptType     = 3,
+      shieldPower             = 600,
+      shieldPowerRegen        = 5,
+      shieldPowerRegenEnergy  = 2,
+      shieldRadius            = 80,
+      shieldRepulser          = false,
+      smartShield             = true,
+	  shieldStartingPower     = 300,
+      visibleShield           = false,
+      visibleShieldRepulse    = false,
+      --texture1                = [[shield3mist]],
+      --visibleShield           = true,
+      --visibleShieldHitFrames  = 4,
+      --visibleShieldRepulse    = true,
+      weaponType              = [[Shield]],
     },
 
   },

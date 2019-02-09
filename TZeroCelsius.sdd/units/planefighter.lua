@@ -25,8 +25,8 @@ unitDef = {
   customParams           = {
 
 	specialreloadtime = [[850]],
-	boost_speed_mult = 2,
-	boost_accel_mult = 4,
+	boost_speed_mult = 1.5,
+	boost_accel_mult = 3.5,
 	boost_duration = 150, -- frames
 
 	fighter_pullup_dist = 400,
@@ -140,25 +140,26 @@ unitDef = {
 
     MISSILE = {
       name                    = [[Guided Missiles]],
-      areaOfEffect            = 48,
+      areaOfEffect            = 40,
       avoidFriendly           = true,
       canattackground         = true,
       cegTag                  = [[missiletrailblue]],
       collideFriendly         = false,
       craterBoost             = 0,
       craterMult              = 0,
+	  burst                   = 2,
+	  burstRate               = 0.5,
 
 	  customParams        	  = {
 		burst = Shared.BURST_RELIABLE,
 
-		isaa = [[1]],
 		light_color = [[0.5 0.6 0.6]],
 	  },
 
       damage                  = {
-        default = 35,
-        planes  = 35,
-        subs    = 10,
+        default = 25,
+        planes  = 25,
+        subs    = 5,
       },
 
       explosionGenerator      = [[custom:WEAPEXP_PUFF]],

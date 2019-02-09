@@ -70,7 +70,7 @@ unitDef = {
 
 	MISSILE = {
       name                    = [[Guided Missiles]],
-      areaOfEffect            = 40,
+      areaOfEffect            = 12,
       avoidFriendly           = true,
       canattackground         = false,
       cegTag                  = [[missiletrailblue]],
