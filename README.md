@@ -7,6 +7,8 @@ This repository contains only game module files, without any associated infrastr
 	
 Seek those in other repositories.
 
+This fork is a rebalance mod. Check the original git here : https://github.com/ZeroK-RTS/Zero-K
+
 Usage
 =====
 
