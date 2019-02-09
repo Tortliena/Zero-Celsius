@@ -74,13 +74,13 @@ unitDef = {
 
     ARM_PIDR = {
       name                    = [[Implosion Bomb]],
-      areaOfEffect            = 248,
+      areaOfEffect            = 260,
       avoidFeature            = false,
       avoidFriendly           = false,
       burnblow                = true,
       cegTag                  = [[raventrail]],
       collideFriendly         = false,
-      burst                   = 4,
+      burst                   = 3,
       burstRate               = 1,
       craterBoost             = 1,
       craterMult              = 2,
@@ -94,8 +94,8 @@ unitDef = {
       },
 
       damage                  = {
-        default = 1000.1,
-        planes  = 1000.1,
+        default = 1200.1,
+        planes  = 1200.1,
         subs    = 100,
       },
 
