@@ -36,7 +36,7 @@ unitDef = {
   idleAutoHeal           = 5,
   idleTime               = 1800,
   maneuverleashlength    = [[500]],
-  maxDamage              = 14200,
+  maxDamage              = 14500,
   maxVelocity            = 3.3,
   minCloakDistance       = 150,
   noAutoFire             = false,
@@ -90,7 +90,9 @@ unitDef = {
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
-
+	{
+      def = [[COR_SHIELD_SMALL]],
+    },
   },
 
 
@@ -215,7 +217,7 @@ unitDef = {
       shieldPower             = 1800,
       shieldPowerRegen        = 25,
       shieldPowerRegenEnergy  = 6,
-      shieldRadius            = 275,
+      shieldRadius            = 220,
       shieldRepulser          = false,
       smartShield             = true,
       visibleShield           = false,

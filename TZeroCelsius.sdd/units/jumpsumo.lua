@@ -6,7 +6,7 @@ unitDef = {
   autoheal            = 20,
   activateWhenBuilt   = true,
   brakeRate           = 0.3,
-  buildCostMetal      = 1700,
+  buildCostMetal      = 1600,
   builder             = false,
   buildPic            = [[jumpsumo.png]],
   canGuard            = true,
@@ -20,11 +20,11 @@ unitDef = {
 
   customParams        = {
     canjump            = 1,
-    jump_range         = 360,
-    jump_height        = 110,
-    jump_speed         = 6,
-    jump_delay         = 30,
-    jump_reload        = 15,
+    jump_range         = 460,
+    jump_height        = 160,
+    jump_speed         = 6.6,
+    jump_delay         = 36,
+    jump_reload        = 10,
     jump_from_midair   = 0,
     jump_rotate_midair = 0,
     aimposoffset   = [[0 6 0]],
@@ -40,7 +40,7 @@ unitDef = {
   idleTime            = 1800,
   leaveTracks         = true,
   losEmitHeight       = 60,
-  maxDamage           = 13500,
+  maxDamage           = 12500,
   maxSlope            = 36,
   maxVelocity         = 1.15,
   maxWaterDepth       = 22,
@@ -108,13 +108,6 @@ unitDef = {
     },
     {
       def                = [[LANDING]],
-      badTargetCategory  = [[]],
-      mainDir            = [[1 0 0]],
-      maxAngleDif        = 0,
-      onlyTargetCategory = [[]],
-    },
-	{
-      def                = [[BLAST]],
       badTargetCategory  = [[FIXEDWING GUNSHIP]],
       onlyTargetCategory = [[LAND SINK TURRET SHIP SWIM FLOAT HOVER GUNSHIP FIXEDWING]],
     },
@@ -183,9 +176,9 @@ unitDef = {
       },
 
       damage                  = {
-        default = 0.8,
-        planes  = 0.8,
-        subs    = 0.1,
+        default = 0.01,
+        planes  = 0.01,
+        subs    = 0.001,
       },
 
       duration                = 0.0333,
@@ -222,16 +215,15 @@ unitDef = {
 
       customParams            = {
         impulse = [[100]],
-        timeslow_damagefactor = 1,
 
         light_color = [[0.85 0.2 0.2]],
         light_radius = 140,
       },
 
       damage                  = {
-        default = 0.8,
-        planes  = 0.8,
-        subs    = 0.1,
+        default = 0.01,
+        planes  = 0.01,
+        subs    = 0.001,
       },
 
       duration                = 0.0333,
@@ -325,118 +317,35 @@ unitDef = {
       weaponType              = [[BeamLaser]],
     },
 
-    DISRUPTOR = {
-      name                    = [[Disruptor Pulse Beam]],
-      areaOfEffect            = 24,
-      beamdecay               = 0.9,
-      beamTime                = 1/30,
-      beamttl                 = 50,
-      coreThickness           = 0.25,
-      craterBoost             = 0,
-      craterMult              = 0,
-
-      customparams = {
-        timeslow_damagefactor = 2,
-      },
-
-      damage                  = {
-        default = 250,
-      },
-
-      explosionGenerator      = [[custom:flash2purple]],
-      fireStarter             = 30,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 1,
-      largeBeamLaser          = true,
-      laserFlareSize          = 4.33,
-      minIntensity            = 1,
-      noSelfDamage            = true,
-      range                   = 320,
-      reloadtime              = 2,
-      rgbColor                = [[0.3 0 0.4]],
-      soundStart              = [[weapon/laser/heavy_laser5]],
-      soundStartVolume        = 3,
-      soundTrigger            = true,
-      sweepfire               = false,
-      texture1                = [[largelaser]],
-      texture2                = [[flare]],
-      texture3                = [[flare]],
-      texture4                = [[smallflare]],
-      thickness               = 12,
-      tolerance               = 18000,
-      turret                  = true,
-      weaponType              = [[BeamLaser]],
-      weaponVelocity          = 500,
-    },
-
-    LANDING = {
-      name                    = [[Jugglenaut Landing]],
-      areaOfEffect            = 400,
-      canattackground         = false,
-      craterBoost             = 4,
-      craterMult              = 6,
-
-      damage                  = {
-        default = 700.1,
-        planes  = 700.1,
-        subs    = 70.1,
-      },
-	  customParams           = {
-        timeslow_damagefactor = 1,
-      },
-
-
-      edgeEffectiveness       = 0,
-      explosionGenerator      = [[custom:FLASH72]],
-      impulseBoost            = 0.5,
-      impulseFactor           = 1,
-      interceptedByShieldType = 1,
-      noSelfDamage            = true,
-      range                   = 5,
-      reloadtime              = 13,
-      soundHit                = [[krog_stomp]],
-      soundStart              = [[krog_stomp]],
-      soundStartVolume        = 3,
-      turret                  = false,
-      weaponType              = [[Cannon]],
-      weaponVelocity          = 5,
-
-      customParams            = {
-        hidden = true
-      }
-    },
-	BLAST    = {
-      name                    = [[Disruptor Pulser]],
-      areaOfEffect            = 400,
+	LANDING    = {
+      name                    = [[LANDING]],
+      areaOfEffect            = 395,
       craterBoost             = 0,
       craterMult              = 0,
 
       damage                  = {
-        default = 150.1,
-        planes  = 15.1,
-        subs    = 30.1,
+        default = 640.1,
+        planes  = 640.1,
+        subs    = 6.4,
       },
 
       customParams           = {
-        light_radius = 300,
-        lups_explodespeed = 3,
-        lups_explodelife = 0.5,
-        nofriendlyfire = 1,
-        timeslow_damagefactor = 0.3,
+        light_radius = 0,
+        lups_explodespeed = 1,
+        lups_explodelife = 0.6,
+        timeslow_damagefactor = 1,
       },
 
-      edgeeffectiveness       = 1,
+      edgeeffectiveness       = 0.05,
       explosionGenerator      = [[custom:FLASH64]],
-      explosionSpeed          = 11,
+      explosionSpeed          = 10,
       impulseBoost            = 0,
       impulseFactor           = 0,
       interceptedByShieldType = 1,
       myGravity               = 10,
       noSelfDamage            = true,
-      range                   = 300,
-      reloadtime              = 3,
+      range                   = 345,
+      reloadtime              = 0.95,
       soundHitVolume          = 1,
       turret                  = true,
       weaponType              = [[Cannon]],

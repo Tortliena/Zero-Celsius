@@ -36,7 +36,7 @@ unitDef = {
   idleAutoHeal        = 5,
   idleTime            = 1800,
   maxAcc              = 0.5,
-  maxDamage           = 1500,
+  maxDamage           = 1400,
   maxAileron          = 0.018,
   maxElevator         = 0.02,
   maxRudder           = 0.008,
@@ -77,10 +77,10 @@ unitDef = {
 
     NAPALM = {
       name                    = [[Napalm Bombs]],
-      areaOfEffect            = 224,
+      areaOfEffect            = 192,
       avoidFeature            = false,
       avoidFriendly           = false,
-      burst                   = 30,
+      burst                   = 24,
       burstrate               = 0.09,
       collideFeature          = false,
       collideFriendly         = false,
@@ -90,17 +90,22 @@ unitDef = {
 	  customParams        	  = {
         reaim_time = 15, -- Fast update not required (maybe dangerous)
 	    setunitsonfire = "1",
-		burntime = 360,
+		burntime = 300,
+		
+		area_damage = 1,
+		area_damage_radius = 48,
+		area_damage_dps = 20,
+		area_damage_duration = 21,
 	  },
 	  
       damage                  = {
-        default = 12,
-        planes  = 12,
-        subs    = 1.2,
+        default = 15,
+        planes  = 15,
+        subs    = 1.5,
       },
 
       edgeEffectiveness       = 0.7,
-      explosionGenerator      = [[custom:napalm_phoenix]],
+      explosionGenerator      = [[custom:napalm_firewalker_small]],
       fireStarter             = 250,
       impulseBoost            = 0,
       impulseFactor           = 0.1,
@@ -111,7 +116,7 @@ unitDef = {
       reloadtime              = 1,
       soundHit                = [[weapon/burn_mixed]],
       soundStart              = [[weapon/bomb_drop_short]],
-      sprayangle              = 66000,
+      sprayangle              = 92000,
       weaponType              = [[AircraftBomb]],
     },
 
