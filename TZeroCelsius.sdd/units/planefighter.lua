@@ -47,7 +47,7 @@ unitDef = {
   idleTime               = 1800,
   maneuverleashlength    = [[1280]],
   maxAcc                 = 0.5,
-  maxDamage              = 360,
+  maxDamage              = 330,
   maxRudder              = 0.007,
   maxVelocity            = 12,
   minCloakDistance       = 75,
@@ -87,8 +87,8 @@ unitDef = {
 
     {
       def                = [[MISSILE]],
-      badTargetCategory  = [[GUNSHIP]],
-      onlyTargetCategory = [[FIXEDWING GUNSHIP]],
+      badTargetCategory  = [[]],
+      onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
 
   },
@@ -111,8 +111,8 @@ unitDef = {
       },
 
       damage                  = {
-        default = 7,
-        subs    = 0.4,
+        default = 9,
+        subs    = 0.9,
       },
 
       duration                = 0.012,
@@ -124,7 +124,7 @@ unitDef = {
       interceptedByShieldType = 1,
       lodDistance             = 10000,
       range                   = 700,
-      reloadtime              = 0.2,
+      reloadtime              = 0.21,
       rgbColor                = [[1 0 0]],
       soundHit                = [[weapon/laser/lasercannon_hit]],
       soundStart              = [[weapon/laser/small_laser_fire3]],
@@ -138,18 +138,18 @@ unitDef = {
     },
 
 
-    MISSILE = {
+    MISSILE = { --TTODO Make them only shoot while sweeping at enemies.
       name                    = [[Guided Missiles]],
       areaOfEffect            = 40,
       avoidFriendly           = true,
-      canattackground         = true,
       cegTag                  = [[missiletrailblue]],
       collideFriendly         = false,
       craterBoost             = 0,
       craterMult              = 0,
 	  burst                   = 2,
 	  burstRate               = 0.5,
-
+	  cylinderTargeting       = 1, --TTODO Look if it affects firing when sweeping or not.
+	  
 	  customParams        	  = {
 		burst = Shared.BURST_RELIABLE,
 
@@ -157,11 +157,12 @@ unitDef = {
 	  },
 
       damage                  = {
-        default = 25,
-        planes  = 25,
-        subs    = 5,
+        default = 40.1,
+        planes  = 40.1,
+        subs    = 4.1,
       },
-
+	
+	  edgeeffectiveness       = 0.5,
       explosionGenerator      = [[custom:WEAPEXP_PUFF]],
       fireStarter             = 70,
       flightTime              = 3,
@@ -172,15 +173,16 @@ unitDef = {
       model                   = [[wep_m_fury.s3o]],
       noSelfDamage            = true,
       range                   = 530,
-      reloadtime              = 3,
+      reloadtime              = 3.5,
       smokeTrail              = true,
       soundHit                = [[weapon/missile/rocket_hit]],
       soundStart              = [[weapon/missile/missile_fire7]],
+	  sweepfire               = false, -- TTODO Look if it is related to sweeping at enemies.
       startVelocity           = 200,
       texture2                = [[AAsmoketrail]],
       tolerance               = 22000,
       tracks                  = true,
-      turnRate                = 40000,
+      turnRate                = 8000,
       weaponAcceleration      = 550,
       weaponType              = [[MissileLauncher]],
       weaponVelocity          = 750,
