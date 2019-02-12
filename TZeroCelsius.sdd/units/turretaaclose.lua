@@ -74,7 +74,7 @@ unitDef = {
 
         isaa = [[1]],
         script_reload = [[15]],
-        script_burst = [[4]],
+        script_burst = [[4]], --TTODO : TO TEST IF IT REALLY FIRES 4 ROCKETS.
         light_color = [[0.5 0.6 0.6]],
       },
 
