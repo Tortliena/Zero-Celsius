@@ -26,7 +26,7 @@ unitDef = {
 
 	specialreloadtime = [[850]],
 	boost_speed_mult = 1.5,
-	boost_accel_mult = 3.5,
+	boost_accel_mult = 4,
 	boost_duration = 150, -- frames
 
 	fighter_pullup_dist = 400,
@@ -49,7 +49,7 @@ unitDef = {
   maxAcc                 = 0.5,
   maxDamage              = 330,
   maxRudder              = 0.007,
-  maxVelocity            = 12,
+  maxVelocity            = 11.5,
   minCloakDistance       = 75,
   mygravity              = 1,
   noAutoFire             = false,
@@ -87,8 +87,10 @@ unitDef = {
 
     {
       def                = [[MISSILE]],
-      badTargetCategory  = [[]],
+      badTargetCategory  = [[FIXEDWING GUNSHIP]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
+	  mainDir            = [[0 0 1]],
+	  maxAngleDif        = 30,
     },
 
   },
@@ -147,7 +149,7 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 	  burst                   = 2,
-	  burstRate               = 0.5,
+	  burstRate               = 0.45,
 	  cylinderTargeting       = 1, --TTODO Look if it affects firing when sweeping or not.
 	  
 	  customParams        	  = {
@@ -172,18 +174,19 @@ unitDef = {
       metalpershot            = 0,
       model                   = [[wep_m_fury.s3o]],
       noSelfDamage            = true,
-      range                   = 530,
-      reloadtime              = 3.5,
+      range                   = 550,
+      reloadtime              = 3.6,
       smokeTrail              = true,
       soundHit                = [[weapon/missile/rocket_hit]],
       soundStart              = [[weapon/missile/missile_fire7]],
-	  sweepfire               = false, -- TTODO Look if it is related to sweeping at enemies.
-      startVelocity           = 200,
+	  sweepfire               = true, -- TTODO Look if it is related to sweeping at enemies.
+      startVelocity           = 70,
       texture2                = [[AAsmoketrail]],
       tolerance               = 22000,
       tracks                  = true,
-      turnRate                = 8000,
-      weaponAcceleration      = 550,
+	  turret                  = true, --In combination with max angle diff and mainDir in weapon definition, allows a fixed attack angle.
+      turnRate                = 9200,
+      weaponAcceleration      = 360,
       weaponType              = [[MissileLauncher]],
       weaponVelocity          = 750,
     },
