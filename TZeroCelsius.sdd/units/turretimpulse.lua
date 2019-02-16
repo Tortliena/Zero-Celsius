@@ -73,7 +73,7 @@ unitDef = {
 
       customParams            = {
         reaim_time = 8, -- COB
-        impulse = [[-4500]],
+        --impulse = [[-4500]], Removed to allow the other weapon to function
 
         light_color = [[0.33 0.33 1.28]],
         light_radius = 140,
