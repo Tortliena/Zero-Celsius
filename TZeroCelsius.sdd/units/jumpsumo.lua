@@ -158,7 +158,7 @@ unitDef = {
       weaponVelocity          = 900,
     },
 
-    GRAVITY_NEG = {
+    GRAVITY_NEG = { --Actually heavy and slow-firing plasma weapon. TTODO, add a toggle.
 	  name                    = [[Direct Energy Weapon]],
       areaOfEffect            = 48,
       cegTag                  = [[beamweapon_muzzle_blue]],
@@ -204,7 +204,7 @@ unitDef = {
     },
 
 
-    GRAVITY_POS = {
+    GRAVITY_POS = { --Actually light and fast-firing plasma weapon
 	  name                    = [[Direct Energy Weapon]],
       areaOfEffect            = 32,
       cegTag                  = [[beamweapon_muzzle_blue]],
@@ -341,7 +341,7 @@ unitDef = {
 
       edgeeffectiveness       = 0.05,
       explosionGenerator      = [[custom:FLASH64]],
-      explosionSpeed          = 10,
+      explosionSpeed          = 13,
       impulseBoost            = 1,
       impulseFactor           = 4,
       interceptedByShieldType = 1,
