@@ -77,31 +77,31 @@ unitDef = {
       def                = [[FAKELASER]],
       mainDir            = [[0 0 1]],
       maxAngleDif        = 30,
-    }, --TTODO : See we can add gravity weapons without sacrificing damage to allow switching between the big plasma cannon and the plasma stream.
+    },
     {
       def                = [[GRAVITY_NEG]],
-      badTargetCategory  = [[]],
+      badTargetCategory  = [[FIXEDWING GUNSHIP]],
       onlyTargetCategory = [[LAND SINK TURRET SHIP SWIM FLOAT HOVER GUNSHIP FIXEDWING]],
       mainDir            = [[-1 0 0]],
       maxAngleDif        = 222,
     },
     {
       def                = [[GRAVITY_NEG]],
-      badTargetCategory  = [[]],
+      badTargetCategory  = [[FIXEDWING GUNSHIP]],
       onlyTargetCategory = [[LAND SINK TURRET SHIP SWIM FLOAT HOVER GUNSHIP FIXEDWING]],
       mainDir            = [[1 0 0]],
       maxAngleDif        = 222,
     },
     {
       def                = [[GRAVITY_POS]],
-      badTargetCategory  = [[]],
+      badTargetCategory  = [[FIXEDWING GUNSHIP]],
       onlyTargetCategory = [[LAND SINK TURRET SHIP SWIM FLOAT HOVER GUNSHIP FIXEDWING]],
       mainDir            = [[-1 0 0]],
       maxAngleDif        = 222,
     },
     {
       def                = [[GRAVITY_POS]],
-      badTargetCategory  = [[]],
+      badTargetCategory  = [[FIXEDWING GUNSHIP]],
       onlyTargetCategory = [[LAND SINK TURRET SHIP SWIM FLOAT HOVER GUNSHIP FIXEDWING]],
       mainDir            = [[1 0 0]],
       maxAngleDif        = 222,
@@ -159,7 +159,7 @@ unitDef = {
     },
 
     GRAVITY_NEG = { --Actually heavy and slow-firing plasma weapon.
-	  name                    = [[Charged energy Weapon]],
+	  name                    = [[Charged Plasma Weapon]],
       areaOfEffect            = 64,
       cegTag                  = [[beamweapon_muzzle_blue]],
       coreThickness           = 1.3,
@@ -207,7 +207,7 @@ unitDef = {
 
 
     GRAVITY_POS = { --Actually light and fast-firing plasma weapon
-	  name                    = [[Direct Energy Weapon]],
+	  name                    = [[Flux Plasma Weapon]],
       areaOfEffect            = 32,
       cegTag                  = [[beamweapon_muzzle_blue]],
       coreThickness           = 0.5,
