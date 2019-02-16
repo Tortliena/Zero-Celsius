@@ -3,7 +3,7 @@ unitDef = {
   name                          = [[Newton]],
   description                   = [[Gravity Turret]],
   activateWhenBuilt             = true,
-  buildCostMetal                = 250,
+  buildCostMetal                = 200,
   builder                       = false,
   buildingGroundDecalDecaySpeed = 30,
   buildingGroundDecalSizeX      = 4,
@@ -53,10 +53,6 @@ unitDef = {
       badTargetCategory  = [[]],
       onlyTargetCategory = [[FIXEDWING HOVER SWIM LAND SHIP GUNSHIP]],
     },
-	
-	--{ --Missile interceptor laser. TTODO need to determine which weapons are actually destructible by the laser.
-      --def                = [[LASER]],
-    --},
 
   },
 
@@ -67,13 +63,15 @@ unitDef = {
       name                    = [[Attractive Gravity]],
       areaOfEffect            = 8,
       avoidFriendly           = false,
+      burst                   = 6,
+      burstrate               = 0.01,
       coreThickness           = 0.5,
       craterBoost             = 0,
       craterMult              = 0,
 
       customParams            = {
         reaim_time = 8, -- COB
-        --impulse = [[-4500]], Removed to allow the other weapon to function
+        impulse = [[-150]],
 
         light_color = [[0.33 0.33 1.28]],
         light_radius = 140,
@@ -93,7 +91,7 @@ unitDef = {
       noSelfDamage            = true,
       proximityPriority       = -15,
       range                   = 460,
-      reloadtime              = 1,
+      reloadtime              = 0.2,
       rgbColor                = [[0 0 1]],
       rgbColor2               = [[1 0.5 1]],
       size                    = 2,
@@ -107,101 +105,49 @@ unitDef = {
     },
 
 
-    GRAVITY_POS = { --Actually heavy and slow-firing disruptor weapon. TTODO, add a toggle.
-      name                    = [[Newton+ Disruption Cannon]],
-      accuracy                = 200,
-      areaOfEffect            = 280,
-      cegTag                  = [[beamweapon_muzzle_purple]],
-      craterBoost             = 0,
-      craterMult              = 0,
-
-      customparams = {
-		burst = Shared.BURST_RELIABLE,
-
-        timeslow_damagefactor = 5,
-		
-		light_camera_height = 2500,
-		light_color = [[1.36 0.68 1.5]],
-		light_radius = 180,
-      },
-
-      damage                  = {
-        default = 65.1,
-        subs    = 65.1,
-      },
-
-      edgeeffectiveness       = 0.05,
-      explosionGenerator      = [[custom:flash64]],
-	  explosionSpeed          = 13,
-      fireStarter             = 0.0,
-      impactOnly              = false,
-      impulseBoost            = 1,
-      impulseFactor           = 25,
-      interceptedByShieldType = 2,
-      myGravity               = 0.33,
-      range                   = 460,
-      reloadtime              = 3.2,
-      rgbcolor                = [[0.9 0.1 0.9]],
-      soundHit                = [[weapon/laser/heavy_disrupter_hit]],
-      soundHitVolume          = 1.5,
-      soundStart              = [[weapon/laser/small_laser_fire3]],
-      soundStartVolume        = 3.5,
-      soundTrigger            = true,
-      turret                  = true,
-      weaponType              = [[Cannon]],
-      weaponVelocity          = 600,
-	  
-    },
-	
-	LASER = {
-      name                    = [[Laserbeam]],
+    GRAVITY_POS = {
+      name                    = [[Repulsive Gravity]],
       areaOfEffect            = 8,
-      beamTime                = 0.1,
-      coreThickness           = 0.4,
+      avoidFriendly           = false,
+      burst                   = 6,
+      burstrate               = 0.01,
+      coreThickness           = 0.5,
       craterBoost             = 0,
       craterMult              = 0,
 
-	  customparams = {
-		stats_hide_damage = 1, -- Anti-missile
-		stats_hide_reload = 1,
-		
-		light_color = [[0.4 1.1 1.1]],
-		light_radius = 120,
-	  },
+      customParams            = {
+        reaim_time = 8, -- COB
+        impulse = [[150]],
 
-      damage                  = {
-        default = 1.1,
-        subs    = 1.1,
+        light_color = [[0.85 0.2 0.2]],
+        light_radius = 140,
       },
 
-      duration                = 0.1,
-      explosionGenerator      = [[custom:FLASH1blue]],
-      fireStarter             = 30,
+      damage                  = {
+        default = 0.001,
+        planes  = 0.001,
+        subs    = 5E-05,
+      },
+
+      duration                = 0.0333,
+      explosionGenerator      = [[custom:NONE]],
       impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0,
-      interceptor             = 2,
-	  coverage                = 400,
-      interceptedByShieldType = 1,
-      largeBeamLaser          = true,
-      laserFlareSize          = 3,
-      minIntensity            = 1.5,
+      intensity               = 0.7,
+      interceptedByShieldType = 0,
       noSelfDamage            = true,
-      range                   = 400,
-      reloadtime              = 1.5,
-      rgbColor                = [[0 1 1]],
+      proximityPriority       = 15,
+      range                   = 440,
+      reloadtime              = 0.2,
+      rgbColor                = [[1 0 0]],
+      rgbColor2               = [[1 0.5 1]],
+      size                    = 2,
       soundStart              = [[weapon/gravity_fire]],
       soundTrigger            = true,
-      sweepfire               = false,
-      texture1                = [[largelaser]],
-      texture2                = [[flare]],
-      texture3                = [[flare]],
-      texture4                = [[smallflare]],
-      thickness               = 2,
+      thickness               = 4,
       tolerance               = 5000,
       turret                  = true,
-      weaponType              = [[BeamLaser]],
-      weaponVelocity          = 500,
+      weaponType              = [[LaserCannon]],
+      weaponVelocity          = 2200,
     },
 
   },

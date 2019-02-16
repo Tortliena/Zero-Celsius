@@ -6,7 +6,7 @@ unitDef = {
   autoheal            = 20,
   activateWhenBuilt   = true,
   brakeRate           = 0.3,
-  buildCostMetal      = 1600,
+  buildCostMetal      = 1620,
   builder             = false,
   buildPic            = [[jumpsumo.png]],
   canGuard            = true,
@@ -158,17 +158,17 @@ unitDef = {
       weaponVelocity          = 900,
     },
 
-    GRAVITY_NEG = { --Actually heavy and slow-firing plasma weapon. TTODO, add a toggle.
-	  name                    = [[Direct Energy Weapon]],
-      areaOfEffect            = 48,
+    GRAVITY_NEG = { --Actually heavy and slow-firing plasma weapon.
+	  name                    = [[Charged energy Weapon]],
+      areaOfEffect            = 64,
       cegTag                  = [[beamweapon_muzzle_blue]],
-      coreThickness           = 0.7,
+      coreThickness           = 1.3,
       craterBoost             = 0,
       craterMult              = 0,
 
 	  customParams        	  = {
 		light_camera_height = 1600,
-		light_color = [[2.5 0.7 0.7]],
+		light_color = [[2.4 0.7 0.7]],
 		light_radius = 300,
 	  },
 	  
@@ -177,29 +177,31 @@ unitDef = {
         subs    = 600.1,
       },
 
-      edgeeffectiveness       = 0.2,
-      duration                = 0.3,
+      edgeeffectiveness       = 0.33,
+      duration                = 0.4,
       explosionGenerator      = [[custom:beamerray]],
-      fireStarter             = 50,
+      fireStarter             = 100,
       heightMod               = 1,
       impulseBoost            = 0,
-      impulseFactor           = 0.4,
+      impulseFactor           = 0.6,
       interceptedByShieldType = 1,
       noSelfDamage            = true,
-      range                   = 290,
+      range                   = 310,
       reloadtime              = 2.5,
-      rgbColor                = [[0 0.3 1]],
+      rgbColor                = [[1 0.4 0.05]],
       soundHit                = [[weapon/laser/heavy_disrupter_hit]],
+	  soundStartVolume        = 1.75,
       soundStart              = [[weapon/cannon/plasma_fire]],
       soundTrigger            = true,
+	  soundStartVolume        = 1.2,
       texture1                = [[energywave]],
       texture2                = [[null]],
       texture3                = [[null]],
-      thickness               = 9,
+      thickness               = 14.5,
       tolerance               = 10000,
       turret                  = true,
       weaponType              = [[LaserCannon]],
-      weaponVelocity          = 75,
+      weaponVelocity          = 190,
 	  
     },
 
@@ -219,8 +221,8 @@ unitDef = {
 	  },
 	  
       damage                  = {
-        default = 45.1,
-        subs    = 4.5,
+        default = 42.1,
+        subs    = 4.2,
       },
 
       edgeeffectiveness       = 0.2,
@@ -232,7 +234,7 @@ unitDef = {
       impulseFactor           = 0.4,
       interceptedByShieldType = 1,
       noSelfDamage            = true,
-      range                   = 290,
+      range                   = 300,
       reloadtime              = 0.35,
       rgbColor                = [[0 0.3 1]],
       soundHit                = [[weapon/laser/small_laser_fire2]],
@@ -245,7 +247,7 @@ unitDef = {
       tolerance               = 10000,
       turret                  = true,
       weaponType              = [[LaserCannon]],
-      weaponVelocity          = 360,
+      weaponVelocity          = 390,
 	  
     },
 
