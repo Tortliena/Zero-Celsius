@@ -1,4 +1,4 @@
-Zero-Celsius (version -260°C)
+Zero-Celsius (version -218°C)
 ======
 
 Zero-Celsius is a rebalancing mod for Zero-K, which aims to improve how battles feel by easening up some of the micro-management-heavy units, by making confrontation not being always a choice for long-ranged type units, and bringing back some units back into the fray.
