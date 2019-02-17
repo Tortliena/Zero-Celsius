@@ -76,8 +76,8 @@ unitDef = {
 
 		area_damage = 1,
 		area_damage_radius = 256,
-		area_damage_dps = 20,
-		area_damage_duration = 25,
+		area_damage_dps = 12.5,
+		area_damage_duration = 45,
 		
 		light_color = [[1.35 0.5 0.36]],
 		light_radius = 550,

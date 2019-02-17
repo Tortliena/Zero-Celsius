@@ -2,7 +2,7 @@ unitDef = {
   unitname                      = [[seismic]],
   name                          = [[Quake]],
   description                   = [[Seismic Missile]],
-  buildCostMetal                = 300,
+  buildCostMetal                = 280,
   builder                       = false,
   buildingGroundDecalDecaySpeed = 30,
   buildingGroundDecalSizeX      = 3,
@@ -57,7 +57,7 @@ unitDef = {
 
     SEISMIC_WEAPON = {
       name                    = [[Seismic Missile]],
-      areaOfEffect            = 768,
+      areaOfEffect            = 716,
       avoidFriendly           = false,
       cegTag                  = [[seismictrail]],
       collideFriendly         = false,
@@ -65,17 +65,17 @@ unitDef = {
       craterMult              = 1,
 
       customParams            = {
-        gatherradius = [[624]],
-        smoothradius = [[384]],
-        detachmentradius = [[384]],
+        gatherradius = [[582]],
+        smoothradius = [[358]],
+        detachmentradius = [[358]],
         smoothmult   = [[1]],
 
         restrict_in_widgets = 1,
 
 		stats_hide_dps = 1, -- one use
 		stats_hide_reload = 1,
-		timeslow_damagefactor = 50,
-		timeslow_overslow_frames = 3.5*30,
+		timeslow_damagefactor = 45,
+		timeslow_overslow_frames = 3*30,
 		
 		
 		light_color = [[1.2 1.6 0.55]],
@@ -90,6 +90,7 @@ unitDef = {
 
       edgeEffectiveness       = 0.05,
       explosionGenerator      = [[custom:bull_fade]],
+	  explosionSpeed          = 13,
       fireStarter             = 0,
       flightTime              = 100,
       interceptedByShieldType = 1,
