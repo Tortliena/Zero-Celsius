@@ -2,7 +2,7 @@ unitDef = {
   unitname                      = [[napalmmissile]],
   name                          = [[Inferno]],
   description                   = [[Napalm Missile]],
-  buildCostMetal                = 340,
+  buildCostMetal                = 320,
   builder                       = false,
   buildingGroundDecalDecaySpeed = 30,
   buildingGroundDecalSizeX      = 3,
@@ -62,8 +62,8 @@ unitDef = {
 	  craterAreaOfEffect      = 64,
       avoidFriendly           = false,
       collideFriendly         = false,
-      craterBoost             = 4,
-      craterMult              = 3.5,
+      craterBoost             = 2,
+      craterMult              = 2,
 
       customParams        	  = {
         setunitsonfire = "1",
@@ -77,18 +77,18 @@ unitDef = {
 		area_damage = 1,
 		area_damage_radius = 256,
 		area_damage_dps = 20,
-		area_damage_duration = 30,
+		area_damage_duration = 25,
 		
 		light_color = [[1.35 0.5 0.36]],
 		light_radius = 550,
       },
 
       damage                  = {
-        default = 135.1,
-        subs    = 6.7,
+        default = 75.1,
+        subs    = 4.5,
       },
 
-      edgeEffectiveness       = 0.4,
+      edgeEffectiveness       = 0.33,
       explosionGenerator      = [[custom:napalm_missile]],
       fireStarter             = 220,
       flightTime              = 100,

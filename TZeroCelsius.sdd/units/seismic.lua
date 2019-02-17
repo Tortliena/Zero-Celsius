@@ -61,20 +61,21 @@ unitDef = {
       avoidFriendly           = false,
       cegTag                  = [[seismictrail]],
       collideFriendly         = false,
-      craterBoost             = 32,
+      craterBoost             = 24,
       craterMult              = 1,
 
       customParams            = {
         gatherradius = [[624]],
         smoothradius = [[384]],
         detachmentradius = [[384]],
-        smoothmult   = [[1.5]],
+        smoothmult   = [[1]],
 
         restrict_in_widgets = 1,
 
 		stats_hide_dps = 1, -- one use
 		stats_hide_reload = 1,
-		
+		timeslow_damagefactor = 50,
+		timeslow_overslow_frames = 3.5*30,
 		
 		
 		light_color = [[1.2 1.6 0.55]],
@@ -84,8 +85,7 @@ unitDef = {
       damage                  = {
         default = 25.1,
         subs    = 2.5,
-		timeslow_damagefactor = 50,
-		timeslow_overslow_frames = 3.5*30,
+
       },
 
       edgeEffectiveness       = 0.05,
