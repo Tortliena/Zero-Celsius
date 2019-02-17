@@ -339,6 +339,8 @@ unitDef = {
         lups_explodelife = 0.6,
         timeslow_damagefactor = 1,
 		timeslow_overslow_frames = 2*30,
+		stats_hide_dps = 1, -- It's DPS is solely based on how often it jumps.
+		stats_hide_reload = 1, --Its reload is based on how often it jumps.
       },
 
       edgeeffectiveness       = 0.05,
