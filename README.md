@@ -7,7 +7,7 @@ What is in this mod ?
 
 * Some units made more reliable by removing or improving some of their... more technically unreliable components (Yes physics engine, I'm looking right at you! And you too easy-going friendly fire!).
 * A reinforcement on air units, especially the frail airplanes, to make them more viable -even if not ideal- opponents against AA defenses. Also, airplanes can be more played as heavy-fire support-forces than spec-ops focused on killing high priority targets.
-* More unit combinations. A strider with two shield layers, with one being super-large? Check! A turtle-like bombardier that spreads doom at whatever is underneath it? Check!
+* More strongly typed units? A turtle-like bombardier that spreads doom at whatever is underneath it? Check!
 * Some units just rebalanced to bring confrontations on the front, and not running and kiting one of your constant, micro-managing issues. This should also help with the AI being "too good for the player's good", being able to harass all your bases at the same time and eroding them slowly, while never trying to make a breach even if it has four times your power (and it knows it!).
 
 What is not in this mod?
