@@ -1,9 +1,9 @@
 unitDef = {
   unitname                      = [[turretimpulse]],
-  name                          = [[Newton]],
-  description                   = [[Gravity Turret]],
+  name                          = [[Nest]],
+  description                   = [[Drone turret]],
   activateWhenBuilt             = true,
-  buildCostMetal                = 200,
+  buildCostMetal                = 110,
   builder                       = false,
   buildingGroundDecalDecaySpeed = 30,
   buildingGroundDecalSizeX      = 4,
@@ -25,14 +25,14 @@ unitDef = {
   footprintZ                    = 2,
   iconType                      = [[defensesupport]],
   levelGround                   = false,
-  maxDamage                     = 2000,
+  maxDamage                     = 750,
   maxSlope                      = 36,
   maxWaterDepth                 = 0,
   minCloakDistance              = 150,
   noAutoFire                    = false,
   noChaseCategory               = [[FIXEDWING LAND SINK TURRET SHIP SATELLITE SWIM GUNSHIP FLOAT SUB HOVER]],
   objectName                    = [[CORGRAV]],
-  onoffable                     = true,
+  onoffable                     = false,
   selfDestructAs                = [[MEDIUM_BUILDINGEX]],
   sightDistance                 = 506,
   useBuildingGroundDecal        = true,
@@ -40,25 +40,60 @@ unitDef = {
   yardMap                       = [[oooo]],
 
   weapons                       = {
-
-    {
-      def                = [[GRAVITY_POS]],
-      badTargetCategory  = [[]],
-      onlyTargetCategory = [[FIXEDWING HOVER SWIM LAND SHIP GUNSHIP]],
-    },
-
-
-    {
-      def                = [[GRAVITY_NEG]],
-      badTargetCategory  = [[]],
-      onlyTargetCategory = [[FIXEDWING HOVER SWIM LAND SHIP GUNSHIP]],
+	--No weapons apart from a fake one, its drone newton does the attack (turretimpulse_relayer).
+	{
+      def                = [[FAKELASER]],
+      badTargetCategory  = [[FIXEDWING GUNSHIP]],
+      onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
+	  
     },
 
   },
 
-
   weaponDefs                    = {
 
+    FAKELASER     = {
+      name                    = [[Fake Laser]],
+      areaOfEffect            = 12,
+      beamTime                = 0.1,
+      coreThickness           = 0.5,
+      craterBoost             = 0,
+      craterMult              = 0,
+
+      damage                  = {
+        default = 0,
+        subs    = 0,
+      },
+
+      duration                = 0.11,
+      edgeEffectiveness       = 0.99,
+      explosionGenerator      = [[custom:flash1green]],
+      fireStarter             = 70,
+      impactOnly              = true,
+      impulseBoost            = 0,
+      impulseFactor           = 0.4,
+      interceptedByShieldType = 1,
+      largeBeamLaser          = true,
+      laserFlareSize          = 5.53,
+      minIntensity            = 1,
+      noSelfDamage            = true,
+      proximityPriority       = 10,
+      range                   = 680,
+      reloadtime              = 0.11,
+      rgbColor                = [[0 1 0]],
+      soundStart              = [[weapon/laser/laser_burn5]],
+      soundTrigger            = true,
+      texture1                = [[largelaser]],
+      texture2                = [[flare]],
+      texture3                = [[flare]],
+      texture4                = [[smallflare]],
+      thickness               = 5.53,
+      tolerance               = 10000,
+      turret                  = false,
+      weaponType              = [[BeamLaser]],
+      weaponVelocity          = 900,
+    },
+	
     GRAVITY_NEG = {
       name                    = [[Attractive Gravity]],
       areaOfEffect            = 8,
@@ -90,7 +125,7 @@ unitDef = {
       interceptedByShieldType = 0,
       noSelfDamage            = true,
       proximityPriority       = -15,
-      range                   = 460,
+      range                   = 1,
       reloadtime              = 0.2,
       rgbColor                = [[0 0 1]],
       rgbColor2               = [[1 0.5 1]],
@@ -136,7 +171,7 @@ unitDef = {
       interceptedByShieldType = 0,
       noSelfDamage            = true,
       proximityPriority       = 15,
-      range                   = 440,
+      range                   = 1,
       reloadtime              = 0.2,
       rgbColor                = [[1 0 0]],
       rgbColor2               = [[1 0.5 1]],
