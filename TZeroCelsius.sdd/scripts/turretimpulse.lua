@@ -48,6 +48,7 @@ end
 
 function script.Create()
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) ~= 0) do Sleep(400) end
+	Turn(turret, x_axis, -math.rad(90), math.rad(30))
 	StartThread(SmokeUnit, smokePiece)
 	StartThread(IdleAnim)
 end
