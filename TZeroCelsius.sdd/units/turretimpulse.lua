@@ -33,8 +33,8 @@ unitDef = {
   noChaseCategory               = [[FIXEDWING LAND SINK TURRET SHIP SATELLITE SWIM GUNSHIP FLOAT SUB HOVER]],
   objectName                    = [[CORGRAV]],
   onoffable                     = false,
-  selfDestructAs                = [[MEDIUM_BUILDINGEX]],
-  sightDistance                 = 506,
+  selfDestructAs                = [[SMALL_BUILDINGEX]],
+  sightDistance                 = 500,
   useBuildingGroundDecal        = true,
   workerTime                    = 0,
   yardMap                       = [[oooo]],
@@ -42,7 +42,7 @@ unitDef = {
   weapons                       = {
 	--No weapons apart from a fake one, its drone newton does the attack (turretimpulse_relayer).
 	{
-      def                = [[FAKELASER]],
+      def                = [[BOGUS_FAKE_TARGETER]],
       badTargetCategory  = [[FIXEDWING GUNSHIP]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
 	  
@@ -52,46 +52,27 @@ unitDef = {
 
   weaponDefs                    = {
 
-    FAKELASER     = {
-      name                    = [[Fake Laser]],
-      areaOfEffect            = 12,
-      beamTime                = 0.1,
-      coreThickness           = 0.5,
-      craterBoost             = 0,
-      craterMult              = 0,
+	  BOGUS_FAKE_TARGETER = {
+      name                    = [[Bogus Fake Targeter]],
+      avoidGround             = false, -- avoid nothing, else attempts to move out to clear line of fine
+      avoidFriendly           = false,
+      avoidFeature            = false,
+      avoidNeutral            = false,
 
       damage                  = {
-        default = 0,
-        subs    = 0,
+        default = 11.34,
+        planes  = 11.34,
+        subs    = 0.567,
       },
 
-      duration                = 0.11,
-      edgeEffectiveness       = 0.99,
-      explosionGenerator      = [[custom:flash1green]],
-      fireStarter             = 70,
-      impactOnly              = true,
-      impulseBoost            = 0,
-      impulseFactor           = 0.4,
-      interceptedByShieldType = 1,
-      largeBeamLaser          = true,
-      laserFlareSize          = 5.53,
-      minIntensity            = 1,
+      explosionGenerator      = [[custom:FLASHPLOSION]],
       noSelfDamage            = true,
-      proximityPriority       = 10,
       range                   = 680,
-      reloadtime              = 0.11,
-      rgbColor                = [[0 1 0]],
-      soundStart              = [[weapon/laser/laser_burn5]],
-      soundTrigger            = true,
-      texture1                = [[largelaser]],
-      texture2                = [[flare]],
-      texture3                = [[flare]],
-      texture4                = [[smallflare]],
-      thickness               = 5.53,
-      tolerance               = 10000,
-      turret                  = false,
-      weaponType              = [[BeamLaser]],
-      weaponVelocity          = 900,
+      reloadtime              = 1,
+      tolerance               = 5000,
+      turret                  = true,
+      weaponType              = [[StarburstLauncher]],
+      weaponVelocity          = 500,
     },
 	
     GRAVITY_NEG = {

@@ -48,10 +48,10 @@ local carrierDefNames = {
 		spawnPieces = { "center" },
 		{
 			drone = UnitDefNames.dronenewton.id, 
-			reloadTime = 12, 
+			reloadTime = 11, 
 			maxDrones = 1, 
 			spawnSize = 3, 
-			range = 500, 
+			range = 520, 
 			buildTime = 9, 
 			maxBuild = 1,
 			offsets = {0, 35, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}

@@ -26,7 +26,18 @@ local WOBBLE_SPEED = 2
 local TURRET_AIM_SPEED = 300
 local TURRET_SPIN_SPEED = 60
 
+--The angular speed of the circle in front of the turret.
 local RING_SPIN_SPEED = -120
+
+local MAIN_CRYSTAL_IDLE_SPIN_SPEED = 20
+local MAIN_CRYSTAL_IDLE_SPIN_ACCELERATION = 20
+local MAIN_CRYSTAL_AIMING_SPIN_SPEED = 100
+local MAIN_CRYSTAL_AIMING_SPIN_ACCELERATION = 100
+
+local CRYSTALS_IDLE_SPIN_SPEED = 40
+local CRYSTALS_IDLE_SPIN_ACCELERATION = 40
+local CRYSTALS_AIMING_SPIN_SPEED = 120
+local CRYSTALS_AIMING_SPIN_ACCELERATION = 120
 
 local CRYSTAL_TURN_SPEED = 180
 
@@ -39,6 +50,7 @@ local function IdleAnim()
 	
 	--Turning main part
 	Spin(ring, z_axis, math.rad(RING_SPIN_SPEED))
+	StartSpinningCrystalsIdle()
 	while true do
 		Sleep(math.random(3000, 6500))
 		--Turn(turret, y_axis, lastHeading + math.rad(30), math.rad(60))
@@ -46,9 +58,32 @@ local function IdleAnim()
 	end
 end
 
+--Make the crystals spin at a slow speed.
+function StartSpinningCrystalsIdle()
+	Spin(turret, y_axis, math.rad(MAIN_CRYSTAL_IDLE_SPIN_SPEED), math.rad(MAIN_CRYSTAL_IDLE_SPIN_ACCELERATION)) 
+	Spin(crystal1, y_axis, math.rad(-CRYSTALS_IDLE_SPIN_SPEED), math.rad(CRYSTALS_IDLE_SPIN_ACCELERATION))
+	Spin(crystal2, x_axis, math.rad(-CRYSTALS_IDLE_SPIN_SPEED), math.rad(CRYSTALS_IDLE_SPIN_ACCELERATION))
+	Spin(crystal3, y_axis, math.rad(CRYSTALS_IDLE_SPIN_SPEED), math.rad(CRYSTALS_IDLE_SPIN_ACCELERATION))
+	Spin(crystal4, x_axis, math.rad(CRYSTALS_IDLE_SPIN_SPEED), math.rad(CRYSTALS_IDLE_SPIN_ACCELERATION))
+end
+
+--Makes the crystals spin at a fast speed.
+function StartSpinningCrystalsAiming() 
+	Spin(turret, y_axis, math.rad(MAIN_CRYSTAL_AIMING_SPIN_SPEED), math.rad(MAIN_CRYSTAL_AIMING_SPIN_ACCELERATION))
+	Spin(crystal1, y_axis, math.rad(-CRYSTALS_AIMING_SPIN_SPEED), math.rad(CRYSTALS_AIMING_SPIN_ACCELERATION))
+	Spin(crystal2, x_axis, math.rad(-CRYSTALS_AIMING_SPIN_SPEED), math.rad(CRYSTALS_AIMING_SPIN_ACCELERATION))
+	Spin(crystal3, y_axis, math.rad(CRYSTALS_AIMING_SPIN_SPEED), math.rad(CRYSTALS_AIMING_SPIN_ACCELERATION))
+	Spin(crystal4, x_axis, math.rad(CRYSTALS_AIMING_SPIN_SPEED), math.rad(CRYSTALS_AIMING_SPIN_ACCELERATION))
+end
+
+--Anim when unit is created.
+local function OnCreatedAnim() 
+	Turn(turret, x_axis, -math.rad(90), math.rad(30))
+end
+
 function script.Create()
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) ~= 0) do Sleep(400) end
-	Turn(turret, x_axis, -math.rad(90), math.rad(30))
+	OnCreatedAnim()
 	StartThread(SmokeUnit, smokePiece)
 	StartThread(IdleAnim)
 end
@@ -70,15 +105,16 @@ function script.AimWeapon(num, heading, pitch)
 	Signal(SIG_Idle)
 	Signal(SIG_Aim)
 	SetSignalMask(SIG_Aim)
+	StartSpinningCrystalsAiming()
 	--[[Turn(turret, y_axis, heading, math.rad(360))
 	Turn(barrel, x_axis, -pitch, math.rad(90))
 	WaitForTurn(turret, y_axis)
 	WaitForTurn(barrel, x_axis)
 	lastHeading = heading--]]
 	StartThread(RestoreAfterDelay)
-	return true
+	if num == 1 then return false -- fake targeter
+	else return true end
 end
-
 
 function script.Killed(recentDamage, maxHealth)
 	local severity = recentDamage / maxHealth

@@ -26,7 +26,7 @@ local smokePiece = {fuselage, engineL, engineR}
 --constants
 local tiltAngle = math.rad(10)
 local tiltSpeed = math.rad(30)
-local rotorSpeed = math.rad(1080)
+local rotorSpeed = math.rad(-900)
 local rotorAccel = math.rad(240)
 local rotorDecel = math.rad(120)
 local pivotSpeed = math.rad(180)
