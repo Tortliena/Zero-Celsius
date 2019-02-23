@@ -98,7 +98,7 @@ unitDef = {
       },
 
       damage                  = {
-        default = 25.1,
+        default = 26.1,
       },
 
       explosionGenerator      = [[custom:flashslow]],
