@@ -23,21 +23,21 @@ local WOBBLE_DIST_POS = 2
 local WOBBLE_DIST_NEG = -2
 local WOBBLE_SPEED = 2
 
-local TURRET_AIM_SPEED = 300
-local TURRET_SPIN_SPEED = 60
 
 --The angular speed of the circle in front of the turret.
 local RING_SPIN_SPEED = -120
 
-local MAIN_CRYSTAL_IDLE_SPIN_SPEED = 20
-local MAIN_CRYSTAL_IDLE_SPIN_ACCELERATION = 20
-local MAIN_CRYSTAL_AIMING_SPIN_SPEED = 100
-local MAIN_CRYSTAL_AIMING_SPIN_ACCELERATION = 100
+--Main moving part
+local MAIN_CRYSTAL_IDLE_SPIN_SPEED = math.rad(20)
+local MAIN_CRYSTAL_IDLE_SPIN_ACCELERATION = math.rad(20)
+local MAIN_CRYSTAL_AIMING_SPIN_SPEED = math.rad(100)
+local MAIN_CRYSTAL_AIMING_SPIN_ACCELERATION = math.rad(100)
 
-local CRYSTALS_IDLE_SPIN_SPEED = 40
-local CRYSTALS_IDLE_SPIN_ACCELERATION = 40
-local CRYSTALS_AIMING_SPIN_SPEED = 120
-local CRYSTALS_AIMING_SPIN_ACCELERATION = 120
+--The small crystals on the parts around
+local CRYSTALS_IDLE_SPIN_SPEED = math.rad(40)
+local CRYSTALS_IDLE_SPIN_ACCELERATION = math.rad(40)
+local CRYSTALS_AIMING_SPIN_SPEED = math.rad(120)
+local CRYSTALS_AIMING_SPIN_ACCELERATION = math.rad(120)
 
 local CRYSTAL_TURN_SPEED = 180
 
@@ -60,25 +60,25 @@ end
 
 --Make the crystals spin at a slow speed.
 function StartSpinningCrystalsIdle()
-	Spin(turret, y_axis, math.rad(MAIN_CRYSTAL_IDLE_SPIN_SPEED), math.rad(MAIN_CRYSTAL_IDLE_SPIN_ACCELERATION)) 
-	Spin(crystal1, y_axis, math.rad(-CRYSTALS_IDLE_SPIN_SPEED), math.rad(CRYSTALS_IDLE_SPIN_ACCELERATION))
-	Spin(crystal2, x_axis, math.rad(-CRYSTALS_IDLE_SPIN_SPEED), math.rad(CRYSTALS_IDLE_SPIN_ACCELERATION))
-	Spin(crystal3, y_axis, math.rad(CRYSTALS_IDLE_SPIN_SPEED), math.rad(CRYSTALS_IDLE_SPIN_ACCELERATION))
-	Spin(crystal4, x_axis, math.rad(CRYSTALS_IDLE_SPIN_SPEED), math.rad(CRYSTALS_IDLE_SPIN_ACCELERATION))
+	Spin(turret, y_axis, MAIN_CRYSTAL_IDLE_SPIN_SPEED, MAIN_CRYSTAL_IDLE_SPIN_ACCELERATION) 
+	Spin(crystal1, y_axis, -CRYSTALS_IDLE_SPIN_SPEED, CRYSTALS_IDLE_SPIN_ACCELERATION)
+	Spin(crystal2, x_axis, -CRYSTALS_IDLE_SPIN_SPEED, CRYSTALS_IDLE_SPIN_ACCELERATION)
+	Spin(crystal3, y_axis, CRYSTALS_IDLE_SPIN_SPEED, CRYSTALS_IDLE_SPIN_ACCELERATION)
+	Spin(crystal4, x_axis, CRYSTALS_IDLE_SPIN_SPEED, CRYSTALS_IDLE_SPIN_ACCELERATION)
 end
 
 --Makes the crystals spin at a fast speed.
 function StartSpinningCrystalsAiming() 
-	Spin(turret, y_axis, math.rad(MAIN_CRYSTAL_AIMING_SPIN_SPEED), math.rad(MAIN_CRYSTAL_AIMING_SPIN_ACCELERATION))
-	Spin(crystal1, y_axis, math.rad(-CRYSTALS_AIMING_SPIN_SPEED), math.rad(CRYSTALS_AIMING_SPIN_ACCELERATION))
-	Spin(crystal2, x_axis, math.rad(-CRYSTALS_AIMING_SPIN_SPEED), math.rad(CRYSTALS_AIMING_SPIN_ACCELERATION))
-	Spin(crystal3, y_axis, math.rad(CRYSTALS_AIMING_SPIN_SPEED), math.rad(CRYSTALS_AIMING_SPIN_ACCELERATION))
-	Spin(crystal4, x_axis, math.rad(CRYSTALS_AIMING_SPIN_SPEED), math.rad(CRYSTALS_AIMING_SPIN_ACCELERATION))
+	Spin(turret, y_axis, MAIN_CRYSTAL_AIMING_SPIN_SPEED, MAIN_CRYSTAL_AIMING_SPIN_ACCELERATION)
+	Spin(crystal1, y_axis, -CRYSTALS_AIMING_SPIN_SPEED, CRYSTALS_AIMING_SPIN_ACCELERATION)
+	Spin(crystal2, x_axis, -CRYSTALS_AIMING_SPIN_SPEED, CRYSTALS_AIMING_SPIN_ACCELERATION)
+	Spin(crystal3, y_axis, CRYSTALS_AIMING_SPIN_SPEED, CRYSTALS_AIMING_SPIN_ACCELERATION)
+	Spin(crystal4, x_axis, CRYSTALS_AIMING_SPIN_SPEED, CRYSTALS_AIMING_SPIN_ACCELERATION)
 end
 
 --Anim when unit is created.
 local function OnCreatedAnim() 
-	Turn(turret, x_axis, -math.rad(90), math.rad(30))
+	Turn(turret, x_axis, -math.rad(90), math.rad(25))
 end
 
 function script.Create()
@@ -131,7 +131,18 @@ function script.Killed(recentDamage, maxHealth)
 	end
 end
 
+local function DoSomeHax()
+	Sleep(33)
+	local commands = Spring.GetCommandQueue(unitID, 0)
+	if commands == 0 then
+		Spring.GiveOrderToUnit(unitID, CMD.STOP, {}, {})
+	end
+end
 
+function script.BlockShot(num, targetID)
+	StartThread(DoSomeHax)
+	return false
+end
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
