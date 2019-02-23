@@ -29,7 +29,7 @@ local carrierDefNames = {
 			maxDrones = 6, 
 			spawnSize = 2, 
 			range = 800, 
-			buildTime = 6, 
+			buildTime = 5, 
 			maxBuild = 1,
 			offsets = {0, 35, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
 		},
@@ -39,7 +39,7 @@ local carrierDefNames = {
 			maxDrones = 2, 
 			spawnSize = 1, 
 			range = 800, 
-			buildTime = 9, 
+			buildTime = 6, 
 			maxBuild = 1,
 			offsets = {0, 35, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
 		},
@@ -50,7 +50,7 @@ local carrierDefNames = {
 			drone = UnitDefNames.dronenewton.id, 
 			reloadTime = 11, 
 			maxDrones = 1, 
-			spawnSize = 3, 
+			spawnSize = 1, 
 			range = 520, 
 			buildTime = 9, 
 			maxBuild = 1,
@@ -131,7 +131,7 @@ local presets = {
 		maxDrones = 2,
 		spawnSize = 1, 
 		range = 600, 
-		buildTime = 6, 
+		buildTime = 5, 
 		maxBuild = 1,
 		offsets = {0, 35, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
 	},
@@ -141,7 +141,7 @@ local presets = {
 		maxDrones = 1, 
 		spawnSize = 1, 
 		range = 600, 
-		buildTime = 9,
+		buildTime = 8,
 		maxBuild = 1,
 		offsets = {0, 35, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
 	},
