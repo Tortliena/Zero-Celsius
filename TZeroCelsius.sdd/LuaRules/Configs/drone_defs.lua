@@ -14,7 +14,7 @@ local carrierDefNames = {
 			maxDrones = 8, 
 			spawnSize = 1, 
 			range = 1000, 
-			buildTime = 25, 
+			buildTime = 24, 
 			maxBuild = 4,
 			offsets = {0, 0, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
 		},
@@ -48,13 +48,13 @@ local carrierDefNames = {
 		spawnPieces = { "center" },
 		{
 			drone = UnitDefNames.dronenewton.id, 
-			reloadTime = 11, 
+			reloadTime = 9, 
 			maxDrones = 1, 
 			spawnSize = 1, 
 			range = 520, 
-			buildTime = 9, 
+			buildTime = 8, 
 			maxBuild = 1,
-			offsets = {0, 35, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
+			offsets = {0, 33, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
 		},
 	},
 	nebula = {
