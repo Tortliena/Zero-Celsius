@@ -19,7 +19,7 @@ unitDef = {
   collisionVolumeScales    = [[28 28 28]],
   collisionVolumeType      = [[ellipsoid]],
   collide             = false,
-  cruiseAlt           = 145,
+  cruiseAlt           = 140,
   explodeAs           = [[TINY_BUILDINGEX]],
   floater             = true,
   footprintX          = 2,
@@ -30,7 +30,7 @@ unitDef = {
   idleTime            = 300,
   maneuverleashlength = [[600]],
   maxDamage           = 300,
-  maxVelocity         = 3.3,
+  maxVelocity         = 4.3,
   minCloakDistance    = 75,
   noAutoFire          = false,
   noChaseCategory     = [[TERRAFORM FIXEDWING GUNSHIP SATELLITE SUB]],
@@ -53,7 +53,7 @@ unitDef = {
     },
 
   },
-  sightDistance       = 320,
+  sightDistance       = 270,
   turnRate            = 880,
   upright             = true,
 
@@ -82,7 +82,8 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 	  accuracy				  = 600,
-
+	  collideFriendly         = false,
+	  
       customparams = {
         timeslow_damagefactor = 2,
         timeslow_smartretarget = 0.33,
@@ -97,7 +98,7 @@ unitDef = {
       },
 
       damage                  = {
-        default = 25,
+        default = 25.1,
       },
 
       explosionGenerator      = [[custom:flashslow]],
@@ -110,7 +111,7 @@ unitDef = {
       laserFlareSize          = 4,
       minIntensity            = 1,
       noSelfDamage            = true,
-      range                   = 220,
+      range                   = 210,
       reloadtime              = 0.92,
       rgbColor                = [[0.64 0.05 0.33]],
       soundStart              = [[weapon/laser/pulse_laser2]],
