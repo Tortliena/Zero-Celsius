@@ -24,7 +24,7 @@ local flare = piece "flare"
 local smokePiece = {fuselage, engineL, engineR}
 
 --constants
-local tiltAngle = math.rad(10)
+local tiltAngle = math.rad(15)
 local tiltSpeed = math.rad(30)
 local rotorSpeed = math.rad(-900)
 local rotorAccel = math.rad(240)
