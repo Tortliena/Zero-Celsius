@@ -507,12 +507,12 @@ local moduleDefs = {
 		image = moduleImagePath .. "module_energy_cell.png",
 		limit = 1,
 		unequipable = true,
-		cost = 200 * COST_MULT,
+		cost = 100 * COST_MULT,
 		requireLevel = 0,
 		slotType = "module",
 		applicationFunction = function (modules, sharedData)
-			sharedData.metalIncome = (sharedData.metalIncome or 0) + 3.7
-			sharedData.energyIncome = (sharedData.energyIncome or 0) + 5.7
+			sharedData.metalIncome = (sharedData.metalIncome or 0) + 8
+			sharedData.energyIncome = (sharedData.energyIncome or 0) + 8
 		end
 	},
 	{
