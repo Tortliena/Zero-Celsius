@@ -126,29 +126,29 @@ end
 function script.Killed(recentDamage, maxHealth)
 	local severity = recentDamage / maxHealth
 	if severity <= 0.25 then
-		Explode(launcher1, sfxNone)
-		Explode(launcher2, sfxNone)
-		Explode(base, sfxNone)
-		Explode(turret, sfxNone)
+		Explode(launcher1, SFX.NONE)
+		Explode(launcher2, SFX.NONE)
+		Explode(base, SFX.NONE)
+		Explode(turret, SFX.NONE)
 		return 1
 	end
 	if severity <= 0.50 then
-		Explode(launcher1, sfxNone)
-		Explode(launcher2, sfxNone)
-		Explode(base, sfxNone)
-		Explode(turret, sfxNone)
+		Explode(launcher1, SFX.NONE)
+		Explode(launcher2, SFX.NONE)
+		Explode(base, SFX.NONE)
+		Explode(turret, SFX.NONE)
 		return 1
 	end
 	if severity <= 0.99 then
-		Explode(launcher1, sfxFall + sfxSmoke + sfxFire + sfxExplodeOnHit)
-		Explode(launcher2, sfxFall + sfxSmoke + sfxFire + sfxExplodeOnHit)
-		Explode(base, sfxNone)
-		Explode(turret, sfxFall + sfxSmoke + sfxFire + sfxExplodeOnHit)
+		Explode(launcher1, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE_ON_HIT)
+		Explode(launcher2, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE_ON_HIT)
+		Explode(base, SFX.NONE)
+		Explode(turret, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE_ON_HIT)
 		return 2
 	end
-	Explode(launcher1, sfxFall + sfxSmoke + sfxFire + sfxExplodeOnHit)
-	Explode(launcher2, sfxFall + sfxSmoke + sfxFire + sfxExplodeOnHit)
-	Explode(base, sfxNone)
-	Explode(turret, sfxFall + sfxSmoke + sfxFire + sfxExplodeOnHit)
+	Explode(launcher1, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE_ON_HIT)
+	Explode(launcher2, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE_ON_HIT)
+	Explode(base, SFX.NONE)
+	Explode(turret, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE_ON_HIT)
 	return 2
 end
