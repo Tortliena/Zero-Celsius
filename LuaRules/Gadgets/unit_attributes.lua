@@ -205,6 +205,7 @@ local function UpdateReloadSpeed(unitID, ud, speedFactor, gameFrame)
 			if not unitReloadPaused[unitID] then
 				local newReload = 100000 -- set a high reload time so healthbars don't judder. NOTE: math.huge is TOO LARGE
 				unitReloadPaused[unitID] = unitDefID
+				spSetUnitRulesParam(unitID, "reloadPaused", 1, INLOS_ACCESS)
 				if reloadState < gameFrame then -- unit is already reloaded, so set unit to almost reloaded
 					spSetUnitWeaponState(unitID, i, {reloadTime = newReload, reloadState = gameFrame+UPDATE_PERIOD+1})
 				else
@@ -216,7 +217,7 @@ local function UpdateReloadSpeed(unitID, ud, speedFactor, gameFrame)
 		else
 			if unitReloadPaused[unitID] then
 				unitReloadPaused[unitID] = nil
-				spSetUnitRulesParam(unitID, "reloadPaused", -1, INLOS_ACCESS)
+				spSetUnitRulesParam(unitID, "reloadPaused", 0, INLOS_ACCESS)
 			end
 			local newReload = w.reload/speedFactor
 			local nextReload = gameFrame+(reloadState-gameFrame)*newReload/reloadTime
@@ -308,6 +309,7 @@ local function UpdateMovementSpeed(unitID, ud, speedFactor, turnAccelFactor, max
 				decRate         = state.origMaxDec      *maxAccelerationFactor
 			}
 			spSetGunshipMoveTypeData (unitID, attribute)
+			GG.ForceUpdateWantedMaxSpeed(unitID, unitDefID)
 		elseif state.movetype == 2 then
 			if workingGroundMoveType then
 				local accRate = state.origMaxAcc*maxAccelerationFactor 
@@ -325,6 +327,7 @@ local function UpdateMovementSpeed(unitID, ud, speedFactor, turnAccelFactor, max
 					turnAccel       = state.origTurnRate    *turnAccelFactor*1.2,
 				}
 				spSetGroundMoveTypeData (unitID, attribute)
+				GG.ForceUpdateWantedMaxSpeed(unitID, unitDefID)
 			else
 				--Spring.Echo(state.origSpeed*speedFactor*WACKY_CONVERSION_FACTOR_1)
 				--Spring.Echo(Spring.GetUnitCOBValue(unitID, COB_MAX_SPEED))

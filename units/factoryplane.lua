@@ -21,6 +21,7 @@ unitDef = {
     [[bomberdisarm]],
     [[bomberheavy]],
     [[planescout]],
+    [[planelightscout]],
   },
 
   buildPic                      = [[factoryplane.png]],
@@ -38,6 +39,7 @@ unitDef = {
 	nongroundfac = [[1]],
 	default_spacing = 8,
 	factorytab       = 1,
+	shared_energy_gen = 1,
   },
 
   energyUse                     = 0,

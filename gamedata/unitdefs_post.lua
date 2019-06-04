@@ -8,6 +8,13 @@ Spring.Echo("Loading UnitDefs_posts")
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
+-- Constants?
+--
+
+local TRANSPORT_LIGHT_COST_MAX = 1000
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Utility
 --
 
@@ -173,6 +180,11 @@ for name, ud in pairs(UnitDefs) do
 				if wd.customparams and wd.customparams.script_burst then
 					ud.customparams.script_burst = wd.customparams.script_burst
 				end
+				if wd.customparams and wd.customparams.post_capture_reload then
+					ud.customparams.post_capture_reload = wd.customparams.post_capture_reload
+				end
+				wd.customparams = wd.customparams or {}
+				wd.customparams.is_unit_weapon = 1
 			end
 		end
 	end
@@ -193,6 +205,7 @@ for name, ud in pairs(UnitDefs) do
 					hasShield = true
 					ud.customparams.shield_radius = wd.shieldradius
 					ud.customparams.shield_power = wd.shieldpower
+					ud.customparams.shield_recharge_delay = (wd.customparams or {}).shield_recharge_delay or wd.shieldrechargedelay
 					ud.customparams.shield_rate = (wd.customparams or {}).shield_rate or wd.shieldpowerregen
 					break
 				end
@@ -212,8 +225,8 @@ end
 --------------------------------------------------------------------------------
 -- UnitDefs Dont Repeat Yourself
 --
-local BP2RES = 0.00
-local BP2RES_FACTORY = 0.05
+local BP2RES = 0
+local BP2RES_FACTORY = 0
 local BP2TERRASPEED = 1000 --used to be 60 in most of the cases
 --local SEISMICSIG = 4 --used to be 4 in most of the cases
 for name, ud in pairs (UnitDefs) do
@@ -792,5 +805,13 @@ end
 if Utilities.IsCurrentVersionNewerThan(104, 600) then
 	for name, ud in pairs (UnitDefs) do
 		ud.transportmass = nil
+		if ud.buildcostmetal and tonumber(ud.buildcostmetal) > TRANSPORT_LIGHT_COST_MAX then
+			ud.customparams.requireheavytrans = 1
+		end
 	end
+end
+
+local ai_start_units = VFS.Include("LuaRules/Configs/ai_commanders.lua")
+for i = 1, #ai_start_units do
+	UnitDefs[ai_start_units[i]].customparams.ai_start_unit = true
 end

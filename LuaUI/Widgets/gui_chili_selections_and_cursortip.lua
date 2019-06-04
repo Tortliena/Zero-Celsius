@@ -95,6 +95,8 @@ local CURSOR_ERASE_NAME = "map_erase"
 local CURSOR_POINT_NAME = "map_point"
 local CURSOR_DRAW_NAME = "map_draw"
 
+local NO_TOOLTIP = "NONE"
+
 local iconTypesPath = LUAUI_DIRNAME .. "Configs/icontypes.lua"
 local icontypes = VFS.FileExists(iconTypesPath) and VFS.Include(iconTypesPath)
 local _, iconFormat = VFS.Include(LUAUI_DIRNAME .. "Configs/chilitip_conf.lua" , nil, VFS.RAW_FIRST)
@@ -627,6 +629,13 @@ local function GetUnitRegenString(unitID, ud)
 end
 
 local function GetUnitShieldRegenString(unitID, ud)
+	if ud.customParams.shield_recharge_delay or true then
+		local shieldRegen = spGetUnitRulesParam(unitID, "shieldRegenTimer")
+		if shieldRegen and shieldRegen > 0 then
+			return "  (" .. math.ceil(shieldRegen / 30) .. "s)"
+		end
+	end
+	
 	local mult = spGetUnitRulesParam(unitID,"totalReloadSpeedChange") or 1 * (1 - (spGetUnitRulesParam(unitID, "shieldChargeDisabled") or 0))
 	if mult == 0 then
 		return ""
@@ -792,13 +801,13 @@ local function GetExtraBuildTooltipAndHealthOverride(unitDefID, mousePlaceX, mou
 end
 
 local function GetPlayerCaption(teamID)
-	local _, player,_,isAI = Spring.GetTeamInfo(teamID)
+	local _, player,_,isAI = Spring.GetTeamInfo(teamID, false)
 	local playerName
 	if isAI then
 		local _, aiName, _, shortName = Spring.GetAIInfo(teamID)
 		playerName = aiName -- .. ' (' .. shortName .. ')'
 	else
-		playerName = (player and Spring.GetPlayerInfo(player)) or (teamID ~= GAIA_TEAM and "noname")
+		playerName = (player and Spring.GetPlayerInfo(player, false)) or (teamID ~= GAIA_TEAM and "noname")
 		if not playerName then
 			return false
 		end
@@ -1440,6 +1449,8 @@ local function GetSelectionStatsDisplay(parentControl)
 				global_totalBuildPower = total_totalbp
 			end
 		end
+
+		total_totalburst = math.floor(total_totalburst / 10) * 10 -- round numbers are easier to parse and compare
 		
 		UpdateDynamicGroupInfo()
 	end
@@ -2153,6 +2164,10 @@ local function UpdateTooltipContent(mx, my, dt, requiredOnly)
 	
 	-- Mouseover build option tooltip (screen0.currentTooltip)
 	local chiliTooltip = screen0.currentTooltip
+	if chiliTooltip == NO_TOOLTIP then
+		return false
+	end
+	
 	if chiliTooltip and string.find(chiliTooltip, "BuildUnit") then
 		local name = string.sub(chiliTooltip, 10)
 		local ud = name and UnitDefNames[name]
@@ -2171,7 +2186,7 @@ local function UpdateTooltipContent(mx, my, dt, requiredOnly)
 	
 	-- Mouseover morph tooltip (screen0.currentTooltip)
 	if chiliTooltip and string.find(chiliTooltip, "Morph") then
-		local unitHumanName = chiliTooltip:gsub('Morph into a (.*)(time).*', '%1'):gsub('[^%a \-]', '')
+		local unitHumanName = chiliTooltip:gsub('Morph into a (.*)(time).*', '%1'):gsub('[^%a \\-]', '')
 		local morphTime = chiliTooltip:gsub('.*time:(.*)metal.*', '%1'):gsub('[^%d]', '')
 		local morphCost = chiliTooltip:gsub('.*metal: (.*)energy.*', '%1'):gsub('[^%d]', '')
 		local unitDefID = GetUnitDefByHumanName(unitHumanName)

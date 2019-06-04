@@ -3,13 +3,13 @@
 
 function gadget:GetInfo()
 	return {
-		name		= "Chicken Spawner",
-		desc		= "Spawns burrows and chickens",
-		author		= "quantum, improved by KingRaptor",
-		date		= "April 29, 2008", --last update: Mei 7, 2014
-		license		= "GNU GPL, v2 or later",
-		layer		= 1000001,	-- must do the GameOver() thing only after gadget:awards.lua has finishes detect queen destroyed else queenKill award won't appear.
-		enabled		= true --	loaded by default?
+		name     = "Chicken Spawner",
+		desc     = "Spawns burrows and chickens",
+		author   = "quantum, improved by KingRaptor",
+		date     = "April 29, 2008", --last update: Mei 7, 2014
+		license  = "GNU GPL, v2 or later",
+		layer    = 1000001,	-- must do the GameOver() thing only after gadget:awards.lua has finishes detect queen destroyed else queenKill award won't appear.
+		enabled  = true --	loaded by default?
 	}
 end
 
@@ -205,6 +205,9 @@ else
 			humanTeams[teamID] = true
 		end
 	end
+	if chickenTeamID then
+		Spring.SetGameRulesParam("chickenTeamID", chickenTeamID)
+	end
 	luaAI = highestLevel
 end
 
@@ -334,7 +337,7 @@ local function KillAllComputerUnits()
 		--for i=1,#teamUnits do
 		--	Spring.DestroyUnit(teamUnits[i])
 		--end
-		local allyTeam = select(6, Spring.GetTeamInfo(teamID))
+		local allyTeam = select(6, Spring.GetTeamInfo(teamID, false))
 		if GG.DestroyAlliance then
 			GG.DestroyAlliance(allyTeam)
 		end
@@ -494,7 +497,7 @@ end
 
 local function ChooseChicken(units, useTech)
 	local s = spGetGameSeconds() + math.floor(gameFrameOffset/30)
-	local units = units or chickenTypes
+	units = units or chickenTypes
 	local choices,choisesN = {},0
 	local techMod = 0
 	if useTech then
@@ -1145,8 +1148,7 @@ function gadget:GameFrame(n)
 			local chickens = spGetTeamUnits(chickenTeamID) 
 			for i=1,#chickens do
 				local unitID = chickens[i]
-				local cmdQueue = spGetCommandQueue(unitID, 1)
-				if (not (cmdQueue and cmdQueue[1])) then
+				if (not Spring.Utilities.GetUnitFirstCommand(unitID)) then
 					--AttackNearestEnemy(unitID)
 					if (difficulty > 1) and (unitID == data.queenID) then
 						spGiveOrderToUnit(unitID, CMD_RAW_MOVE, data.targetCache, CMD.OPT_SHIFT)
@@ -1318,7 +1320,7 @@ function gadget:GameOver()
 end
 
 function gadget:Load(zip)
-	if not GG.SaveLoad then
+	if not (GG.SaveLoad and GG.SaveLoad.ReadFile) then
 		Spring.Log(gadget:GetInfo().name, LOG.ERROR, "ERROR: Chicken Spawner failed to access save/load API")
 		return
 	end

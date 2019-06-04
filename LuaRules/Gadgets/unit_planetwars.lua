@@ -24,7 +24,6 @@ local DEBUG_MODE = false
 --local defenderTeam = nil
 local defenderFaction = Spring.GetModOptions().defendingfaction ~= "Mercenary"
 
-local spAreTeamsAllied = Spring.AreTeamsAllied
 local floor = math.floor
 
 include "LuaRules/Configs/customcmds.h.lua"
@@ -125,7 +124,7 @@ local function GeneratePlayerNameToTeamIDMap()
 	
 	local playerList = Spring.GetPlayerList()
 	for i = 1, #playerList do
-		local name, active, spectator, teamID = Spring.GetPlayerInfo(playerList[i])
+		local name, active, spectator, teamID = Spring.GetPlayerInfo(playerList[i], false)
 		if name and active and (not spectator) then
 			map[name] = teamID
 		end
@@ -388,7 +387,7 @@ end
 local function GetAllyTeamLeader(teamList)
 	local bestRank, bestRankTeams
 	for i = 1, #teamList do
-		local teamID, leader, _, isAiTeam = Spring.GetTeamInfo(teamList[i])
+		local teamID, leader, _, isAiTeam = Spring.GetTeamInfo(teamList[i], false)
 		if leader and not isAiTeam then
 			local customKeys = select(10, Spring.GetPlayerInfo(leader)) or {}
 			local rank = customKeys.pwrank
@@ -694,7 +693,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 		CheckRemoveWormhole(unitID, unitDefID)
 	end
 	if hqs[unitID] then
-		local allyTeam = select(6, Spring.GetTeamInfo(unitTeam))
+		local allyTeam = select(6, Spring.GetTeamInfo(unitTeam, false))
 		hqsDestroyed[#hqsDestroyed+1] = allyTeam
 		
 		destroyedStructureCount = destroyedStructureCount + 1

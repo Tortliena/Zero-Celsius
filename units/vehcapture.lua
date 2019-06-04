@@ -20,9 +20,8 @@ unitDef = {
   corpse              = [[DEAD]],
 
   customParams        = {
-    post_capture_reload = 360,
-	modelradius    = [[13]],
-	turnatfullspeed = [[1]],
+    modelradius    = [[13]],
+    turnatfullspeed = [[1]],
   },
 
   explodeAs           = [[BIG_UNITEX]],
@@ -34,7 +33,7 @@ unitDef = {
   leaveTracks         = true,
   maxDamage           = 820,
   maxSlope            = 18,
-  maxVelocity         = 2.2,
+  maxVelocity         = 1.95,
   maxWaterDepth       = 22,
   minCloakDistance    = 75,
   movementClass       = [[TANK3]],
@@ -78,12 +77,13 @@ unitDef = {
       customparams = {
         capture_scaling = 0,
         is_capture = 1,
+        post_capture_reload = 360,
 
-		stats_hide_damage = 1, -- continuous laser
-		stats_hide_reload = 1,
-		
-		light_radius = 120,
-		light_color = [[0 0.6 0.15]],
+        stats_hide_damage = 1, -- continuous laser
+        stats_hide_reload = 1,
+        
+        light_radius = 120,
+        light_color = [[0 0.6 0.15]],
       },
 
       damage                  = {

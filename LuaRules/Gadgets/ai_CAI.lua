@@ -347,21 +347,17 @@ local function conJobAllocator(team)
 	-- remove con from jobs with too much BP
 	for _,data in pairs(conJob) do
 		data.bpChange = data.importance*a.totalBP - data.assignedBP
-		local changed = true
-		while (changed and data.bpChange <= -4.8) do
-			changed = false
-			for unitID,_ in pairs(data.con) do
-				--if controlledUnit.conByID[unitID].bp <= -data.bpChange then
-					data.bpChange = data.bpChange + controlledUnit.conByID[unitID].bp
-					data.con[unitID] = nil
-					data.assignedBP = data.assignedBP - controlledUnit.conByID[unitID].bp
-					if Spring.ValidUnitID(unitID) and not Spring.GetUnitIsDead(unitID) then
-						unassignedCons.count = unassignedCons.count + 1
-						unassignedCons[unassignedCons.count] = unitID
-					end
-					changed = true
-					break
-				--end
+		while data.bpChange <= -4.8 do
+			local unitID = next(data.con)
+			if not unitID then
+				break
+			end
+			data.bpChange = data.bpChange + controlledUnit.conByID[unitID].bp
+			data.con[unitID] = nil
+			data.assignedBP = data.assignedBP - controlledUnit.conByID[unitID].bp
+			if Spring.ValidUnitID(unitID) and not Spring.GetUnitIsDead(unitID) then
+				unassignedCons.count = unassignedCons.count + 1
+				unassignedCons[unassignedCons.count] = unitID
 			end
 		end
 		
@@ -2838,18 +2834,8 @@ local function initialiseFaction(team)
 		return true
 	end
 	
-	local shortname = Game.modShortName
-	
-	-- FIXME: 	this is to allow CAI to work in missions
-	--		it has the side effect of assuming the mod is always ZK,
-	--		which is kind of hacky and should probably be changed
-	--		on the other hand the previous code wasn't flexible either!
-	if true then	--if shortname == "ZK" then
-		a.buildDefs = a.buildConfig.robots
-		return true
-	end
-	
-	return false
+	a.buildDefs = a.buildConfig.robots
+	return true
 end
 
 local function echoEnemyForceComposition(allyTeam)
@@ -2920,7 +2906,7 @@ function gadget:GameFrame(n)
 				if debugData.showFacJobList[team] then
 					echoFacJobList(team)
 				end
-				local isDead = select(3, spGetTeamInfo(team))
+				local isDead = select(3, spGetTeamInfo(team, false))
 				if isDead then
 					aiTeamData[team] = nil	-- team is dead, stop working
 				end
@@ -3269,7 +3255,6 @@ local function ProcessUnitCreated(unitID, unitDefID, unitTeam, builderID, change
 				local x,y,z = spGetUnitPosition(unitID)
 				local mx,my,mz = getPositionTowardsMiddle(unitID, 500, 25)
 				local amx,amy,amz = getPositionTowardsMiddle(unitID, -250, -25)
-				local amx,amy,amz = getPositionTowardsMiddle(unitID, -250, -25)
 				if not built then
 					editDefenceHeatmap(unitTeam,unitID,buildDefs.factoryByDefId[unitDefID].defenceQuota,buildDefs.factoryByDefId[unitDefID].airDefenceQuota,buildDefs.factoryByDefId[unitDefID].defenceRange,1,1)
 				end
@@ -3535,8 +3520,8 @@ function gadget:UnitCreated(unitID, unitDefID, unitTeam, builderID)
 end
 
 function gadget:UnitGiven(unitID, unitDefID, teamID, oldTeamID) -- add unit
-	local _,_,_,_,_,newAllyTeam = Spring.GetTeamInfo(teamID)
-	local _,_,_,_,_,oldAllyTeam = Spring.GetTeamInfo(oldTeamID)
+	local _,_,_,_,_,newAllyTeam = Spring.GetTeamInfo(teamID, false)
+	local _,_,_,_,_,oldAllyTeam = Spring.GetTeamInfo(oldTeamID, false)
 	for team,_ in pairs(aiTeamData) do
 		if teamID == team then
 			ProcessUnitCreated(unitID, unitDefID, teamID, nil, newAllyTeam ~= oldAllyTeam)
@@ -3549,8 +3534,8 @@ function gadget:UnitGiven(unitID, unitDefID, teamID, oldTeamID) -- add unit
 end
 
 function gadget:UnitTaken(unitID, unitDefID, teamID, newTeamID) -- remove unit
-	local _,_,_,_,_,newAllyTeam = Spring.GetTeamInfo(newTeamID)
-	local _,_,_,_,_,oldAllyTeam = Spring.GetTeamInfo(teamID)
+	local _,_,_,_,_,newAllyTeam = Spring.GetTeamInfo(newTeamID, false)
+	local _,_,_,_,_,oldAllyTeam = Spring.GetTeamInfo(teamID, false)
 	for team,_ in pairs(aiTeamData) do
 		if teamID == team then
 			ProcessUnitDestroyed(unitID, unitDefID, teamID, newAllyTeam ~= oldAllyTeam)
@@ -3726,7 +3711,7 @@ local function initialiseAiTeam(team, allyteam, aiConfig)
 		end
 	end
 	
-	local player = select(2, Spring.GetTeamInfo(team))
+	local player = select(2, Spring.GetTeamInfo(team, false))
 	local stratIndex = SelectRandomStrat(player, team)
 	--Spring.Echo(a.buildConfig)
 	--ModifyTable(a.buildConfig, buildTasksMods)
@@ -3776,7 +3761,7 @@ local function initialiseAllyTeam(allyTeam, aiOnTeam)
 	local at = allyTeamData[allyTeam]
 	
 	for _,t in pairs(spGetTeamList()) do
-		local _,_,_,_,_,myAllyTeam = spGetTeamInfo(t)
+		local _,_,_,_,_,myAllyTeam = spGetTeamInfo(t, false)
 		if myAllyTeam == allyTeam then
 			Spring.Echo("Team " .. t .. " on allyTeam " .. allyTeam)
 			at.teams[t] = true
@@ -3891,8 +3876,8 @@ local function SetFactoryDefImportance(team, factoryDefID, importance)
 end
 
 local function RemoveUnit(unitID, unitDefID, unitTeam)
-	local unitDefID = unitDefID or spGetUnitDefID(unitID)
-	local unitTeam = unitTeam or spGetUnitTeam(unitID)
+	unitDefID = unitDefID or spGetUnitDefID(unitID)
+	unitTeam = unitTeam or spGetUnitTeam(unitID)
 	if not aiTeamData[unitTeam] then
 		Spring.Log(gadget:GetInfo().name, LOG.ERROR, "attempt to remove unit from a non-existent CAI team")
 	end
@@ -4096,11 +4081,10 @@ function gadget:Initialize()
 	end
 	
 	for _,team in ipairs(spGetTeamList()) do
-		--local _,_,_,isAI,side = spGetTeamInfo(team)
+		--local _,_,_,isAI,side = spGetTeamInfo(team, false)
 		if aiConfigByName[spGetTeamLuaAI(team)] then
-			local _,_,_,_,_,_,CustomTeamOptions = spGetTeamInfo(team)
+			local _,_,_,_,_,allyTeam,CustomTeamOptions = spGetTeamInfo(team)
 			if (not CustomTeamOptions) or (not CustomTeamOptions["aioverride"]) then -- what is this for?
-				local _,_,_,_,_,allyTeam = spGetTeamInfo(team)
 				initialiseAiTeam(team, allyTeam, aiConfigByName[spGetTeamLuaAI(team)])
 				aiOnTeam[allyTeam] = true
 				usingAI = true
@@ -4212,7 +4196,7 @@ local function ReloadUnitIDs()
 end
 
 function gadget:Load(zip)
-	if not GG.SaveLoad then
+	if not (GG.SaveLoad and GG.SaveLoad.ReadFile) then
 		Spring.Log(gadget:GetInfo().name, LOG.ERROR, "CAI failed to access save/load API")
 		return
 	end
@@ -4305,7 +4289,7 @@ end
 function gadget:Initialize()
 	local usingAI = false
 	for _,team in ipairs(spGetTeamList()) do
-		--local _,_,_,isAI,side = spGetTeamInfo(team)
+		--local _,_,_,isAI,side = spGetTeamInfo(team, false)
 		if aiConfigByName[spGetTeamLuaAI(team)] then
 			local _,_,_,_,_,_,CustomTeamOptions = spGetTeamInfo(team)
 			if (not CustomTeamOptions) or (not CustomTeamOptions["aioverride"]) then -- what is this for?

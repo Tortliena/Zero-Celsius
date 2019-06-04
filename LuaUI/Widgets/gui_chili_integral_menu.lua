@@ -25,7 +25,6 @@ local specialKeyCodes = include("Configs/integral_menu_special_keys.lua")
 local Chili
 local Button
 local Label
-local Colorbars
 local Checkbox
 local Window
 local Panel
@@ -58,6 +57,7 @@ local BUTTON_FOCUS_COLOR
 local BUTTON_BORDER_COLOR
 
 local NO_TEXT = ""
+local NO_TOOLTIP = "NONE"
 
 EPIC_NAME = "epic_chili_integral_menu_"
 EPIC_NAME_UNITS = "epic_chili_integral_menu_tab_units"
@@ -596,7 +596,7 @@ local function MoveOrRemoveCommands(cmdID, factoryUnitID, commands, queuePositio
 end
 
 local function MoveCommandBlock(factoryUnitID, queueCmdID, moveBlock, insertBlock)
-	local commands = Spring.GetFactoryCommands(factoryUnitID)
+	local commands = Spring.GetFactoryCommands(factoryUnitID, -1)
 	if not commands then
 		return
 	end
@@ -651,7 +651,7 @@ local function MoveCommandBlock(factoryUnitID, queueCmdID, moveBlock, insertBloc
 end
 
 local function QueueClickFunc(mouse, right, alt, ctrl, meta, shift, queueCmdID, factoryUnitID, queueBlock)
-	local commands = Spring.GetFactoryCommands(factoryUnitID)
+	local commands = Spring.GetFactoryCommands(factoryUnitID, -1)
 	if not commands then
 		return true
 	end
@@ -715,9 +715,8 @@ local function ClickFunc(mouse, cmdID, isStructure, factoryUnitID, fakeFactory, 
 	end
 
 	if alt and factoryUnitID and options.altInsertBehind.value and (not fakeFactory) then
-		local state = Spring.GetUnitStates(factoryUnitID)
 		-- Repeat alt has to be handled by engine so that the command is removed after completion.
-		if state and not state["repeat"] then
+		if not Spring.Utilities.GetUnitRepeat(factoryUnitID) then
 			local inputMult = 1*(shift and 5 or 1)*(ctrl and 20 or 1)
 			for i = 1, inputMult do
 				Spring.GiveOrderToUnit(factoryUnitID, CMD.INSERT, {1, cmdID, 0 }, CMD.OPT_ALT + CMD.OPT_CTRL)
@@ -1348,6 +1347,7 @@ local function GetTabButton(panel, contentControl, name, humanName, hotkey, loit
 		classname = "button_tab",
 		caption = humanName,
 		padding = {0, 0, 0, 1},
+		tooltip = NO_TOOLTIP,
 		OnClick = {
 			function()
 				DoClick(true)
@@ -2066,7 +2066,6 @@ function widget:Initialize()
 	Chili = WG.Chili
 	Button = Chili.Button
 	Label = Chili.Label
-	Colorbars = Chili.Colorbars
 	Checkbox = Chili.Checkbox
 	Window = Chili.Window
 	Panel = Chili.Panel

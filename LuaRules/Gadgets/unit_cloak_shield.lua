@@ -281,8 +281,8 @@ end
 
 
 function gadget:UnitTaken(unitID, unitDefID, oldTeamID, teamID)
-	local _,_,_,_,_,newAllyTeam = Spring.GetTeamInfo(teamID)
-	local _,_,_,_,_,oldAllyTeam = Spring.GetTeamInfo(oldTeamID)
+	local _,_,_,_,_,newAllyTeam = Spring.GetTeamInfo(teamID, false)
+	local _,_,_,_,_,oldAllyTeam = Spring.GetTeamInfo(oldTeamID, false)
 	
 	if (newAllyTeam ~= oldAllyTeam) then
 		if (cloakShieldUnits[unitID]) then
@@ -393,7 +393,6 @@ local function ShrinkRadius(cloaker)
     cloaker.radius = 0
     return 0
   end
-  local r = cloaker.radius
   r = (r * r) - cloaker.def.shrinkRate
   r = (r < 0) and 0 or math.sqrt(r)
   cloaker.radius = r
@@ -430,8 +429,7 @@ function gadget:GameFrame(frameNum)
     elseif (not data.want) then
       ShrinkRadius(data)
     else
-	  local activeState = Spring.GetUnitStates(unitID)
-	  local newState = activeState and activeState["active"] and (GetUnitRulesParam(unitID, "forcedOff") ~= 1)
+	  local newState = Spring.Utilities.GetUnitActiveState(unitID) and (GetUnitRulesParam(unitID, "forcedOff") ~= 1)
       if (newState) then
         GrowRadius(data)
       else
@@ -808,8 +806,6 @@ local GetSpectatingState  = Spring.GetSpectatingState
 local GetLocalAllyTeamID  = Spring.GetLocalAllyTeamID
 local IsUnitSelected      = Spring.IsUnitSelected
 local GetUnitAllyTeam     = Spring.GetUnitAllyTeam
-local GetLocalAllyTeamID  = Spring.GetLocalAllyTeamID
-local GetUnitViewPosition = Spring.GetUnitViewPosition
 local DrawGroundCircle    = gl.DrawGroundCircle
 
 function gadget:DrawWorld()
