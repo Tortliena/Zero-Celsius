@@ -1,6 +1,6 @@
 include "constants.lua"
 
---Code mixed with TurretAAHeavy. No animation for now.
+--Code mixed with TurretAAHeavy.
 --------------------------------------------------------------------------------
 -- pieces
 --------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ local RING_SPIN_SPEED = -120
 
 --Main moving part
 local MAIN_CRYSTAL_IDLE_SPIN_SPEED = math.rad(20)
-local MAIN_CRYSTAL_IDLE_SPIN_ACCELERATION = math.rad(20)
+local MAIN_CRYSTAL_IDLE_SPIN_ACCELERATION = math.rad(10)
 local MAIN_CRYSTAL_AIMING_SPIN_SPEED = math.rad(100)
 local MAIN_CRYSTAL_AIMING_SPIN_ACCELERATION = math.rad(100)
 
@@ -51,11 +51,6 @@ local function IdleAnim()
 	--Turning main part
 	Spin(ring, z_axis, math.rad(RING_SPIN_SPEED))
 	StartSpinningCrystalsIdle()
-	while true do
-		Sleep(math.random(3000, 6500))
-		--Turn(turret, y_axis, lastHeading + math.rad(30), math.rad(60))
-		Sleep(math.random(3000, 6500))
-	end
 end
 
 --Make the crystals spin at a slow speed.
@@ -79,6 +74,8 @@ end
 --Anim when unit is created.
 local function OnCreatedAnim() 
 	Turn(turret, x_axis, -math.rad(90), math.rad(25))
+	Sleep(3600) --90 / 25
+	StartSpinningCrystalsIdle()
 end
 
 function script.Create()
@@ -119,14 +116,14 @@ end
 function script.Killed(recentDamage, maxHealth)
 	local severity = recentDamage / maxHealth
 	if (severity <= .5) then
-		Explode(base, sfxNone)
-		Explode(ring, sfxNone)
-		Explode(turret, sfxNone)
+		Explode(base, SFX.NONE)
+		Explode(ring, SFX.NONE)
+		Explode(turret, SFX.NONE)
 		return 1 -- corpsetype
 	else		
-		Explode(base, sfxShatter)
-		Explode(turret, sfxSmoke + sfxFire)
-		Explode(ring, sfxSmoke + sfxFire + sfxExplode)
+		Explode(base, SFX.SHATTER)
+		Explode(turret, SFX.SMOKE + SFX.FIRE)
+		Explode(ring, SFX.SMOKE + SFX.FIRE + SFX.EXPLODE)
 		return 2 -- corpsetype
 	end
 end
