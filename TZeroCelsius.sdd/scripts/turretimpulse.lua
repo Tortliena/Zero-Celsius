@@ -74,14 +74,11 @@ end
 --Anim when unit is created.
 local function OnCreatedAnim() 
 	Turn(turret, x_axis, -math.rad(90), math.rad(25))
-	Sleep(3600) --90 / 25
-	StartSpinningCrystalsIdle()
 end
 
 function script.Create()
 	while (GetUnitValue(COB.BUILD_PERCENT_LEFT) ~= 0) do Sleep(400) end
 	OnCreatedAnim()
-	StartThread(SmokeUnit, smokePiece)
 	StartThread(IdleAnim)
 end
 
