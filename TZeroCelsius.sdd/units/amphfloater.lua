@@ -3,6 +3,7 @@ unitDef = {
   name                   = [[Buoy]],
   description            = [[Heavy Amphibious Skirmisher Bot]],
   acceleration           = 0.2,
+  autoheal               = 12,
   activateWhenBuilt      = true,
   brakeRate              = 0.4,
   buildCostMetal         = 300,
@@ -17,7 +18,7 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-    amph_regen = 60,
+    amph_regen = 48,
     amph_submerged_at = 30,
 	sink_on_emp    = 0,
     floattoggle    = [[1]],
