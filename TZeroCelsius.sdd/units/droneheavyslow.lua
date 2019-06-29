@@ -25,7 +25,7 @@ unitDef = {
   iconType            = [[gunship]],
   idleAutoHeal        = 5,
   idleTime            = 300,
-  maxDamage           = 440,
+  maxDamage           = 500,
   maxVelocity         = 5,
   minCloakDistance    = 75,
   noAutoFire          = false,
@@ -77,7 +77,7 @@ unitDef = {
       craterMult              = 0,
   
       customParams			= {
-	    timeslow_damagefactor = [[2]],
+	    timeslow_damagefactor = [[1.2]],
 		
 		light_camera_height = 2000,
 		light_color = [[0.85 0.33 1]],

@@ -21,29 +21,6 @@ local carrierDefNames = {
 	},
 	--gunshipkrow = { {drone = UnitDefNames.dronelight.id, reloadTime = 15, maxDrones = 6, spawnSize = 2, range = 900, buildTime=3,
 			-- offsets = {0,0,0,colvolMidX=0, colvolMidY=0,colvolMidZ=0,aimX=0,aimY=0,aimZ=0}},
-	striderfunnelweb = {
-		spawnPieces = {"emitl", "emitr"},
-		{
-			drone = UnitDefNames.dronelight.id, 
-			reloadTime = 15, 
-			maxDrones = 6, 
-			spawnSize = 2, 
-			range = 800, 
-			buildTime = 5, 
-			maxBuild = 1,
-			offsets = {0, 35, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
-		},
-		{
-			drone = UnitDefNames.droneheavyslow.id,
-			reloadTime = 25, 
-			maxDrones = 2, 
-			spawnSize = 1, 
-			range = 800, 
-			buildTime = 6, 
-			maxBuild = 1,
-			offsets = {0, 35, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
-		},
-	},
 	turretimpulse = {
 		spawnPieces = { "center" },
 		{
@@ -150,21 +127,21 @@ local presets = {
 local unitRulesCarrierDefs = {
 	drone = {
 		drone = UnitDefNames.dronelight.id, 
-		reloadTime = 15, 
+		reloadTime = 20, 
 		maxDrones = 2,
 		spawnSize = 1, 
 		range = 450, 
-		buildTime = 10, 
+		buildTime = 5, 
 		maxBuild = 1,
 		offsets = {0, 50, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
 	},
 	droneheavyslow = {
 		drone = UnitDefNames.droneheavyslow.id, 
-		reloadTime = 25,
+		reloadTime = 30,
 		maxDrones = 1, 
 		spawnSize = 1, 
 		range = 600, 
-		buildTime = 15,
+		buildTime = 7.5,
 		maxBuild = 1,
 		offsets = {0, 50, 0, colvolMidX = 0, colvolMidY = 0, colvolMidZ = 0, aimX = 0, aimY = 0, aimZ = 0}
 	}
