@@ -28,6 +28,8 @@ unitDef = {
 	modelradius    = [[10]],
 	refuelturnradius = [[120]],
 
+    --Kept but put at 1.0 because it otherwise throws an error.
+	combat_slowdown = 1.0,
 	selection_scale = 1.4,
   },
 
