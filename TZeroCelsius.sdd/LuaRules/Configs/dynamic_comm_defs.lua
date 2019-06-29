@@ -748,7 +748,7 @@ local moduleDefs = {
 	{
 		name = "module_dmg_booster",
 		humanName = "Damage Booster",
-		description = "Damage Booster - Increases damage by 12% but reduces range by 6%.  Limit: 8",
+		description = "Damage Booster - Increases damage by 12% but reduces range and speed by 3%.  Limit: 8",
 		image = moduleImagePath .. "module_dmg_booster.png",
 		limit = 8,
 		cost = 125 * COST_MULT,
@@ -757,7 +757,7 @@ local moduleDefs = {
 		applicationFunction = function (modules, sharedData)
 			-- Damage boost is applied via clone swapping
 			sharedData.damageMult = (sharedData.damageMult or 1) + 0.12
-			sharedData.rangeMult = (sharedData.rangeMult or 1) - 0.06
+			sharedData.rangeMult = (sharedData.rangeMult or 1) - 0.03
 		end
 	},
 	{
@@ -766,7 +766,7 @@ local moduleDefs = {
 		description = "High Power Servos - Increases speed by 10%. Limit: 8",
 		image = moduleImagePath .. "module_high_power_servos.png",
 		limit = 8,
-		cost = 125 * COST_MULT,
+		cost = 150 * COST_MULT,
 		requireLevel = 1,
 		slotType = "module",
 		applicationFunction = function (modules, sharedData)
@@ -776,7 +776,7 @@ local moduleDefs = {
 	{
 		name = "module_adv_targeting",
 		humanName = "Adv. Targeting System",
-		description = "Advanced Targeting System - Increases range by 12% but reduces speed by 6%. Limit: 8",
+		description = "Advanced Targeting System - Increases range by 12% but reduces speed and damage by 3%. Limit: 8",
 		image = moduleImagePath .. "module_adv_targeting.png",
 		limit = 8,
 		cost = 125 * COST_MULT,
@@ -784,7 +784,8 @@ local moduleDefs = {
 		slotType = "module",
 		applicationFunction = function (modules, sharedData)
 			sharedData.rangeMult = (sharedData.rangeMult or 1) + 0.12
-			sharedData.speedMult = (sharedData.speedMult or 1) - 0.06
+			sharedData.damageMult = (sharedData.damageMult or 1) - 0.03
+			sharedData.speedMult = (sharedData.speedMult or 1) - 0.03
 		end
 	},
 	{
