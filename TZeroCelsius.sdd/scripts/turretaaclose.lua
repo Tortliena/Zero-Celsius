@@ -119,7 +119,7 @@ end
 
 function script.Create()
 	scriptReload.SetupScriptReload(2, 15 * gameSpeed)
-	StartThread(SmokeUnit, {base})
+	StartThread(GG.Script.SmokeUnit, {base})
 	StartThread(RestoreAfterDelay)
 end
 
