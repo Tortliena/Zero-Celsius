@@ -18,14 +18,14 @@ local weaponDef = {
 	},
 
 	damage                  = {
-		default = 820,
+		default = 810,
 		subs    = 41.0,
 	},
 
 	edgeEffectiveness       = 0.5,
 	explosionGenerator      = [[custom:100rlexplode]],
-	impulseBoost            = 350,
-	impulseFactor           = 0.75,
+	impulseBoost            = 500,
+	impulseFactor           = 0.8,
 	interceptedByShieldType = 1,
 	range                   = 460,
 	reloadtime              = 15,

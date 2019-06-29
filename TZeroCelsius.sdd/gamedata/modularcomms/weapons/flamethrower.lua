@@ -31,7 +31,7 @@ local weaponDef = {
 		subs    = 0.6,
 	},
 
-	accuracy                = 360,
+	accuracy                = 410,
 	explosionGenerator      = [[custom:SMOKE]],
 	fallOffRate             = 1,
 	fireStarter             = 100,

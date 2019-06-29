@@ -20,13 +20,13 @@ local weaponDef = {
 	},
 
 	damage                  = {
-		default = 55,
-		subs    = 5.5,
+		default = 49,
+		subs    = 4.9,
 	},
 
 	duration                = 0.3,
-	dynDamageExp            = 1,
-	dynDamageMin            = 0.1,
+	dynDamageExp            = 1.75,
+	dynDamageMin            = 0.05,
 	dynDamageInverted       = false,
 	explosionGenerator      = [[custom:HEATRAY_HIT]],
 	fallOffRate             = 1,
@@ -38,7 +38,7 @@ local weaponDef = {
 	interceptedByShieldType = 1,
 	lodDistance             = 10000,
 	proximityPriority       = 4,
-	range                   = 260,
+	range                   = 285,
 	reloadtime              = 0.1,
 	rgbColor                = [[1 0.1 0]],
 	rgbColor2               = [[1 1 0.25]],
