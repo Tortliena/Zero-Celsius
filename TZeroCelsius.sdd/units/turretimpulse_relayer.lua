@@ -29,8 +29,8 @@ unitDef = {
   idleAutoHeal        = 5,
   idleTime            = 300,
   maneuverleashlength = [[600]],
-  maxDamage           = 300,
-  maxVelocity         = 4.3,
+  maxDamage           = 310,
+  maxVelocity         = 4.35,
   minCloakDistance    = 75,
   noAutoFire          = false,
   noChaseCategory     = [[TERRAFORM FIXEDWING GUNSHIP SATELLITE SUB]],
@@ -98,7 +98,7 @@ unitDef = {
       },
 
       damage                  = {
-        default = 26.1,
+        default = 26.6,
       },
 
       explosionGenerator      = [[custom:flashslow]],
