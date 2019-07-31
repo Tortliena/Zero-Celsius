@@ -26,7 +26,7 @@ unitDef = {
   leaveTracks            = true,
   maxDamage              = 650,
   maxSlope               = 72,
-  maxVelocity            = 1.6,
+  maxVelocity            = 1.55,
   maxWaterDepth          = 22,
   minCloakDistance       = 75,
   movementClass          = [[TKBOT3]],
@@ -56,7 +56,7 @@ unitDef = {
 
     ADV_ROCKET = {
       name                    = [[Rocket Volley]],
-      areaOfEffect            = 48,
+      areaOfEffect            = 64,
       burst                   = 3,
       burstrate               = 0.3,
       cegTag                  = [[missiletrailredsmall]],
@@ -75,7 +75,7 @@ unitDef = {
         subs    = 7,
       },
 
-      edgeEffectiveness       = 0.5,
+      edgeEffectiveness       = 0.25,
       fireStarter             = 70,
       flightTime              = 4,
       impulseBoost            = 0,
@@ -84,7 +84,7 @@ unitDef = {
       model                   = [[recluse_missile.s3o]],
       noSelfDamage            = true,
       predictBoost            = 0.75,
-      range                   = 570,
+      range                   = 580,
       reloadtime              = 4,
       smokeTrail              = true,
       soundHit                = [[explosion/ex_small13]],
