@@ -811,8 +811,8 @@
 	},
 	"spiderriot" : {
 		"name" : "Redback",
-		"description" : "Riot Spider",
-		"helptext" : "A rapid fire spider which excels at picking off fast units."
+		"description" : "EMP Artillery Spider",
+		"helptext" : "The redback is a long range light EMP artillery. Due to its slow rate of fire, it cannot lock enemies in place, but will still be able to weaken them, especially to shielded ones. It can switch between two fire angles, and its shots also bounces on the ground. Force attack the ground to extend further the range of the redback!"
 	},
 	"spiderassault" : {
 		"name" : "Hermit",
