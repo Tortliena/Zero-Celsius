@@ -28,7 +28,7 @@ unitDef = {
     modelradius      = [[10]],
     requireammo      = [[1]],
     reammoseconds    = [[40]],
-    refuelturnradius = [[150]],
+    refuelturnradius = [[130]],
 	reallyabomber    = [[1]],
   },
 
@@ -41,9 +41,12 @@ unitDef = {
   idleTime            = 1800,
   maneuverleashlength = [[1440]],
   maxAcc              = 0.5,
-  maxDamage           = 3650,
+  maxDamage           = 3850,
+  maxAileron          = 0.067,
+  maxElevator         = 0.0067,
+  maxRudder           = 0.0018,
   maxFuel             = 1000000,
-  maxVelocity         = 5.7,
+  maxVelocity         = 5.75,
   minCloakDistance    = 75,
   mygravity           = 1,
   noAutoFire          = false,
@@ -53,7 +56,7 @@ unitDef = {
   script              = [[bomberheavy.lua]],
   selfDestructAs      = [[GUNSHIPEX]],
   sightDistance       = 660,
-  turnRadius          = 20,
+  turnRadius          = 15,
   workerTime          = 0,
 
   weapons             = {
@@ -74,7 +77,7 @@ unitDef = {
 
     ARM_PIDR = {
       name                    = [[Implosion Bomb]],
-      areaOfEffect            = 300,
+      areaOfEffect            = 410,
       avoidFeature            = false,
       avoidFriendly           = false,
       burnblow                = true,
@@ -82,8 +85,8 @@ unitDef = {
       collideFriendly         = false,
       burst                   = 3,
       burstRate               = 0.95,
-      craterBoost             = 1,
-      craterMult              = 1,
+      craterBoost             = 0.33,
+      craterMult              = 1.0,
 
       customParams            = {
 		burst = Shared.BURST_UNRELIABLE,
@@ -94,12 +97,12 @@ unitDef = {
       },
 
       damage                  = {
-        default = 1120.1,
-        planes  = 1120.1,
-        subs    = 112,
+        default = 1000.1,
+        planes  = 1000.1,
+        subs    = 100.1,
       },
 
-      edgeEffectiveness       = 0.5,
+      edgeEffectiveness       = 0.05,
       explosionGenerator      = [[custom:NUKE_150]],
       fireStarter             = 100,
       impulseBoost            = 0,
@@ -134,7 +137,6 @@ unitDef = {
       shieldInterceptType     = 3,
       shieldPower             = 600,
       shieldPowerRegen        = 5,
-      shieldPowerRegenEnergy  = 0.2,
       shieldRadius            = 70,
       shieldRepulser          = false,
       smartShield             = true,
