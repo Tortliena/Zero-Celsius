@@ -99,12 +99,12 @@ unitDef = {
 	  },
 	  
       damage                  = {
-        default = 15,
-        planes  = 15,
-        subs    = 1.5,
+        default = 20,
+        planes  = 20,
+        subs    = 2.0,
       },
 
-      edgeEffectiveness       = 0.7,
+      edgeEffectiveness       = 0.6,
       explosionGenerator      = [[custom:napalm_firewalker_small]],
       fireStarter             = 250,
       impulseBoost            = 0,
