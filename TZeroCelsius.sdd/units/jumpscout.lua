@@ -83,7 +83,7 @@ unitDef = {
 
     MISSILE = {
       name                    = [[Legless Puppy]],
-      areaOfEffect            = 40,
+      areaOfEffect            = 48,
       cegTag                  = [[VINDIBACK]],
       craterBoost             = 1,
       craterMult              = 2,
