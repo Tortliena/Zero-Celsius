@@ -891,8 +891,8 @@
 	},
 	"shipriot" : {
 		"name" : "Corsair",
-		"description" : "Corvette (Raider/Riot)",
-		"helptext" : "This Corvette comes equipped with two shotguns which are effective against anything which gets close. It has no weapons effective against underwater targets."
+		"description" : "Corvette (Riot)",
+		"helptext" : "This Corvette comes equipped with two gauss shotguns which will shatter grouped targets at close range. Each cannon can deals up to 300 damage per shot at point blank range, but damage falls off quickly."
 	},
 	"shipassault" : {
 		"name" : "Siren",
