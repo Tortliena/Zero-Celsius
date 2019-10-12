@@ -5,7 +5,7 @@ unitDef = {
   acceleration           = 0.0417,
   activateWhenBuilt      = true,
   brakeRate              = 0.142,
-  buildCostMetal         = 280,
+  buildCostMetal         = 300,
   builder                = false,
   buildPic               = [[shipriot.png]],
   canGuard               = true,
@@ -29,8 +29,8 @@ unitDef = {
   iconType               = [[shipriot]],
   idleAutoHeal           = 5,
   idleTime               = 1800,
-  maxDamage              = 1150,
-  maxVelocity            = 2.3,
+  maxDamage              = 1300,
+  maxVelocity            = 2.25,
   minCloakDistance       = 75,
   minWaterDepth          = 10,
   movementClass          = [[BOAT4]],
@@ -59,14 +59,14 @@ unitDef = {
   weapons                = {
 
     {
-      def                = [[GAUSS]],
+      def                = [[CORSAIR_SHOTGUN]],
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SUB SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
 
 
     {
-      def                = [[GAUSS]],
+      def                = [[CORSAIR_SHOTGUN]],
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SUB SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
@@ -76,9 +76,9 @@ unitDef = {
 
   weaponDefs             = {
 
-	GAUSS = {
-		  name                    = [[Light Gauss Cannon]],
-		  alphaDecay              = 0.18,
+	CORSAIR_SHOTGUN = {
+		  name                    = [[Gauss Shotgun]],
+		  alphaDecay              = 0.21,
 		  areaOfEffect            = 16,
 		  avoidfeature            = false,
 		  burst                   = 3,
@@ -93,11 +93,12 @@ unitDef = {
 		  customParams = {
 			burst = Shared.BURST_RELIABLE,
 			single_hit = true,
+			damage_vs_shield = 10.1,
 		  },
 
 		  damage                  = {
-			default = 300.1,
-			planes  = 300.1,
+			default = 330.1,
+			planes  = 330.1,
 		  },
 		  
 		  explosionGenerator      = [[custom:gauss_hit_m]],
@@ -109,7 +110,7 @@ unitDef = {
 		  noExplode               = true,
 		  noSelfDamage            = true,
 		  numbounce               = 36,
-		  range                   = 420,
+		  range                   = 400,
 		  projectiles             = 3,
           sprayangle              = 3800,
 		  reloadtime              = 3.0,
