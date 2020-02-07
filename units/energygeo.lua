@@ -1,4 +1,4 @@
-unitDef = {
+return { energygeo = {
   unitname                      = [[energygeo]],
   name                          = [[Geothermal Generator]],
   description                   = [[Medium Powerplant (+25)]],
@@ -24,14 +24,14 @@ unitDef = {
     aimposoffset   = [[0 0 0]],
     midposoffset   = [[0 -10 0]],
     modelradius    = [[42]],
-	removewait     = 1,
+    removewait     = 1,
     selectionscalemult = 1.15,
     
     morphto = [[energyheavygeo]],
     morphtime = [[90]],
-	
-	priority_misc = 1, -- Medium
-	default_spacing = 0,
+    
+    priority_misc = 1, -- Medium
+    default_spacing = 0,
   },
 
   energyMake                    = 25,
@@ -76,6 +76,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ energygeo = unitDef })
+} }

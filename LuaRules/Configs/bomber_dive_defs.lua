@@ -15,7 +15,7 @@ local units = {
 		diveDamage = 600,
 		diveHeight = 25,
 		diveDistanceMult = 1.7,
-		altPerFlightFrame = 6.25,
+		altPerFlightFrame = 6.15,
 		sizeSafetyFactor = 0.75,
 		orgHeight = UnitDefNames["bomberprec"].wantedHeight*FUDGE_FACTOR,
 	},
@@ -23,16 +23,16 @@ local units = {
 
 for i = 1, #WeaponDefs do
 	for weapon, data in pairs(weapons) do
-		if WeaponDefs[i].name == weapon then 
-			weaponArray[i] = data 
+		if WeaponDefs[i].name == weapon then
+			weaponArray[i] = data
 		end
 	end
 end
 
 for i = 1, #UnitDefs do
 	for unit, data in pairs(units) do
-		if UnitDefs[i].name == unit then 
-			unitArray[i] = data 
+		if UnitDefs[i].name == unit then
+			unitArray[i] = data
 		end
 	end
 end

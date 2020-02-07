@@ -1,4 +1,4 @@
-unitDef = {
+return { staticsonar = {
   unitname          = [[staticsonar]],
   name              = [[Sonar Station]],
   description       = [[Locates Water Units]],
@@ -34,8 +34,8 @@ unitDef = {
   
   customParams                  = {
     modelradius    = [[16]],
-	removewait     = 1,
-	priority_misc  = 2, -- High
+    removewait     = 1,
+    priority_misc  = 2, -- High
   },
 
   featureDefs       = {
@@ -57,6 +57,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ staticsonar = unitDef })
+} }

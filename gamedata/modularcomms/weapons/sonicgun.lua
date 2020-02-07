@@ -9,11 +9,13 @@ local weaponDef = {
 	craterMult              = 0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		lups_explodelife = 100,
 		lups_explodespeed = 1,
 		badtargetcategory = [[FIXEDWING]],
 		onlyTargetCategory = [[FIXEDWING LAND SINK SWIM FLOAT SHIP SUB GUNSHIP HOVER]],
+		reaim_time = 1,
 	},
 
 	damage                  = {

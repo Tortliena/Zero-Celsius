@@ -12,7 +12,7 @@ end
 
 -------------------------------------------------------------
 -------------------------------------------------------------
-if not (gadgetHandler:IsSyncedCode()) then 
+if not (gadgetHandler:IsSyncedCode()) then
 	return false
 end
 -------------------------------------------------------------
@@ -115,10 +115,6 @@ end
 
 function gadget:Initialize()
 	for id,_ in pairs(projectileDefs) do
-		if Script.SetWatchProjectile then
-			Script.SetWatchProjectile(id, true)
-		else
-			Script.SetWatchWeapon(id, true)
-		end
+		Script.SetWatchProjectile(id, true)
 	end
 end

@@ -35,7 +35,7 @@ local glColor       	= gl.Color
 local glBeginEnd    	= gl.BeginEnd
 
 local floor = math.floor
-local ceil = math.ceil 
+local ceil = math.ceil
 
 local toggleHeight   = KEYSYMS.B
 local heightIncrease = KEYSYMS.C
@@ -121,6 +121,7 @@ local groundGridColor  = {0.3, 0.2, 1, 0.8} -- grid representing new ground heig
 -- colour of lasso during drawing
 local lassoColor = {0.2, 1.0, 0.2, 0.8}
 local edgeColor = {0.2, 1.0, 0.2, 0.4}
+local waterColor = {0.2, 0.0, 1.0, 0.4}
 
 local SQUARE_BUILDABLE = 2 -- magic constant returned by TestBuildOrder
 
@@ -135,6 +136,7 @@ local buildingPlacementHeight = 0
 
 local toggleEnabled = false
 local floating = false
+local drawWater = false
 
 local pointX = 0
 local pointY = 0
@@ -166,7 +168,7 @@ end
 local function SendCommand()
 	local constructor = spGetSelectedUnits()
 
-	if #constructor == 0 then 
+	if #constructor == 0 then
 		return
 	end
 	
@@ -183,9 +185,9 @@ local function SendCommand()
 					pointY = 2
 				else
 					pointY = height + buildingPlacementHeight
-				end	
+				end
 			else
-				pointY = height + buildingPlacementHeight	
+				pointY = height + buildingPlacementHeight
 			end
 		end
 	end
@@ -201,7 +203,7 @@ local function SendCommand()
 	params[4] = pointZ
 	params[5] = commandTag
 	params[6] = 1            -- Loop parameter
-	params[7] = pointY       -- Height parameter of terraform 
+	params[7] = pointY       -- Height parameter of terraform
 	params[8] = 5            -- Five points in the terraform
 	params[9] = #constructor -- Number of constructors with the command
 	params[10] = 0            -- Ordinary volume selection
@@ -346,10 +348,16 @@ function widget:Update(dt)
 				pointY = 2
 			else
 				pointY = height + buildingPlacementHeight
-			end	
+			end
 		else
 			floating = false
-			pointY = height + buildingPlacementHeight	
+			pointY = height + buildingPlacementHeight
+		end
+		
+		if height > 0 and pointY < 0 then
+			drawWater = true
+		else
+			drawWater = false
 		end
 		
 		for i = -1, 1, 2 do
@@ -357,7 +365,7 @@ function widget:Update(dt)
 				corner[i][j] = spGetGroundHeight(pointX + sizeX*i, pointZ + sizeZ*j)
 			end
 		end
-	else 
+	else
 		pointX = false
 	end
 end
@@ -419,12 +427,12 @@ end
 -- Drawing
 --------------------------------------------------------------------------------
 
-local function DrawRectangleLine()
-	glVertex(pointX + sizeX, pointY, pointZ + sizeZ)
-	glVertex(pointX + sizeX, pointY, pointZ - sizeZ)
-	glVertex(pointX - sizeX, pointY, pointZ - sizeZ)
-	glVertex(pointX - sizeX, pointY, pointZ + sizeZ)
-	glVertex(pointX + sizeX, pointY, pointZ + sizeZ)
+local function DrawRectangleLine(h)
+	glVertex(pointX + sizeX, h, pointZ + sizeZ)
+	glVertex(pointX + sizeX, h, pointZ - sizeZ)
+	glVertex(pointX - sizeX, h, pointZ - sizeZ)
+	glVertex(pointX - sizeX, h, pointZ + sizeZ)
+	glVertex(pointX + sizeX, h, pointZ + sizeZ)
 end
 
 local function DrawRectangleCorners()
@@ -451,12 +459,17 @@ function widget:DrawWorld()
 		--// draw the lines
 		
 		glLineWidth(2.0)
+		if drawWater then
+			glColor(waterColor)
+			glBeginEnd(GL_LINE_STRIP, DrawRectangleLine, 0)
+		end
+		
 		glColor(edgeColor)
 		glBeginEnd(GL_LINES, DrawRectangleCorners)
 		
 		glLineWidth(3.0)
 		glColor(lassoColor)
-		glBeginEnd(GL_LINE_STRIP, DrawRectangleLine)
+		glBeginEnd(GL_LINE_STRIP, DrawRectangleLine, pointY)
 		
 		glColor(1, 1, 1, 1)
 		glLineWidth(1.0)
@@ -464,12 +477,12 @@ function widget:DrawWorld()
 end
 
 function widget:Shutdown()
-	if (volumeDraw) then 
+	if (volumeDraw) then
 		gl.DeleteList(volumeDraw); volumeDraw=nil
 		gl.DeleteList(mouseGridDraw); mouseGridDraw=nil
 	end
-	if (groundGridDraw) then 
-		gl.DeleteList(groundGridDraw); groundGridDraw=nil 
+	if (groundGridDraw) then
+		gl.DeleteList(groundGridDraw); groundGridDraw=nil
 	end
 end
 

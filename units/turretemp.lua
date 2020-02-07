@@ -1,4 +1,4 @@
-unitDef = {
+return { turretemp = {
   unitname                      = [[turretemp]],
   name                          = [[Faraday]],
   description                   = [[EMP Turret]],
@@ -27,7 +27,7 @@ unitDef = {
   footprintZ                    = 2,
   iconType                      = [[defensespecial]],
   levelGround                   = false,
-  maxDamage                     = 2200,
+  maxDamage                     = 1700,
   maxSlope                      = 36,
   maxWaterDepth                 = 0,
   minCloakDistance              = 150,
@@ -45,7 +45,7 @@ unitDef = {
 
   },
 
-  sightDistance                 = 506,
+  sightDistance                 = 554, -- Range*1.1 + 48 for radar overshoot
   useBuildingGroundDecal        = true,
   yardMap                       = [[oo oo]],
 
@@ -67,10 +67,10 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
       cylinderTargeting       = 0,
-	  
+      
       customParams            = {
-		light_color = [[0.75 0.75 0.56]],
-		light_radius = 220,
+        light_color = [[0.75 0.75 0.56]],
+        light_radius = 220,
       },
 
       damage                  = {
@@ -121,6 +121,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ turretemp = unitDef })
+} }

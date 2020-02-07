@@ -7,8 +7,10 @@ local weaponDef = {
 	craterMult              = 0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		light_radius = 0,
+		reaim_time = 1,
 	},
 
 	damage                  = {

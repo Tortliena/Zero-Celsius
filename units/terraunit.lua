@@ -1,4 +1,4 @@
-unitDef = {
+return { terraunit = {
   unitname               = [[terraunit]],
   name                   = [[Terraform]],
   description            = [[Spent: 0]],
@@ -19,8 +19,8 @@ unitDef = {
   customParams           = {
     dontcount      = [[1]],
     mobilebuilding = [[1]],
-	cannotcloak    = [[1]],
-	instantselfd   = [[1]],
+    cannotcloak    = [[1]],
+    instantselfd   = [[1]],
   },
 
   footprintX             = 2,
@@ -46,6 +46,4 @@ unitDef = {
   upright                = false,
   workerTime             = 0,
   yardMap                = [[yyyy]],
-}
-
-return lowerkeys({ terraunit = unitDef })
+} }

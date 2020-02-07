@@ -23,7 +23,7 @@ local hasShockwave = {} -- other gadgets can do Script.SetWatchWeapon and it is 
 local wantedList = {}
 
 --// find weapons which cause a shockwave
-for i=1,#WeaponDefs do
+for i = 1, #WeaponDefs do
 	local wd = WeaponDefs[i]
 	local customParams = wd.customParams or {}
 	if (not customParams.lups_noshockwave) then
@@ -41,31 +41,19 @@ for i=1,#WeaponDefs do
 		if wd.description == "Implosion Bomb" then
 			hasShockwave[wd.id] = {special = 1}
 			wantedList[#wantedList + 1] = wd.id
-			if Script.SetWatchExplosion then
-				Script.SetWatchExplosion(wd.id, true)
-			else
-				Script.SetWatchWeapon(wd.id, true)
-			end
+			Script.SetWatchExplosion(wd.id, true)
 		elseif normalShockwave then
 			hasShockwave[wd.id] = {
-				life = 23*life, 
+				life = 23*life,
 				speed = speed,
 				growth = (wd.damageAreaOfEffect*1.1)/20*speed
 			}
 			wantedList[#wantedList + 1] = wd.id
-			if Script.SetWatchExplosion then
-				Script.SetWatchExplosion(wd.id, true)
-			else
-				Script.SetWatchWeapon(wd.id, true)
-			end
+			Script.SetWatchExplosion(wd.id, true)
 		elseif (wd.type == "DGun") then
 			hasShockwave[wd.id] = {DGun = true}
 			wantedList[#wantedList + 1] = wd.id
-			if Script.SetWatchExplosion then
-				Script.SetWatchExplosion(wd.id, true)
-			else
-				Script.SetWatchWeapon(wd.id, true)
-			end
+			Script.SetWatchExplosion(wd.id, true)
 		end
 	end
 end
@@ -75,7 +63,6 @@ function gadget:Explosion_GetWantedWeaponDef()
 end
 
 function gadget:Explosion(weaponID, px, py, pz, ownerID)
-	local wd = WeaponDefs[weaponID]
 	local shockwave = hasShockwave[weaponID]
 	if shockwave then
 		if shockwave.DGun then

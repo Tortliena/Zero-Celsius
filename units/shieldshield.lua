@@ -1,10 +1,10 @@
-unitDef = {
+return { shieldshield = {
   unitname               = [[shieldshield]],
   name                   = [[Aspis]],
   description            = [[Area Shield Walker]],
-  acceleration           = 0.25,
+  acceleration           = 0.75,
   activateWhenBuilt      = true,
-  brakeRate              = 0.75,
+  brakeRate              = 4.5,
   buildCostMetal         = 600,
   buildPic               = [[shieldshield.png]],
   canGuard               = true,
@@ -21,9 +21,9 @@ unitDef = {
     
     morphto = [[staticshield]],
     morphtime = 30,
-	
-	priority_misc = 1, -- Medium
-	unarmed       = true,
+    
+    priority_misc = 1, -- Medium
+    unarmed       = true,
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -112,6 +112,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shieldshield = unitDef })
+} }

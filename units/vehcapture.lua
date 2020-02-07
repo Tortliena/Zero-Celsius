@@ -1,9 +1,9 @@
-unitDef = {
+return { vehcapture = {
   unitname            = [[vehcapture]],
   name                = [[Dominatrix]],
   description         = [[Capture Rover]],
-  acceleration        = 0.0444,
-  brakeRate           = 0.0385,
+  acceleration        = 0.222,
+  brakeRate           = 0.385,
   buildCostMetal      = 420,
   builder             = false,
   buildPic            = [[vehcapture.png]],
@@ -22,6 +22,7 @@ unitDef = {
   customParams        = {
     modelradius    = [[13]],
     turnatfullspeed = [[1]],
+    cus_noflashlight = 1,
   },
 
   explodeAs           = [[BIG_UNITEX]],
@@ -75,7 +76,7 @@ unitDef = {
       craterMult              = 0,
 
       customparams = {
-        capture_scaling = 0,
+        capture_scaling = 1,
         is_capture = 1,
         post_capture_reload = 360,
 
@@ -87,7 +88,7 @@ unitDef = {
       },
 
       damage                  = {
-        default = 2.6,
+        default = 11.1,
       },
 
       explosionGenerator      = [[custom:NONE]],
@@ -114,6 +115,7 @@ unitDef = {
       thickness               = 4.2,
       tolerance               = 5000,
       turret                  = true,
+      waterweapon             = true,
       weaponType              = [[BeamLaser]],
       weaponVelocity          = 500,
     },
@@ -128,6 +130,9 @@ unitDef = {
       featureDead      = [[HEAP]],
       footprintX       = 2,
       footprintZ       = 2,
+      collisionVolumeOffsets = [[0 0 0]],
+      collisionVolumeScales  = [[26 26 50]],
+      collisionVolumeType    = [[cylZ]],
       object           = [[corvrad_big_dead.s3o]],
     },
 
@@ -141,6 +146,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ vehcapture = unitDef })
+} }

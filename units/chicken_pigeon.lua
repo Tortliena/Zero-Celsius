@@ -1,4 +1,4 @@
-unitDef = {
+return { chicken_pigeon = {
   unitname            = [[chicken_pigeon]],
   name                = [[Pigeon]],
   description         = [[Flying Spore Scout]],
@@ -83,6 +83,10 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
+      customParams            = {
+        bogus = 1,
+      },
+
       damage                  = {
         default = 0,
       },
@@ -148,6 +152,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chicken_pigeon = unitDef })
+} }

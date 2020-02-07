@@ -65,10 +65,10 @@ function gadget:GameFrame(n)
 		local unitID = units.data[i]
 		local data = unitsByID[unitID]
 		local stocked, queued = spGetUnitStockpile(unitID)
-		local stunned_or_inbuild, stunned, inbuild = spGetUnitIsStunned(unitID) 
+		local stunned_or_inbuild, stunned, inbuild = spGetUnitIsStunned(unitID)
 		local disarmed = (spGetUnitRulesParam(unitID, "disarmed") == 1)
 		local def = stockpileUnitDefID[data.unitDefID]
-		local cmdID = Spring.Utilities.GetUnitFirstCommand(unitID)
+		local cmdID = Spring.GetUnitCurrentCommand(unitID)
 		local isWaiting = cmdID and (cmdID == CMD.WAIT)
 		if (not (stunned_or_inbuild or disarmed)) and queued ~= 0 and not (isWaiting and (def.stockCost > 0)) then
 			
@@ -87,7 +87,7 @@ function gadget:GameFrame(n)
 				data.resTable.e = data.resTable.m
 			end
 			
-			if (def.stockCost == 0) or spUseUnitResource(unitID, data.resTable) then
+			if (newStockSpeed > 0) and ((def.stockCost == 0) or spUseUnitResource(unitID, data.resTable)) then
 				data.progress = data.progress - newStockSpeed
 				if data.progress <= 0 then
 					spSetUnitStockpile(unitID, stocked, 1)
@@ -130,10 +130,10 @@ function gadget:UnitFinished(unitID, unitDefID, teamID)
 		units.data[units.count] = unitID
 		unitsByID[unitID] = {
 			id = units.count, --the "id" is the index in units.data table
-			progress = def.stockUpdates, 
-			unitDefID = unitDefID, 
-			teamID = teamID, 
-			stockSpeed = 0, 
+			progress = def.stockUpdates,
+			unitDefID = unitDefID,
+			teamID = teamID,
+			stockSpeed = 0,
 			resTable = {
 				m = def.perUpdateCost,
 				e = def.perUpdateCost

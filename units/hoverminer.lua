@@ -1,9 +1,9 @@
-unitDef = {
+return { hoverminer = {
   unitname            = [[hoverminer]],
   name                = [[Dampener]],
   description         = [[Minelaying Hover]],
-  acceleration        = 0.0435,
-  brakeRate           = 0.205,
+  acceleration        = 0.2175,
+  brakeRate           = 2.05,
   buildCostMetal      = 200,
   builder             = false,
   buildPic            = [[hoverminer.png]],
@@ -66,11 +66,16 @@ unitDef = {
       avoidFriendly           = false,
       avoidNeutral            = false,
       burnblow                = true,
-      collideEnemy            = false,      
+      collideEnemy            = false,
       collideFriendly         = false,
       collideNeutral          = false,
       craterBoost             = 0,
       craterMult              = 0,
+
+      customParams            = {
+        spawns_name = "wolverine_mine",
+        spawns_expire = 60,
+      },
 
       damage                  = {
         default = 20,
@@ -118,6 +123,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ hoverminer = unitDef })
+} }

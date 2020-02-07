@@ -1,4 +1,4 @@
-unitDef = {
+return { factorytank = {
   unitname                      = [[factorytank]],
   name                          = [[Tank Foundry]],
   description                   = [[Produces Heavy Tracked Vehicles, Builds at 10 m/s]],
@@ -41,11 +41,11 @@ unitDef = {
     default_spacing = 8,
     aimposoffset   = [[0 15 -35]],
     midposoffset   = [[0 15 -10]],
-	modelradius    = [[100]],
-	unstick_help   = 1,
+    modelradius    = [[100]],
+    unstick_help   = 1,
     selectionscalemult = 1,
-	factorytab       = 1,
-	shared_energy_gen = 1,
+    factorytab       = 1,
+    shared_energy_gen = 1,
   },
 
   energyUse                     = 0,
@@ -96,6 +96,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ factorytank = unitDef })
+} }

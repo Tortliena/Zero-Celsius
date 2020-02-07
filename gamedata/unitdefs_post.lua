@@ -32,13 +32,29 @@ local function tobool(val)
   return false
 end
 
+local function lowerkeys(t)
+	local tn = {}
+	if type(t) == "table" then
+		for i,v in pairs(t) do
+			local typ = type(i)
+			if type(v)=="table" then
+				v = lowerkeys(v)
+			end
+			if typ=="string" then
+				tn[i:lower()] = v
+			else
+				tn[i] = v
+			end
+		end
+	end
+	return tn
+end
 
 --deep not safe with circular tables! defaults To false
 Spring.Utilities = Spring.Utilities or {}
 VFS.Include("LuaRules/Utilities/tablefunctions.lua")
 CopyTable = Spring.Utilities.CopyTable
 MergeTable = Spring.Utilities.MergeTable
-
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -50,6 +66,26 @@ for _, ud in pairs(UnitDefs) do
         ud.customparams = {}
     end
  end
+ 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+-- Balance Testing
+--
+
+--modOptions.tweakunits = 'ewpjbG9ha3JhaWQgPSB7YnVpbGRDb3N0TWV0YWwgPSAxMCwKd2VhcG9uRGVmcyA9IHtFTUcgPSB7ZGFtYWdlID0ge2RlZmF1bHQgPSAyMDB9fX19LAp9'
+
+if modOptions.tweakunits and modOptions.tweakunits ~= "" then
+	local tweaks = Spring.Utilities.CustomKeyToUsefulTable(modOptions.tweakunits)
+	if type(tweaks) == "table" then
+		Spring.Echo("Loading tweakunits modoption")
+		for name, ud in pairs(UnitDefs) do
+			if tweaks[name] then
+				Spring.Echo("Loading tweakunits for " .. name)
+				Spring.Utilities.OverwriteTableInplace(ud, lowerkeys(tweaks[name]), true)
+			end
+		end
+	end
+end
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -173,6 +209,7 @@ end
 for name, ud in pairs(UnitDefs) do
 	if not ud.customparams.dynamic_comm then
 		if ud.weapondefs then
+			local cobWeapon = (ud.script and ud.script:find("%.cob"))
 			for _, wd in pairs(ud.weapondefs) do
 				if wd.customparams and wd.customparams.script_reload then
 					ud.customparams.script_reload = wd.customparams.script_reload
@@ -185,6 +222,9 @@ for name, ud in pairs(UnitDefs) do
 				end
 				wd.customparams = wd.customparams or {}
 				wd.customparams.is_unit_weapon = 1
+				if cobWeapon then
+					wd.customparams.cob_weapon = 1
+				end
 			end
 		end
 	end
@@ -312,23 +352,24 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -- Maneuverability multipliers, useful for testing.
--- TODO: migrate the x3 and x5 ones to defs, leave at x1 for easy testing
 
-local TURNRATE_MULT = 1
-local ACCEL_MULT = 3
-local ACCEL_MULT_HIGH = 5
+local TURNRATE_MULT = 1.2
+local TURNRATE_MULT_HIGH = 1.6
+local ACCEL_MULT = 1
+local ACCEL_MULT_HIGH = 1.2
 
 for name, ud in pairs(UnitDefs) do
 	if ud.turnrate and ud.acceleration and ud.brakerate and ud.movementclass then
 		local class = ud.movementclass
 
-		ud.turnrate = ud.turnrate * TURNRATE_MULT
 		if class:find("TANK") or class:find("BOAT") or class:find("HOVER") then
+			ud.turnrate = ud.turnrate * TURNRATE_MULT_HIGH
 			ud.acceleration = ud.acceleration * ACCEL_MULT_HIGH
-			ud.brakerate = ud.brakerate * ACCEL_MULT_HIGH*2
+			ud.brakerate = ud.brakerate * ACCEL_MULT_HIGH
 		else
+			ud.turnrate = ud.turnrate * TURNRATE_MULT
 			ud.acceleration = ud.acceleration * ACCEL_MULT
-			ud.brakerate = ud.brakerate * ACCEL_MULT*2
+			ud.brakerate = ud.brakerate * ACCEL_MULT
 		end
 	end
 end
@@ -690,6 +731,8 @@ end
 -- Altered unit health mod option
 --
 
+--modOptions.hpmult = 1.5 -- TEST CHANGE
+
 if modOptions and modOptions.hpmult and modOptions.hpmult ~= 1 then
     local hpMulti = modOptions.hpmult
     for unitDefID, unitDef in pairs(UnitDefs) do
@@ -806,6 +849,20 @@ if Utilities.IsCurrentVersionNewerThan(104, 600) then
 	for name, ud in pairs (UnitDefs) do
 		ud.transportmass = nil
 		if ud.buildcostmetal and tonumber(ud.buildcostmetal) > TRANSPORT_LIGHT_COST_MAX then
+			ud.customparams.requireheavytrans = 1
+		end
+	end
+else
+	--[[ old engines handle transporting rules entirely on their own,
+	     but mark units anyway so that other code doesn't need to
+	     replicate these checks ]]
+	local valkDef = UnitDefs.gunshiptrans
+	local valkMaxMass = valkDef.transportmass
+	local valkMaxSize = valkDef.transportsize
+	for name, ud in pairs (UnitDefs) do
+		if ud.mass > valkMaxMass
+		or ud.footprintx > valkMaxSize
+		or ud.footprintz > valkMaxSize then
 			ud.customparams.requireheavytrans = 1
 		end
 	end

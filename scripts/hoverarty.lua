@@ -1,14 +1,14 @@
 include "constants.lua"
 
-local base = piece 'base' 
-local turret = piece 'turret' 
-local gun = piece 'barrel1' 
+local base = piece 'base'
+local turret = piece 'turret'
+local gun = piece 'barrel1'
 local wheels = {piece 'frdirt', piece 'fldirt', piece 'rrdirt', piece 'rldirt'}
-local frpontoon = piece 'frpontoon' 
-local flpontoon = piece 'flpontoon' 
-local rrpontoon = piece 'rrpontoon' 
-local rlpontoon = piece 'rlpontoon' 
-local flare = piece 'firepoint1' 
+local frpontoon = piece 'frpontoon'
+local flpontoon = piece 'flpontoon'
+local rrpontoon = piece 'rrpontoon'
+local rlpontoon = piece 'rlpontoon'
+local flare = piece 'firepoint1'
 
 local smokePiece = {base, turret}
 
@@ -48,14 +48,10 @@ local function WobbleUnit()
 end
 
 local function HoverFX()
-	local emitType = 1024
 	while true do
 		if not Spring.GetUnitIsCloaked(unitID) then
-			if (curTerrainType == 1 or curTerrainType == 2) and select(2, Spring.GetUnitPosition(unitID)) == 0 then
-				emitType = 5
-			else
-				emitType = 1024
-			end
+			local isOnWater = (curTerrainType == 1 or curTerrainType == 2) and select(2, Spring.GetUnitPosition(unitID)) == 0
+			local emitType = isOnWater and 5 or 1024
 			for i = 1, 4 do
 				EmitSfx(wheels[i], emitType)
 			end
@@ -68,10 +64,6 @@ function script.setSFXoccupy(num)
 	curTerrainType = num
 end
 
-function script.StopMoving()
-	bMoving = 0
-end
-
 function script.Create()
 	Hide(flare)
 
@@ -80,7 +72,7 @@ function script.Create()
 	for i = 1, 4 do
 		Hide(wheels[i])
 	end
-	StartThread(GG.Script.SmokeUnit, smokePiece)
+	StartThread(GG.Script.SmokeUnit, unitID, smokePiece)
 	StartThread(HoverFX)
 end
 

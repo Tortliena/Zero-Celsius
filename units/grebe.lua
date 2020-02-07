@@ -1,10 +1,10 @@
-unitDef = {
+return { grebe = {
   unitname               = [[grebe]],
   name                   = [[Grebe]],
   description            = [[Amphibious Raider Bot]],
-  acceleration           = 0.2,
+  acceleration           = 0.6,
   activateWhenBuilt      = true,
-  brakeRate              = 0.4,
+  brakeRate              = 2.4,
   buildCostMetal         = 300,
   buildPic               = [[grebe.png]],
   canGuard               = true,
@@ -65,7 +65,7 @@ unitDef = {
 
   weaponDefs             = {
 
-	GRENADE = {
+    GRENADE = {
       name                    = [[Grenade Launcher]],
       accuracy                = 200,
       areaOfEffect            = 96,
@@ -92,14 +92,14 @@ unitDef = {
       soundHitVolume          = 8,
       soundStart              = [[weapon/cannon/cannon_fire3]],
       soundStartVolume        = 2,
-      soundTrigger			= true,
+      soundTrigger            = true,
       sprayangle              = 512,
       turret                  = true,
       weaponType              = [[Cannon]],
       weaponVelocity          = 400,
-	},
+    },
 
-	TORPEDO = {
+    TORPEDO = {
       name                    = [[Torpedo]],
       areaOfEffect            = 16,
       avoidFriendly           = false,
@@ -157,6 +157,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ grebe = unitDef })
+} }

@@ -79,7 +79,7 @@ end
 local players = {}
 
 function MessageProcessor:AddPlayer(playerID)
-	local name, active, spec, teamId, allyTeamId, _,_,_,_,customkeys = Spring.GetPlayerInfo(playerID)
+	local name, active, spec, teamId, allyTeamId, _, _,_,_,_,customkeys = Spring.GetPlayerInfo(playerID)
 	players[name] = { id = playerID, spec = spec, allyTeamId = allyTeamId, muted = (customkeys and customkeys.muted == 1) }
 end
 
@@ -95,7 +95,7 @@ local function SetupPlayers()
 	local spGetPlayerInfo = Spring.GetPlayerInfo
 	
 	for i, id in ipairs(playerroster) do
-		local name,active, spec, teamId, allyTeamId, _,_,_,_,customkeys = spGetPlayerInfo(id)
+		local name,active, spec, teamId, allyTeamId, _, _,_,_,_,customkeys = spGetPlayerInfo(id)
 		players[name] = { id = id, spec = spec, allyTeamId = allyTeamId, muted = (customkeys and customkeys.muted == 1) }
 	end
 	
@@ -115,7 +115,7 @@ local function SetupPlayers()
 				--Note2: <botname> only use name and not shortname. For comparison, crude playerlist botname is: '<'.. name ..'> '.. shortName
 				players[name] = { id = skirmishAIID, allyTeamId = allyTeamId, isAI = true}
 			end
-		end --if teamID ~= Spring.GetGaiaTeamID() 
+		end --if teamID ~= Spring.GetGaiaTeamID()
 	end --for each team
 end
 

@@ -1,16 +1,16 @@
-unitDef = {
+return { amphimpulse = {
   unitname               = [[amphimpulse]],
   name                   = [[Archer]],
   description            = [[Amphibious Raider/Riot Bot]],
-  acceleration           = 0.2,
+  acceleration           = 0.6,
   activateWhenBuilt      = true,
-  brakeRate              = 0.4,
+  brakeRate              = 2.4,
   buildCostMetal         = 180,
   buildPic               = [[amphimpulse.png]],
   canGuard               = true,
   canMove                = true,
   canPatrol              = true,
-  category               = [[SINK]],
+  category               = [[LAND SINK]],
   corpse                 = [[DEAD]],
 
   customParams           = {
@@ -86,12 +86,12 @@ unitDef = {
         normaldamage = [[1]],
 
         --stats_damage = 10.4,
-		--stats_hide_damage = 1, -- continuous laser
-		--stats_hide_reload = 1,
-		
-		light_camera_height = 1500,
-		light_color = [[0 0.03 0.07]],
-		light_radius = 100,
+        --stats_hide_damage = 1, -- continuous laser
+        --stats_hide_reload = 1,
+        
+        light_camera_height = 1500,
+        light_color = [[0 0.03 0.07]],
+        light_radius = 100,
       },
 
       damage                  = {
@@ -114,7 +114,7 @@ unitDef = {
       soundStart              = [[weapon/watershort]],
       soundStartVolume        = 5,
       sweepfire               = false,
-      texture1	              = [[corelaser]],
+      texture1                = [[corelaser]],
       texture2                = [[wake]],
       texture3                = [[wake]],
       texture4                = [[wake]],
@@ -135,7 +135,7 @@ unitDef = {
       coreThickness           = 0,
       craterBoost             = 0,
       craterMult              = 0,
-	  
+      
       customParams            = {
         impulse = [[30]],
         normaldamage = [[1]],
@@ -160,7 +160,7 @@ unitDef = {
 --      soundStart              = [[weapon/laser/laser_burn8]],
       soundTrigger            = true,
       sweepfire               = false,
-      texture1	              = [[corelaser]],
+      texture1                = [[corelaser]],
       texture2                = [[wake]],
       texture3                = [[wake]],
       texture4                = [[wake]],
@@ -194,6 +194,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ amphimpulse = unitDef })
+} }

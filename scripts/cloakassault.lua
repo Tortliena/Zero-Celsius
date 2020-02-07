@@ -1,18 +1,18 @@
-local base = piece 'base' 
-local chest = piece 'chest' 
-local aim = piece 'aim' 
-local flare = piece 'flare' 
-local hips = piece 'hips' 
-local lthigh = piece 'lthigh' 
-local rthigh = piece 'rthigh' 
-local lforearm = piece 'lforearm' 
-local rforearm = piece 'rforearm' 
-local rshoulder = piece 'rshoulder' 
-local lshoulder = piece 'lshoulder' 
-local rshin = piece 'rshin' 
-local rfoot = piece 'rfoot' 
-local lshin = piece 'lshin' 
-local lfoot = piece 'lfoot' 
+local base = piece 'base'
+local chest = piece 'chest'
+local aim = piece 'aim'
+local flare = piece 'flare'
+local hips = piece 'hips'
+local lthigh = piece 'lthigh'
+local rthigh = piece 'rthigh'
+local lforearm = piece 'lforearm'
+local rforearm = piece 'rforearm'
+local rshoulder = piece 'rshoulder'
+local lshoulder = piece 'lshoulder'
+local rshin = piece 'rshin'
+local rfoot = piece 'rfoot'
+local lshin = piece 'lshin'
+local lfoot = piece 'lfoot'
 --linear constant=65536
 
 include "constants.lua"
@@ -38,19 +38,17 @@ local steptime = 10
 local stride_top = -0.5
 local stride_bottom = -2.75
 
+local spGetUnitRulesParam = Spring.GetUnitRulesParam
 local function GetSpeedMod()
-	return (Spring.GetUnitRulesParam(unitID, "totalMoveSpeedChange") or 1)
+	return (spGetUnitRulesParam(unitID, "totalMoveSpeedChange") or 1)
 end
 
 local function walk()
 	Signal(SIG_MOVE)
 	SetSignalMask(SIG_MOVE)
 
-	local speedmod = 1
-	local truespeed = runspeed
 	while true do
-		speedmod = GetSpeedMod()
-		truespeed = runspeed * speedmod
+		local truespeed = runspeed * GetSpeedMod()
 
 		Turn(hips, z_axis, 0.08, truespeed*0.15)
 
@@ -92,8 +90,7 @@ local function walk()
 
 		Sleep(steptime)
 
-		speedmod = (Spring.GetUnitRulesParam(unitID, "totalMoveSpeedChange") or 1)
-		truespeed = runspeed * speedmod
+		truespeed = runspeed * GetSpeedMod() -- again because it might've changed during sleep
 		Turn(hips, z_axis, -0.08, truespeed*0.15)
 
 		Turn(lthigh, x_axis, -0.65, truespeed*1.25)
@@ -137,7 +134,7 @@ local function walk()
 end
 
 function script.Create()
-	StartThread(GG.Script.SmokeUnit, smokePiece)
+	StartThread(GG.Script.SmokeUnit, unitID, smokePiece)
 end
 
 function script.StartMoving()

@@ -9,6 +9,7 @@ local weaponDef = {
 	craterMult              = 0.3,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		muzzleEffectShot = [[custom:WARMUZZLE]],
 		miscEffectShot = [[custom:DEVA_SHELLS]],
@@ -21,6 +22,7 @@ local weaponDef = {
 
 		light_color = [[0.8 0.76 0.38]],
 		light_radius = 180,
+		reaim_time = 1,
 	},
 
 	damage                  = {

@@ -1,4 +1,4 @@
-unitDef = {
+return { energywind = {
   unitname                      = [[energywind]],
   name                          = [[Wind/Tidal Generator]],
   description                   = [[Small Powerplant]],
@@ -20,8 +20,8 @@ unitDef = {
     pylonrange     = 60,
     windgen        = true,
     modelradius    = [[15]],
-	removewait     = 1,
-	default_spacing = 2,
+    removewait     = 1,
+    default_spacing = 2,
   },
 
   energyMake                    = 1.2,
@@ -35,7 +35,7 @@ unitDef = {
   idleTime                      = 1800,
   levelGround                   = false,
   losEmitHeight                 = 30,
-  maxDamage                     = 130,
+  maxDamage                     = 150,
   maxSlope                      = 75,
   minCloakDistance              = 150,
   objectName                    = [[arm_wind_generator.s3o]],
@@ -68,13 +68,11 @@ unitDef = {
       footprintX       = 3,
       footprintZ       = 3,
       object           = [[arm_wind_generator_dead_water.s3o]],
-	  customparams = {
-		health_override = 400,
-	  },
+      customparams = {
+        health_override = 400,
+      },
     }
 
   },
 
-}
-
-return lowerkeys({ energywind = unitDef })
+} }

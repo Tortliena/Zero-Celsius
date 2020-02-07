@@ -12,7 +12,7 @@ end
 
 -------------------------------------------------------------
 -------------------------------------------------------------
-if not (gadgetHandler:IsSyncedCode()) then 
+if not (gadgetHandler:IsSyncedCode()) then
 	return false
 end
 -------------------------------------------------------------
@@ -31,7 +31,7 @@ function gadget:ProjectileCreated(proID, proOwnerID, weaponDefID)
 	if not projectileDefs[weaponDefID] then
 		return
 	end
-	local px, py, pz = Spring.GetProjectilePosition(proID)
+	local _, py = Spring.GetProjectilePosition(proID)
 	if (py or 1) > 0 then
 		return
 	end
@@ -40,10 +40,6 @@ end
 
 function gadget:Initialize()
 	for id,_ in pairs(projectileDefs) do
-		if Script.SetWatchProjectile then
-			Script.SetWatchProjectile(id, true)
-		else
-			Script.SetWatchWeapon(id, true)
-		end
+		Script.SetWatchProjectile(id, true)
 	end
 end

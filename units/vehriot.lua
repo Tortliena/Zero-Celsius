@@ -1,19 +1,19 @@
-unitDef = {
+return { vehriot = {
   unitname            = [[vehriot]],
   name                = [[Ripper]],
   description         = [[Riot Rover]],
-  acceleration        = 0.0318,
-  brakeRate           = 0.124,
+  acceleration        = 0.159,
+  brakeRate           = 1.24,
   buildCostMetal      = 240,
   builder             = false,
   buildPic            = [[vehriot.png]],
   canGuard            = true,
   canMove             = true,
-  canPatrol           = true,	
+  canPatrol           = true,
   category            = [[LAND]],
   selectionVolumeOffsets = [[0 0 0]],
   selectionVolumeScales  = [[42 42 42]],
-  selectionVolumeType    = [[ellipsoid]], 
+  selectionVolumeType    = [[ellipsoid]],
   corpse              = [[DEAD]],
 
   customParams        = {
@@ -83,14 +83,14 @@ unitDef = {
         gatherradius = [[90]],
         smoothradius = [[60]],
         smoothmult   = [[0.08]],
-		force_ignore_ground = [[1]],
+        force_ignore_ground = [[1]],
 
-		light_camera_height = 1500,
+        light_camera_height = 1500,
       },
-	  
+      
       damage                  = {
-        default = 220.2,
-        planes  = 220.2,
+        default = 250.2,
+        planes  = 250.2,
         subs    = 11,
       },
 
@@ -100,8 +100,8 @@ unitDef = {
       impulseFactor           = 0.6,
       interceptedByShieldType = 1,
       noSelfDamage            = true,
-      range                   = 300,
-      reloadtime              = 1.6 + 1/30,
+      range                   = 320,
+      reloadtime              = 1.6,
       soundHit                = [[weapon/cannon/generic_cannon]],
       soundStart              = [[weapon/cannon/outlaw_gun]],
       soundStartVolume        = 3,
@@ -132,6 +132,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ vehriot = unitDef })
+} }

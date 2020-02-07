@@ -1,4 +1,4 @@
-unitDef = {
+return { turretmissile = {
   unitname                      = [[turretmissile]],
   name                          = [[Picket]],
   description                   = [[Light Missile Tower]],
@@ -48,7 +48,7 @@ unitDef = {
     },
 
   },
-  sightDistance                 = 660,
+  sightDistance                 = 719, -- Range*1.1 + 48 for radar overshoot
   turnRate                      = 0,
   useBuildingGroundDecal        = true,
   workerTime                    = 0,
@@ -70,22 +70,22 @@ unitDef = {
     ARMRL_MISSILE = {
       name                    = [[Homing Missiles]],
       areaOfEffect            = 8,
-	  avoidFeature            = true,
+      avoidFeature            = true,
       cegTag                  = [[missiletrailyellow]],
       craterBoost             = 0,
       craterMult              = 0,
       cylinderTargeting       = 5,
 
-	  customParams        	  = {
-		burst = Shared.BURST_RELIABLE,
+      customParams            = {
+        burst = Shared.BURST_RELIABLE,
 
-		isaa = [[1]],
-		script_reload = [[12.5]],
-		script_burst = [[3]],
-		
-		light_camera_height = 2000,
-		light_radius = 200,
-	  },
+        isaa = [[1]],
+        script_reload = [[12.5]],
+        script_burst = [[3]],
+        
+        light_camera_height = 2000,
+        light_radius = 200,
+      },
 
       damage                  = {
         default = 104,
@@ -141,6 +141,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ turretmissile = unitDef })
+} }

@@ -74,6 +74,7 @@ local HandledUnitDefIDs = {
 	[UnitDefNames["vehaa"].id] = 1,
 	[UnitDefNames["gunshipaa"].id] = 1,
 	[UnitDefNames["gunshipskirm"].id] = 1,
+	[UnitDefNames["gunshipassault"].id] = 1,
 	[UnitDefNames["cloaksnipe"].id] = 1,
 	[UnitDefNames["amphraid"].id] = 1,
 	[UnitDefNames["amphriot"].id] = 1,
@@ -97,6 +98,7 @@ local HandledUnitDefIDs = {
 	[UnitDefNames["spiderassault"].id] = 1,
 	[UnitDefNames["cloakskirm"].id] = 1,
 	[UnitDefNames["cloakarty"].id] = 1,
+	[UnitDefNames["tankarty"].id] = 1,
 	[UnitDefNames["striderdetriment"].id] = 1,
 	[UnitDefNames["shipassault"].id] = 1,
 	[UnitDefNames["shiparty"].id] = 1,
@@ -267,11 +269,11 @@ local function CheckBlockCommon(unitID, targetID, gameFrame, fullDamage, disarmD
 				if frame < gameFrame then
 					incData.frames:TrimFront() --frames should come in ascending order, so it's safe to trim front of array one by one
 				else
-					local disarmDamage = data.disarmDamage
-					local fullDamage = data.fullDamage
+					local dataDisarmDamage = data.disarmDamage
+					local dataFullDamage = data.fullDamage
 
-					local disarmExtra = math.floor(disarmDamage/adjHealth*DECAY_FRAMES)
-					adjHealth = adjHealth - fullDamage
+					local disarmExtra = math.floor(dataDisarmDamage/adjHealth*DECAY_FRAMES)
+					adjHealth = adjHealth - dataFullDamage
 
 					disarmFrame = disarmFrame + disarmExtra
 					if disarmFrame > frame + DECAY_FRAMES + disarmTimeout then
@@ -319,16 +321,7 @@ local function CheckBlockCommon(unitID, targetID, gameFrame, fullDamage, disarmD
 		if targetIdentified then
 			local queueSize = spGetCommandQueue(unitID, 0)
 			if queueSize == 1 then
-				local cmdID, cmdOpts, cmdTag, cp_1, cp_2
-				if Spring.Utilities.COMPAT_GET_ORDER then
-					local queue = Spring.GetCommandQueue(unitID, 1)
-					if queue and queue[1] then
-						cmdID, cmdOpts, cmdTag  = queue[1].id, queue[1].options.coded, queue[1].tag
-						cp_1, cp_2 = queue[1].params[1], queue[1].params[2]
-					end
-				else
-					cmdID, cmdOpts, cmdTag, cp_1, cp_2 = Spring.GetUnitCurrentCommand(unitID)
-				end
+				local cmdID, cmdOpts, cmdTag, cp_1, cp_2 = Spring.GetUnitCurrentCommand(unitID)
 				if cmdID == CMD.ATTACK and Spring.Utilities.CheckBit(gadget:GetInfo().name, cmdOpts, CMD.OPT_INTERNAL) and cp_1 and (not cp_2) and cp_1 == targetID then
 					--Spring.Echo("Removing auto-attack command")
 					GG.recursion_GiveOrderToUnit = true

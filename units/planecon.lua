@@ -1,4 +1,4 @@
-unitDef = {
+return { planecon = {
   unitname            = [[planecon]],
   name                = [[Crane]],
   description         = [[Construction Aircraft, Builds at 4 m/s]],
@@ -9,7 +9,7 @@ unitDef = {
   buildDistance       = 160,
   selectionVolumeOffsets = [[0 0 0]],
   selectionVolumeScales  = [[42 42 42]],
-  selectionVolumeType    = [[ellipsoid]], 
+  selectionVolumeType    = [[ellipsoid]],
   builder             = true,
 
   buildoptions        = {
@@ -32,8 +32,8 @@ unitDef = {
 
   customParams        = {
     airstrafecontrol = [[0]],
-	modelradius    = [[10]],
-	midposoffset   = [[0 4 0]],
+    modelradius    = [[10]],
+    midposoffset   = [[0 4 0]],
   },
 
   energyUse           = 0,
@@ -78,6 +78,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ planecon = unitDef })
+} }

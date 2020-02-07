@@ -1,4 +1,4 @@
-unitDef = {
+return { staticheavyarty = {
   unitname                      = [[staticheavyarty]],
   name                          = [[Big Bertha]],
   description                   = [[Strategic Plasma Cannon]],
@@ -10,13 +10,13 @@ unitDef = {
   buildingGroundDecalType       = [[staticheavyarty_aoplane.dds]],
   buildPic                      = [[staticheavyarty.png]],
   category                      = [[SINK]],
-  collisionVolumeOffsets        = [[0 0 0]],
-  collisionVolumeScales         = [[70 194 70]],
+  collisionVolumeOffsets        = [[0 0 -7]],
+  collisionVolumeScales         = [[65 194 65]],
   collisionVolumeType           = [[cylY]],
   corpse                        = [[DEAD]],
 
   customParams                  = {
-
+    aimposoffset = [[0 50 -7]],
     modelradius    = [[35]],
     selectionscalemult = 1,
   },
@@ -80,22 +80,22 @@ unitDef = {
         gatherradius = [[128]],
         smoothradius = [[96]],
         smoothmult   = [[0.4]],
-		
-		light_color = [[2.4 1.5 0.6]],
+        
+        light_color = [[2.4 1.5 0.6]],
       },
-	  
+      
       damage                  = {
         default = 2002.4,
         subs    = 100,
       },
 
       explosionGenerator      = [[custom:lrpc_expl]],
-	  fireTolerance           = 1820, -- 10 degrees
+      fireTolerance           = 1820, -- 10 degrees
       impulseBoost            = 0.5,
       impulseFactor           = 0.2,
       interceptedByShieldType = 1,
       noSelfDamage            = true,
-      range                   = 6200,
+      range                   = 5600,
       reloadtime              = 7,
       soundHit                = [[weapon/cannon/lrpc_hit]],
       soundStart              = [[weapon/cannon/big_begrtha_gun_fire]],
@@ -110,6 +110,9 @@ unitDef = {
 
     DEAD  = {
       blocking         = true,
+      collisionVolumeOffsets        = [[0 0 -7]],
+      collisionVolumeScales         = [[70 194 70]],
+      collisionVolumeType           = [[cylY]],
       featureDead      = [[HEAP]],
       footprintX       = 4,
       footprintZ       = 4,
@@ -126,6 +129,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ staticheavyarty = unitDef })
+} }

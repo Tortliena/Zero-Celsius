@@ -1,10 +1,10 @@
-unitDef = {
+return { jumpcon = {
   unitname            = [[jumpcon]],
   name                = [[Constable]],
   description         = [[Jumpjet Constructor, Builds at 4 m/s]],
-  acceleration        = 0.26,
-  brakeRate           = 0.78,
-  buildCostMetal      = 120,
+  acceleration        = 0.78,
+  brakeRate           = 4.68,
+  buildCostMetal      = 140,
   buildDistance       = 128,
   builder             = true,
 
@@ -67,7 +67,7 @@ unitDef = {
   trackWidth          = 22,
   turnRate            = 1400,
   upright             = true,
-  workerTime          = 4,
+  workerTime          = 5,
  
   weapons             = {
 
@@ -95,10 +95,10 @@ unitDef = {
         timeslow_damagefactor = 12,
         timeslow_smartretarget = 0.33,
         timeslow_smartretargethealth = 50,
-		
-		light_camera_height = 1800,
-		light_color = [[0.4 0.15 0.55]],
-		light_radius = 150,
+        
+        light_camera_height = 1800,
+        light_color = [[0.4 0.15 0.55]],
+        light_radius = 150,
       },
 
       damage                  = {
@@ -153,6 +153,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ jumpcon = unitDef })
+} }

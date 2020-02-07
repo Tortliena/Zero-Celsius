@@ -1,10 +1,10 @@
-unitDef = {
+return { amphlaunch = {
   unitname               = [[amphlaunch]],
   name                   = [[Lobster]],
   description            = [[Amphibious Launcher Bot]],
-  acceleration           = 0.2,
+  acceleration           = 0.6,
   activateWhenBuilt      = true,
-  brakeRate              = 0.4,
+  brakeRate              = 2.4,
   buildCostMetal         = 320,
   buildPic               = [[amphlaunch.png]],
   canGuard               = true,
@@ -18,9 +18,10 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-    amph_regen        = 10,
-    amph_submerged_at = 40,
-    thrower_gather    = 112,
+    amph_regen         = 10,
+    amph_submerged_at  = 40,
+    thrower_gather     = 112,
+    attack_toggle      = [[1]],
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -85,11 +86,11 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
-	  customParams            = {
-		lups_noshockwave = [[1]],
-		thower_weapon    = 1,
-	  },
-	  
+      customParams            = {
+        lups_noshockwave = [[1]],
+        thower_weapon    = 1,
+      },
+      
       damage                  = {
         default = 0,
       },
@@ -124,11 +125,12 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
-	  customParams            = {
-		lups_noshockwave = [[1]],
-		thower_weapon    = 1,
-	  },
-	  
+      customParams            = {
+        lups_noshockwave = [[1]],
+        thower_weapon    = 1,
+        bogus = 1,
+      },
+      
       damage                  = {
         default = 0,
       },
@@ -172,6 +174,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ amphlaunch = unitDef })
+} }

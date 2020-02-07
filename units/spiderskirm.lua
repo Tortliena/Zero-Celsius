@@ -1,9 +1,9 @@
-unitDef = {
+return { spiderskirm = {
   unitname               = [[spiderskirm]],
   name                   = [[Recluse]],
   description            = [[Skirmisher Spider (Indirect Fire)]],
-  acceleration           = 0.26,
-  brakeRate              = 0.78,
+  acceleration           = 0.78,
+  brakeRate              = 4.68,
   buildCostMetal         = 280,
   buildPic               = [[spiderskirm.png]],
   canGuard               = true,
@@ -13,7 +13,7 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	midposoffset   = [[0 -5 0]],
+    midposoffset   = [[0 -5 0]],
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -58,14 +58,14 @@ unitDef = {
       areaOfEffect            = 48,
       burst                   = 3,
       burstrate               = 0.3,
-      cegTag                  = [[missiletrailredsmall]],
+      cegTag                  = [[rocket_trail_bar]],
       craterBoost             = 0,
       craterMult              = 0,
 
       customParams        = {
-		light_camera_height = 2500,
-		light_color = [[0.90 0.65 0.30]],
-		light_radius = 250,
+        light_camera_height = 2500,
+        light_color = [[0.90 0.65 0.30]],
+        light_radius = 250,
       },
 
       damage                  = {
@@ -85,12 +85,11 @@ unitDef = {
       predictBoost            = 0.75,
       range                   = 570,
       reloadtime              = 4,
-      smokeTrail              = true,
+      smokeTrail              = false,
       soundHit                = [[explosion/ex_small13]],
       soundStart              = [[weapon/missile/missile_fire4]],
       soundTrigger            = true,
       startVelocity           = 150,
-      texture2                = [[darksmoketrail]],
       trajectoryHeight        = 1.5,
       turnRate                = 4000,
       turret                  = true,
@@ -109,6 +108,9 @@ unitDef = {
       featureDead      = [[HEAP]],
       footprintX       = 3,
       footprintZ       = 3,
+      collisionVolumeOffsets = [[0 0 0]],
+      collisionVolumeScales  = [[50 30 50]],
+      collisionVolumeType    = [[ellipsoid]],
       object           = [[recluse_wreck.s3o]],
     },
 
@@ -121,6 +123,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ spiderskirm = unitDef })
+} }

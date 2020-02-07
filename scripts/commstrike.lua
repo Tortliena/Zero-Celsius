@@ -1,6 +1,7 @@
 include "constants.lua"
 
-dyncomm = include('dynamicCommander.lua')
+local dyncomm = include('dynamicCommander.lua')
+_G.dyncomm = dyncomm
 
 local AntennaTip = piece('AntennaTip')
 local ArmLeft = piece('ArmLeft')
@@ -266,7 +267,7 @@ function constructSkeleton(unit, piece, offset)
 
     for i=1,3 do
         info.offset[i] = offset[i]+info.offset[i];
-    end 
+    end
 
     bones[piece] = info.offset;
     local map = Spring.GetUnitPieceMap(unit);
@@ -280,7 +281,7 @@ function constructSkeleton(unit, piece, offset)
                 bones[cid] = cinfo;
             end
         end
-    end        
+    end
     return bones;
 end
 
@@ -334,14 +335,12 @@ local function Walk()
 	Signal(SIG_WALK)
 	SetSignalMask(SIG_WALK)
 	
-	local speedMult = 1
-	
 	while true do
 		walkCycle = 3 - walkCycle
-		speedMult = math.max(0.05, (Spring.GetUnitRulesParam(unitID,"totalMoveSpeedChange") or 1)*dyncomm.GetPace())
+		local speedMult = math.max(0.05, (Spring.GetUnitRulesParam(unitID,"totalMoveSpeedChange") or 1)*dyncomm.GetPace())
 		
-		local left = walkAngle[walkCycle] 
-		local right = walkAngle[3 - walkCycle] 
+		local left = walkAngle[walkCycle]
+		local right = walkAngle[3 - walkCycle]
 		-----------------------------------------------------------------------------------
 		
 		Turn(HipLeft, x_axis,  left[1].hip[1],  left[1].hip[2] * speedMult)
@@ -424,18 +423,18 @@ end
 -- Aiming and Firing
 
 function script.AimFromWeapon(num)
-	if num == 5 then 
+	if num == 5 then
 		return Palm
-	elseif num == 3 then 
+	elseif num == 3 then
 		return UnderMuzzle
 	end
 	return Shield
 end
 
 function script.QueryWeapon(num)
-	if num == 5 then 
+	if num == 5 then
 		return Muzzle
-	elseif num == 3 then 
+	elseif num == 3 then
 		return UnderMuzzle
 	end
 	return Shield
@@ -482,7 +481,7 @@ local function AimArm(heading, pitch, arm, hand, wait)
 	end
 end
 
-function script.AimWeapon(num, heading, pitch)	
+function script.AimWeapon(num, heading, pitch)
 	if num == 5 then
 		Signal(SIG_LEFT)
 		SetSignalMask(SIG_LEFT)
@@ -590,7 +589,7 @@ function script.Create()
 	
 	--dyncomm.Create()
 	Spring.SetUnitNanoPieces(unitID, nanoPieces)
-	StartThread(GG.Script.SmokeUnit, smokePiece)
+	StartThread(GG.Script.SmokeUnit, unitID, smokePiece)
 end
 
 function script.Killed(recentDamage, maxHealth)

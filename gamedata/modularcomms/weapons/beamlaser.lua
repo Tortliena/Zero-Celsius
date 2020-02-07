@@ -8,6 +8,7 @@ local weaponDef = {
 	craterMult              = 0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		muzzleEffectShot = [[custom:BEAMWEAPON_MUZZLE_BLUE]],
 		altforms = {
@@ -38,6 +39,7 @@ local weaponDef = {
 
 		light_color = [[0.4 1.1 1.1]],
 		light_radius = 120,
+		reaim_time = 1,
 	},
 
 	damage                  = {

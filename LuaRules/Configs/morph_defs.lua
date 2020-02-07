@@ -17,7 +17,7 @@ local morphDefs = {
 			energy = 600,
 			time = 90,
 		},
-	}, 
+	},
 }
 
 local baseComMorph = {
@@ -42,6 +42,8 @@ for i=1,#UnitDefs do
 		morphDefs[name][#morphDefs[name] + 1] = {
 			into = morphTo,
 			time = cp.morphtime or (cp.level and math.floor((targetDef.metalCost - ud.metalCost) / (6 * (cp.level+1)))),	-- or 30,
+			metal = tonumber(cp.morphcost),
+			energy = tonumber(cp.morphcost),
 			combatMorph = cp.combatmorph == "1",
 		}
 	end
@@ -87,7 +89,7 @@ local function InitUnsafe()
 	for name, id in pairs(Spring.GetPlayerList()) do	-- pairs(playerIDsByName) do
 		-- copied from PlanetWars
 		local commData, success
-		local customKeys = select(10, Spring.GetPlayerInfo(id))
+		local customKeys = select(11, Spring.GetPlayerInfo(id))
 		local commDataRaw = customKeys and customKeys.commanders
 		if not (commDataRaw and type(commDataRaw) == 'string') then
 			if commDataRaw then
@@ -99,7 +101,7 @@ local function InitUnsafe()
 			commDataRaw = Spring.Utilities.Base64Decode(commDataRaw)
 			--Spring.Echo(commDataRaw)
 			local commDataFunc, err = loadstring("return "..commDataRaw)
-			if commDataFunc then 
+			if commDataFunc then
 				success, commData = pcall(commDataFunc)
 				if not success then
 					err = commData
@@ -107,7 +109,7 @@ local function InitUnsafe()
 				end
 			end
 		end
-		if err then 
+		if err then
 			Spring.Log(gadget:GetInfo().name, LOG.WARNING, 'Comm Morph warning: ' .. err)
 		end
 
@@ -120,15 +122,15 @@ end
 
 local function CheckForExistingMorph(morphee, target)
 	local array = morphDefs[morphee]
-	if not array then 
+	if not array then
 		return false
 	end
 	if array.into then
 		return (array.into == target)
 	end
 	for index,morphOpts in pairs(array) do
-		if morphOpts.into and morphOpts.into == target then 
-			return true 
+		if morphOpts.into and morphOpts.into == target then
+			return true
 		end
 	end
 	return false
@@ -213,7 +215,7 @@ local function BuildMorphDef(udSrc, morphData)
 		newData.into = udDst.id
 		newData.time = morphData.time or math.floor(unitDef.buildTime*7/UPGRADING_BUILD_SPEED)
 		newData.increment = (1 / (30 * newData.time))
-		newData.metal	= morphData.metal or DefCost('metalCost', udSrc, udDst)
+		newData.metal = morphData.metal or DefCost('metalCost', udSrc, udDst)
 		newData.energy = morphData.energy or DefCost('energyCost', udSrc, udDst)
 		newData.combatMorph = morphData.combatMorph or false
 		newData.resTable = {
@@ -221,6 +223,7 @@ local function BuildMorphDef(udSrc, morphData)
 			e = (newData.increment * newData.energy)
 		}
 		newData.facing = morphData.facing
+		newData.tooltip = 'Morph ' .. newData.into .. ' ' .. newData.time .. ' ' .. newData.metal
 
 		MAX_MORPH = MAX_MORPH + 1 -- CMD_MORPH is the "generic" morph command. "Specific" morph command start at CMD_MORPH+1
 		newData.cmd = CMD_MORPH + MAX_MORPH
@@ -236,7 +239,6 @@ local function BuildMorphDef(udSrc, morphData)
 		GG.MorphInfo["MAX_MORPH"] = MAX_MORPH
 
 		newData.texture = morphData.texture
-		newData.text = morphData.text
 		return newData
 	end
 end
@@ -251,14 +253,14 @@ local function ValidateMorphDefs(mds)
 			newDefs[udSrc.id] = {}
 			if (morphData.into) then
 				local morphDef = BuildMorphDef(udSrc, morphData)
-				if (morphDef) then 
-					newDefs[udSrc.id][morphDef.cmd] = morphDef 
+				if (morphDef) then
+					newDefs[udSrc.id][morphDef.cmd] = morphDef
 				end
 			else
 				for _, morphData in pairs(morphData) do
 					local morphDef = BuildMorphDef(udSrc, morphData)
-					if (morphDef) then 
-						newDefs[udSrc.id][morphDef.cmd] = morphDef 
+					if (morphDef) then
+						newDefs[udSrc.id][morphDef.cmd] = morphDef
 					end
 				end
 			end

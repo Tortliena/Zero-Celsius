@@ -24,16 +24,18 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local spAreTeamsAllied = Spring.AreTeamsAllied
-local spGetGameFrame = Spring.GetGameFrame
-local spGetUnitHealth = Spring.GetUnitHealth
-local spSetUnitCosts = Spring.SetUnitCosts
-local spValidUnitID = Spring.ValidUnitID
-local spSetUnitRulesParam   = Spring.SetUnitRulesParam
+local spAreTeamsAllied    = Spring.AreTeamsAllied
+local spGetGameFrame      = Spring.GetGameFrame
+local spGetUnitHealth     = Spring.GetUnitHealth
+local spSetUnitCosts      = Spring.SetUnitCosts
+local spValidUnitID       = Spring.ValidUnitID
+local spSetUnitRulesParam = Spring.SetUnitRulesParam
+local spGetUnitIsStunned  = Spring.GetUnitIsStunned
 
 local ALLY_ACCESS = {allied = true}
 
 local unitCostOverride = {}
+local terraunitDefID = UnitDefNames["terraunit"].id
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -50,14 +52,20 @@ for i = 1, #WeaponDefs do
 		noFFWeaponDefs[i] = true
 	end
 end
-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 local damagedUnits = {}
+GG.unitRepairRate = {}
 
-function gadget:UnitDamaged(unitID, unitDefID, unitTeam, fullDamage, paralyzer, weaponDefID, attackerID, attackerDefID, attackerTeam)
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
+function gadget:UnitDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, weaponDefID, attackerID, attackerDefID, attackerTeam)
+	if (unitDefID == terraunitDefID) or (damage < 0.01) then
+		return
+	end
+	
 	if (weaponDefID and noFFWeaponDefs[weaponDefID] and unitTeam and attackerTeam and spAreTeamsAllied(unitTeam, attackerTeam)) then
 		return
 	end
@@ -70,9 +78,11 @@ function gadget:UnitDamaged(unitID, unitDefID, unitTeam, fullDamage, paralyzer, 
 			bt = bt,
 			frames = REPAIR_PENALTY_TIME,
 		}
-		if select(5,spGetUnitHealth(unitID)) == 1 then
+		local _, _, inbuild = spGetUnitIsStunned(unitID)
+		if not inbuild then
 			spSetUnitCosts(unitID, {buildTime = bt*REPAIR_PENALTY})
-			spSetUnitRulesParam(unitID, "repairRate", 1/REPAIR_PENALTY, ALLY_ACCESS)
+			GG.unitRepairRate[unitID] = 1/REPAIR_PENALTY
+			--spSetUnitRulesParam(unitID, "repairRate", 1/REPAIR_PENALTY, ALLY_ACCESS)
 		end
 	end
 end
@@ -80,18 +90,26 @@ end
 function gadget:UnitFinished(unitID, unitDefID, unitTeam)
 	if damagedUnits[unitID] then
 		spSetUnitCosts(unitID, {buildTime = damagedUnits[unitID].bt*REPAIR_PENALTY})
-		spSetUnitRulesParam(unitID, "repairRate", 1/REPAIR_PENALTY, ALLY_ACCESS)
+		GG.unitRepairRate[unitID] = 1/REPAIR_PENALTY
+		--spSetUnitRulesParam(unitID, "repairRate", 1/REPAIR_PENALTY, ALLY_ACCESS)
+	else
+		GG.unitRepairRate[unitID] = 1
 	end
 end
 
 function gadget:GameFrame(n)
 	if n%UPDATE_FREQUENCY == 20 then
-		for unitID,data in pairs(damagedUnits) do
+		for unitID, data in pairs(damagedUnits) do
 			data.frames = data.frames - UPDATE_FREQUENCY
 			if data.frames <= 0 then
 				if spValidUnitID(unitID) then
 					spSetUnitCosts(unitID, {buildTime = data.bt})
-					spSetUnitRulesParam(unitID, "repairRate", 1, ALLY_ACCESS)
+					GG.unitRepairRate[unitID] = 1
+					--spSetUnitRulesParam(unitID, "repairRate", 1, ALLY_ACCESS)
+					local _, _, inbuild = spGetUnitIsStunned(unitID)
+					if inbuild then
+						GG.unitRepairRate[unitID] = nil
+					end
 				end
 				damagedUnits[unitID] = nil
 			end
@@ -109,3 +127,10 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 	end
 end
 
+function gadget:Initialize()
+	-- load active units
+	for _, unitID in ipairs(Spring.GetAllUnits()) do
+		local unitDefID = Spring.GetUnitDefID(unitID)
+		gadget:UnitFinished(unitID, unitDefID)
+	end
+end

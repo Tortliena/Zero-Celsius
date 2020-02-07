@@ -15,12 +15,14 @@ local weaponDef = {
 	craterMult              = 1.0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[3]],
 		muzzleEffectFire = [[custom:SLAM_MUZZLE]],
 		manualfire = 1,
 
 		light_camera_height = 2500,
 		light_color = [[1 0.8 0.2]],
+		reaim_time = 1,
 	},
 	cylinderTargeting       = 1.0,
 

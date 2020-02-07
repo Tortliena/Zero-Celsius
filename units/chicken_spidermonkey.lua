@@ -1,10 +1,10 @@
-unitDef = {
+return { chicken_spidermonkey = {
   unitname            = [[chicken_spidermonkey]],
   name                = [[Spidermonkey]],
   description         = [[All-Terrain Support]],
-  acceleration        = 0.36,
+  acceleration        = 1.08,
   activateWhenBuilt   = true,
-  brakeRate           = 0.205,
+  brakeRate           = 1.23,
   buildCostEnergy     = 0,
   buildCostMetal      = 0,
   builder             = false,
@@ -60,10 +60,10 @@ unitDef = {
   weapons             = {
     {
       def                = [[WEB]],
-			badTargetCategory	 = [[UNARMED]],
+      badTargetCategory  = [[UNARMED]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
-			mainDir            = [[0 0 1]],
-      maxAngleDif        = 180,	  
+      mainDir            = [[0 0 1]],
+      maxAngleDif        = 180,
     },
   },
 
@@ -78,7 +78,7 @@ unitDef = {
         timeslow_damagefactor = 1,
         timeslow_onlyslow = 1,
         timeslow_smartretarget = 0.33,
-				light_radius = 0,
+                light_radius = 0,
       },
       
       craterBoost             = 0,
@@ -113,6 +113,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chicken_spidermonkey = unitDef })
+} }

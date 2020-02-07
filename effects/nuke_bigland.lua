@@ -8,10 +8,9 @@ return {
 		-- 2 Seconds Arrival of Shockwave- Formation of Explodecloud
 		-- 5 Seconds Shockwave at 1,5 km - after this has ended the nuke is fully developed
 		-- 20 Seconds total
-		
-		-- Nuke Explosion ===================================================================================	
+
+		-- Nuke Explosion ===================================================================================
 		groundflash = {
-			
 			alwaysvisible = true,
 			circlealpha = 1,
 			circlegrowth = 4,
@@ -21,11 +20,7 @@ return {
 			water = true,
 			ground = true,
 			air = true,
-			color = {
-				[1] = 0.9,
-				[2] = 0.2,
-				[3] = 0,
-			},
+			color = {0.9, 0.2, 0 },
 		},
 		explosionspike = {
 			air = true,
@@ -99,8 +94,6 @@ return {
 			count = 44,
 			ground = true,
 			water = true,
-			
-			
 			properties = {
 				alpha = 0.9,
 				alphadecay = 0.02,
@@ -109,7 +102,7 @@ return {
 				length = 2,
 				width = 86,
 			},
-		},	
+		},
 		-- /Nuke Explosion ===================================================================================
 		-- Smoke ===================================================================================
 		smoke = {
@@ -121,9 +114,9 @@ return {
 			properties = {
 				airdrag = 0.95,
 				alwaysvisible = true,
-				colormap = [[ 
+				colormap = [[
 				0.9 0.2 0 	0.05
-				0.8 0.2 0 0.05	
+				0.8 0.2 0 0.05
 				0.2 0.1 0	0.35
 				0.4 0.3 0.3 0.6
 				0.15 0.15 0.16 0.5
@@ -150,9 +143,8 @@ return {
 				texture = [[dirt]],
 				useairlos = true,
 			},
-		},		
+		},
 		smokemuzzleflame = {
-			
 			class = [[CBitmapMuzzleFlame]],
 			count = 3,
 			underwater = 1,
@@ -160,9 +152,9 @@ return {
 			ground = true,
 			air = true,
 			properties = {
-				colormap = [[ 
+				colormap = [[
 				0.9 0.2 0 	0.025
-				0.8 0.2 0 0.5	
+				0.8 0.2 0 0.5
 				0.2 0.1 0	0.6
 				0.4 0.3 0.3 0.7
 				0.15 0.15 0.16 0.5
@@ -171,7 +163,6 @@ return {
 				0.15 0.15 0.16 0.2
 				0.15 0.15 0.16 0.2
 				0 0 0 0.0]],
-				
 				dir = [[0r0.01r-0.01, 0.2r0.8, 0r0.01r-0.01]],
 				frontoffset = 0.001,
 				pos = [[0, 10, 0]],
@@ -182,11 +173,10 @@ return {
 				sizegrowth = 0.3,
 				ttl = 575,
 			},
-		},	
+		},
 		-- /Smoke ===================================================================================
 		-- Rising Explosion =========================================================================
 		pillarofFire = {
-			
 			class = [[CBitmapMuzzleFlame]],
 			count = 3,
 			underwater = 1,
@@ -194,15 +184,14 @@ return {
 			ground = true,
 			air = true,
 			properties = {
-				colormap = [[ 
+				colormap = [[
 				0.9 0.2 0 	0.02
-				0.8 0.2 0 	0.02	
-				0.75 0.2 0	0.025	
-				0.8 0.2 0 	0.025		
-				0.75 0.2 0	0.02	
-				0.8 0.2 0 	0.02	
+				0.8 0.2 0 	0.02
+				0.75 0.2 0	0.025
+				0.8 0.2 0 	0.025
+				0.75 0.2 0	0.02
+				0.8 0.2 0 	0.02
 				0 0 0 0.0]],
-				
 				dir = [[0r0.02r-0.02, 0.2r0.8, 0r0.02r-0.02]],
 				pos = [[r-6r6, 0, r-6r6]],
 				frontoffset = 0,
@@ -214,7 +203,6 @@ return {
 				ttl = 150,
 			},
 		},
-		
 		fireballup = {
 			air = true,
 			class = [[CSimpleParticleSystem]],
@@ -225,12 +213,11 @@ return {
 				emitrotspread = 3,
 				airdrag = 0.8,
 				alwaysvisible = true,
-				colormap = [[	1.0 1.0 1.0 0.01	
+				colormap = [[	1.0 1.0 1.0 0.01
 								0.9 0.5 0.2 0.01
-								0.8 0.1 0.1 0.01 	
+								0.8 0.1 0.1 0.01
 								0.8 0.1 0.1 0.0]],
 				directional = true,
-	
 				emitvector = [[0r0.01r-0.01, 2r0.5, 0r0.01r-0.01]],
 				gravity = [[0, 0.1r0.05, 0]],
 				numparticles = 1,
@@ -257,12 +244,11 @@ return {
 				emitrotspread = 3,
 				airdrag = 0.8,
 				alwaysvisible = true,
-				colormap = [[	1.0 1.0 1.0 0.01	
+				colormap = [[	1.0 1.0 1.0 0.01
 								0.9 0.5 0.2 0.01
-								0.8 0.1 0.1 0.01 	
+								0.8 0.1 0.1 0.01
 								0.8 0.1 0.1 0.0]],
 				directional = true,
-	
 				emitvector = [[0r0.01r-0.01, 2r0.5, 0r0.01r-0.01]],
 				gravity = [[0, 0.1r0.05, 0]],
 				numparticles = 1,
@@ -291,10 +277,10 @@ return {
 				emitrotspread = 3,
 				airdrag = 0.8,
 				alwaysvisible = true,
-				colormap = [[ 
+				colormap = [[
 				0.9 0.2 0 	0.05
-				0.8 0.2 0 0.05	
-				0.8 0.2 0 0.05	
+				0.8 0.2 0 0.05
+				0.8 0.2 0 0.05
 				0.2 0.1 0	0.35
 				0.2 0.1 0	0.35
 				0.4 0.3 0.3 0.6
@@ -305,7 +291,6 @@ return {
 				0.15 0.15 0.16 0.2
 				0 0 0 0.0]],
 				directional = true,
-	
 				emitvector = [[0r0.01r-0.01, 2r0.5, 0r0.01r-0.01]],
 				gravity = [[0, 0.07r0.025, 0]],
 				delay              = [[0 i5]],
@@ -334,10 +319,10 @@ return {
 				emitrotspread = 3,
 				airdrag = 0.8,
 				alwaysvisible = true,
-				colormap = [[ 
+				colormap = [[
 				0.9 0.2 0 		0.05
-				0.8 0.2 0 		0.05	
-				0.8 0.2 0 		0.05	
+				0.8 0.2 0 		0.05
+				0.8 0.2 0 		0.05
 				0.2 0.1 0		0.35
 				0.2 0.1 0		0.35
 				0.4 0.3 0.3 	0.6
@@ -348,10 +333,8 @@ return {
 				0.15 0.15 0.16 0.2
 				0 0 0 0.0]],
 				directional = true,
-	
 				emitvector = [[0r0.01r-0.01, 2r0.5, 0r0.01r-0.01]],
 				gravity = [[0, 0, 0]],
-	
 				numparticles = 1,
 				particlelife = 500,
 				particlelifespread = 25,
@@ -376,13 +359,13 @@ return {
 				emitrotspread = 3,
 				airdrag = 0.8,
 				alwaysvisible = true,
-				colormap = [[ 
+				colormap = [[
 				0 0 0  	0
 				0 0 0  	0
 				0 0 0  	0
 				0.9 0.2 0 	0.05
-				0.8 0.2 0 	0.15	
-				0.8 0.2 0 	0.25	
+				0.8 0.2 0 	0.15
+				0.8 0.2 0 	0.25
 				0.2 0.1 0	0.35
 				0.2 0.1 0	0.35
 				0.4 0.3 0.3 0.6
@@ -392,7 +375,6 @@ return {
 				0.15 0.15 0.16 0.2
 				0 0 0 0.0]],
 				directional = true,
-	
 				emitvector = [[0r0.01r-0.01, 2r0.5, 0r0.01r-0.01]],
 				gravity = [[0, 0.035, 0]],
 				numparticles = 1,
@@ -419,23 +401,21 @@ return {
 			ground = true,
 			air = true,
 			properties = {
-				colormap = [[ 
+				colormap = [[
 				0 0 0 0
 				0 0 0 0
 				0 0 0 0
 				0 0 0 0
 				0.9 0.2 0 		0.025
-				0.8 0.2 0	 	0.5	
-				0.8 0.2 0	 	0.5	
+				0.8 0.2 0	 	0.5
+				0.8 0.2 0	 	0.5
 				0.2 0.1 0		0.6
 				0.4 0.3 0.3 	0.7
 				0.15 0.15 0.16 	0.6
 				0.15 0.15 0.16 	0.5
 				0.15 0.15 0.16 	0.4
-
 				0.15 0.15 0.16 	0.2
 				0 0 0 0.0]],
-				
 				dir = [[0r0.05r-0.05, 0.2r0.8, 0r0.05r-0.05]],
 				frontoffset = -0.1,
 				pos = [[0, 160r15r-15, 0]],
@@ -446,7 +426,7 @@ return {
 				sizegrowth = 0.3,
 				ttl = 575,
 			},
-		},		
+		},
 		-- /Cloudring==================================================================================
 	},
 }

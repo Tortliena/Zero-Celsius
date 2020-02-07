@@ -2,10 +2,10 @@
 
 include "constants.lua"
 
--- WARNING: change your constant for the -brackets to 65536 before compilingnot 
-local base, body, turret, sleeve, barrel, firepoint, tracks1, tracks2, tracks3, tracks4, 
-wheels1, wheels2, wheels3, wheels4, wheels5, wheels6, wheels7, wheels8 = 
-piece('base', 'body', 'turret', 'sleeve', 'barrel', 'firepoint', 'tracks1', 'tracks2', 
+-- WARNING: change your constant for the -brackets to 65536 before compilingnot
+local base, body, turret, sleeve, barrel, firepoint, tracks1, tracks2, tracks3, tracks4,
+wheels1, wheels2, wheels3, wheels4, wheels5, wheels6, wheels7, wheels8 =
+piece('base', 'body', 'turret', 'sleeve', 'barrel', 'firepoint', 'tracks1', 'tracks2',
 'tracks3', 'tracks4', 'wheels1', 'wheels2', 'wheels3', 'wheels4', 'wheels5', 'wheels6', 'wheels7', 'wheels8')
 
 local moving, once, animCount = false,true,0
@@ -42,6 +42,7 @@ end
 ----------------------------------------------------------
 ----------------------------------------------------------
 
+--[[
 function FlameTrailThread()
 	flaming = true
 	Signal(SIG_Restore)
@@ -64,11 +65,12 @@ end
 function FlameTrail()
 	StartThread(FlameTrailThread)
 end
+]]
 
 ----------------------------------------------------------
 ----------------------------------------------------------
 
-function AnimationControl()
+local function AnimationControl()
 
 	local current_tracks = 0
 	
@@ -224,24 +226,19 @@ function script.BlockShot(num, targetID)
 	return GG.OverkillPrevention_CheckBlock(unitID, targetID, 125, 50)
 end
 
-function script.Killed(severity, corpsetype)
+function script.Killed(recentDamage, maxHealth)
+	local severity = 100 * recentDamage / maxHealth
 	if severity <= 25 then
-	
-		corpsetype = 1
 		Explode(body, SFX.NONE)
 		Explode(turret, SFX.NONE)
 		return 1
 	end
 	if severity <= 50 then
-	
-		corpsetype = 1
 		Explode(body, SFX.NONE)
 		Explode(turret,SFX.NONE)
 		Explode(barrel, SFX.FALL + SFX.SMOKE + SFX.FIRE)
 		return 1
 	else
-	
-		corpsetype = 2
 		Explode(body, SFX.NONE)
 		Explode(turret, SFX.NONE)
 		Explode(barrel, SFX.FALL + SFX.SMOKE + SFX.FIRE)
@@ -267,5 +264,5 @@ function script.Create()
 	end
 	
 	StartThread(AnimationControl)
-	StartThread(GG.Script.SmokeUnit, smokePiece)
+	StartThread(GG.Script.SmokeUnit, unitID, smokePiece)
 end

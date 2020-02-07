@@ -1,9 +1,9 @@
-unitDef = {
+return { chicken_leaper = {
   unitname            = [[chicken_leaper]],
   name                = [[Leaper]],
   description         = [[Hopping Raider]],
-  acceleration        = 0.5,
-  brakeRate           = 0.205,
+  acceleration        = 1.5,
+  brakeRate           = 1.23,
   buildCostEnergy     = 0,
   buildCostMetal      = 0,
   builder             = false,
@@ -69,7 +69,7 @@ unitDef = {
       areaOfEffect            = 8,
       avoidFriendly           = true,
       burst                   = 5,
-      burstrate               = 0.01,
+      burstrate               = 0.033,
       coreThickness           = 0,
       craterBoost             = 0,
       craterMult              = 0,
@@ -105,6 +105,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chicken_leaper = unitDef })
+} }

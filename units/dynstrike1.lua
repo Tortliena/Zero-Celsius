@@ -1,10 +1,10 @@
-unitDef = {
+return { dynstrike1 = {
   unitname               = [[dynstrike1]],
   name                   = [[Strike Commander]],
   description            = [[Mobile Assault Commander]],
-  acceleration           = 0.18,
+  acceleration           = 0.54,
   activateWhenBuilt      = true,
-  brakeRate              = 0.375,
+  brakeRate              = 2.25,
   buildCostMetal         = 1200,
   buildDistance          = 144,
   builder                = true,
@@ -23,17 +23,17 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	level = [[1]],
-	statsname = [[dynstrike1]],
-	soundok = [[heavy_bot_move]],
-	soundselect = [[bot_select]],
-	soundbuild = [[builder_start]],
-	commtype = [[1]],
-	--decorationicons = {chest = "friendly", shoulders = "arrows-dot"},
+    level = [[1]],
+    statsname = [[dynstrike1]],
+    soundok = [[heavy_bot_move]],
+    soundselect = [[bot_select]],
+    soundbuild = [[builder_start]],
+    commtype = [[1]],
+    --decorationicons = {chest = "friendly", shoulders = "arrows-dot"},
     aimposoffset   = [[0 15 0]],
-	modelradius    = [[25]],
-	dynamic_comm   = 1,
-	shared_energy_gen = 1,
+    modelradius    = [[25]],
+    dynamic_comm   = 1,
+    shared_energy_gen = 1,
   },
 
   energyStorage          = 500,
@@ -45,7 +45,7 @@ unitDef = {
   idleTime               = 0,
   leaveTracks            = true,
   losEmitHeight          = 40,
-  maxDamage              = 3200,
+  maxDamage              = 4200,
   maxSlope               = 36,
   maxVelocity            = 1.35,
   maxWaterDepth          = 5000,
@@ -60,8 +60,8 @@ unitDef = {
   sfxtypes               = {
 
     explosiongenerators = {
-    	[[custom:BEAMWEAPON_MUZZLE_BLUE]],
-		[[custom:NONE]],
+        [[custom:BEAMWEAPON_MUZZLE_BLUE]],
+        [[custom:NONE]],
     },
 
   },
@@ -98,6 +98,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ dynstrike1 = unitDef })
+} }

@@ -1,4 +1,4 @@
-unitDef = {
+return { tele_beacon = {
   unitname                      = [[tele_beacon]],
   name                          = [[Lamp]],
   description                   = [[Teleport Bridge Entry Beacon, right click to teleport.]],
@@ -9,7 +9,7 @@ unitDef = {
   category                      = [[SINK UNARMED]],
 
   customParams                  = {
-  	dontcount = [[1]],
+      dontcount = [[1]],
   },
 
   energyUse                     = 0,
@@ -26,10 +26,10 @@ unitDef = {
   minCloakDistance              = 150,
   noAutoFire                    = false,
   objectName                    = [[amphteleportbeacon.s3o]],
-  reclaimable					= false,
-  script                		= [[tele_beacon.lua]],
+  reclaimable                   = false,
+  script                        = [[tele_beacon.lua]],
   selfDestructAs                = [[TINY_BUILDINGEX]],
-  selfDestructCountdown			= 5,
+  selfDestructCountdown         = 5,
   sightDistance                 = 0,
   turnRate                      = 0,
   useBuildingGroundDecal        = false,
@@ -39,6 +39,4 @@ unitDef = {
   featureDefs                   = {
   },
 
-}
-
-return lowerkeys({ tele_beacon = unitDef })
+} }

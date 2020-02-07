@@ -32,11 +32,7 @@ for i=1,#WeaponDefs do
 	if wd.customParams and wd.customParams.massliftthrow then
 		throwWeaponID[wd.id] = true
 		throwWeaponName[wd.name] = wd.id
-		if Script.SetWatchExplosion then
-			Script.SetWatchExplosion(wd.id, true)
-		else
-			Script.SetWatchWeapon(wd.id, true)
-		end
+		Script.SetWatchExplosion(wd.id, true)
 	end
 end
 
@@ -93,7 +89,7 @@ local function addFlying(unitID, frame, dx, dy, dz, height, parentDis)
 	local ux, uy, uz = Spring.GetUnitPosition(unitID)
 		
 	if unitDefID and ux and moveTypeByID[unitDefID] and  moveTypeByID[unitDefID] == 2 then
-		local frame = frame or Spring.GetGameFrame()
+		frame = frame or Spring.GetGameFrame()
 		
 		local dis = distance(ux,uy,uz,dx,dy,dz)
 		
@@ -244,13 +240,13 @@ local flyFX = {
 	--	rotSpeed     = 1,
 	--	rotSpeedSpread = -2,
 	--	rotSpread    = 360,
-	--	sizeGrowth  = -0.05,		
+	--	sizeGrowth  = -0.05,
 	--	emitVector   = {0,1,0},
-	--	emitRotSpread = 60,		
+	--	emitRotSpread = 60,
 	--	delaySpread = 180,
 	--	sizeMod	    = 10,
 	--	}
-	--},	
+	--},
 	{class='ShieldSphere', options={
 		life		= math.huge,
 		sizeMod      = 1.5,
@@ -258,7 +254,7 @@ local flyFX = {
 		colormap2 = { {0.2, 0.1, 1, 0.08} }
 		}
 	}
-} 
+}
 
 local function addFlying(_, unitID, unitDefID)
 	particleIDs[unitID] = {}

@@ -1,10 +1,10 @@
-unitDef = {
+return { shiptransport = {
   unitname            = [[shiptransport]],
   name                = [[Surfboard]],
   description         = [[Transport Platform]],
-  acceleration        = 0.102,
+  acceleration        = 0.51,
   activateWhenBuilt   = true,
-  brakeRate           = 0.115,
+  brakeRate           = 1.15,
   buildCostMetal      = 220,
   builder             = false,
   buildPic            = [[shiptransport.png]],
@@ -13,11 +13,11 @@ unitDef = {
   category            = [[SHIP UNARMED]],
   collisionVolumeOffsets = [[0 0 -3]],
   collisionVolumeScales  = [[35 20 55]],
-  collisionVolumeType    = [[ellipsoid]],  
+  collisionVolumeType    = [[ellipsoid]],
   corpse              = [[DEAD]],
 
   customParams        = {
-	turnatfullspeed = [[1]],
+    turnatfullspeed = [[1]],
     modelradius    = [[15]],
   },
 
@@ -64,6 +64,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shiptransport = unitDef })
+} }

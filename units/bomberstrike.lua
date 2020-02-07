@@ -1,4 +1,4 @@
-unitDef = {
+return { bomberstrike = {
   unitname            = [[bomberstrike]],
   name                = [[Kestrel]],
   description         = [[Tactical Strike Bomber]],
@@ -53,7 +53,7 @@ unitDef = {
       def                = [[MISSILE]],
       badTargetCategory  = [[FIXEDWING]],
       mainDir            = [[0 0 1]],
-      maxAngleDif        = 90,      
+      maxAngleDif        = 90,
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER SINK SUB]],
     },
   },
@@ -122,6 +122,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ bomberstrike = unitDef })
+} }

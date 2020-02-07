@@ -9,12 +9,14 @@ local weaponDef = {
 	craterMult              = 2,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[3]],
 		muzzleEffectFire = [[custom:RAIDMUZZLE]],
 		manualfire = 1,
 
 		light_color = [[1.5 1.13 0.6]],
 		light_radius = 450,
+		reaim_time = 1,
 	},
 
 	damage                  = {

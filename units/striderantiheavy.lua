@@ -1,11 +1,11 @@
-unitDef = {
+return { striderantiheavy = {
   unitname               = [[striderantiheavy]],
   name                   = [[Ultimatum]],
   description            = [[Cloaked Anti-Heavy/Anti-Strider Walker]],
-  acceleration           = 0.18,
+  acceleration           = 0.54,
   activateWhenBuilt      = true,
   autoHeal               = 5,
-  brakeRate              = 0.375,
+  brakeRate              = 2.25,
   buildCostMetal         = 2000,
   buildPic               = [[striderantiheavy.png]],
   canGuard               = true,
@@ -20,7 +20,7 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[21]],
+    modelradius    = [[21]],
   },
 
   energyUse              = 0,
@@ -93,17 +93,18 @@ unitDef = {
       impulseBoost            = 0,
       impulseFactor           = 0,
       interceptedByShieldType = 0,
+      leadLimit               = 80,
       noExplode               = true,
       noSelfDamage            = true,
       range                   = 250,
       reloadtime              = 1.5,
-	  size					  = 6,
+      size                    = 6,
       soundHit                = [[explosion/ex_med6]],
       soundStart              = [[weapon/laser/heavy_laser4]],
       soundTrigger            = true,
       tolerance               = 10000,
       turret                  = true,
-	  waterWeapon             = true,
+      waterWeapon             = true,
       weaponType              = [[DGun]],
       weaponVelocity          = 300,
     },
@@ -131,6 +132,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ striderantiheavy = unitDef })
+} }

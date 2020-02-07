@@ -1,4 +1,4 @@
-unitDef = {
+return { dronelight = {
   unitname            = [[dronelight]],
   name                = [[Firefly]],
   description         = [[Attack Drone]],
@@ -36,7 +36,7 @@ unitDef = {
   
   customParams        = {
 
-	is_drone = 1,
+    is_drone = 1,
   },
   
   
@@ -76,9 +76,9 @@ unitDef = {
       cylinderTargeting       = 1,
   
       customParams            = {
-		light_camera_height = 1800,
-		light_color = [[0.25 1 0.25]],
-		light_radius = 130,
+        light_camera_height = 1800,
+        light_color = [[0.25 1 0.25]],
+        light_radius = 130,
       },
 
       damage                  = {
@@ -105,6 +105,4 @@ unitDef = {
     },
   },
 
-}
-
-return lowerkeys({ dronelight = unitDef })
+} }

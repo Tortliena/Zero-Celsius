@@ -1,9 +1,9 @@
-unitDef = {
+return { vehcon = {
   unitname               = [[vehcon]],
   name                   = [[Mason]],
   description            = [[Construction Rover, Builds at 5 m/s]],
-  acceleration           = 0.066,
-  brakeRate              = 1.5,
+  acceleration           = 0.33,
+  brakeRate              = 15.0,
   buildCostMetal         = 120,
   buildDistance          = 180,
   builder                = true,
@@ -22,26 +22,29 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[20]],
+    modelradius    = [[20]],
+    selection_scale = 1.2,
+    cus_noflashlight = 1,
   },
 
   energyUse              = 0,
   explodeAs              = [[BIG_UNITEX]],
-  footprintX             = 3,
-  footprintZ             = 3,
+  footprintX             = 2,
+  footprintZ             = 2,
   iconType               = [[builder]],
   idleAutoHeal           = 5,
   idleTime               = 1800,
   leaveTracks            = true,
-  maxDamage              = 900,
+  maxDamage              = 1000,
   maxSlope               = 18,
   maxVelocity            = 2.4,
   maxWaterDepth          = 22,
   minCloakDistance       = 75,
-  movementClass          = [[TANK3]],
+  movementClass          = [[TANK2]],
   noAutoFire             = false,
   noChaseCategory        = [[TERRAFORM SATELLITE FIXEDWING GUNSHIP HOVER SHIP SWIM SUB LAND FLOAT SINK TURRET]],
   objectName             = [[corcv.s3o]],
+  script                 = [[vehcon.lua]],
   selfDestructAs         = [[BIG_UNITEX]],
   showNanoSpray          = false,
   sightDistance          = 273,
@@ -73,6 +76,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ vehcon = unitDef })
+} }

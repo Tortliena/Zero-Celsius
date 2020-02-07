@@ -1,10 +1,10 @@
-unitDef = {
+return { hoverriot = {
   unitname            = [[hoverriot]],
   name                = [[Mace]],
   description         = [[Riot Hover]],
-  acceleration        = 0.03,
+  acceleration        = 0.15,
   activateWhenBuilt   = true,
-  brakeRate           = 0.036,
+  brakeRate           = 0.36,
   buildCostMetal      = 400,
   builder             = false,
   buildPic            = [[hoverriot.png]],
@@ -14,7 +14,7 @@ unitDef = {
   category            = [[HOVER]],
   collisionVolumeOffsets = [[0 -8 0]],
   collisionVolumeScales  = [[48 36 48]],
-  collisionVolumeType    = [[cylY]], 
+  collisionVolumeType    = [[cylY]],
   corpse              = [[DEAD]],
 
   customParams        = {
@@ -47,7 +47,7 @@ unitDef = {
   },
 
   sightDistance       = 407,
-  sonarDistance       = 407,  
+  sonarDistance       = 407,
   turninplace         = 0,
   turnRate            = 560,
   workerTime          = 0,
@@ -72,13 +72,13 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
-	  customparams = {
-		stats_hide_damage = 1, -- continuous laser
-		stats_hide_reload = 1,
-		
-		light_color = [[0.25 1 0.25]],
-		light_radius = 120,
-	  },
+      customparams = {
+        stats_hide_damage = 1, -- continuous laser
+        stats_hide_reload = 1,
+        
+        light_color = [[0.25 1 0.25]],
+        light_radius = 120,
+      },
 
       damage                  = {
         default = 29.68,
@@ -135,6 +135,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ hoverriot = unitDef })
+} }

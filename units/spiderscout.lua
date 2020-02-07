@@ -1,9 +1,9 @@
-unitDef = {
+return { spiderscout = {
   unitname            = [[spiderscout]],
   name                = [[Flea]],
   description         = [[Ultralight Scout Spider (Burrows)]],
-  acceleration        = 0.7,
-  brakeRate           = 2.1,
+  acceleration        = 2.1,
+  brakeRate           = 12.6,
   buildCostMetal      = 25,
   buildPic            = [[spiderscout.png]],
   canGuard            = true,
@@ -53,7 +53,7 @@ unitDef = {
 
   },
 
-  sightDistance       = 560,
+  sightDistance       = 620,
   trackOffset         = 0,
   trackStrength       = 8,
   trackStretch        = 1,
@@ -83,8 +83,8 @@ unitDef = {
       craterMult              = 0,
       
       customParams            = {
-		light_color = [[0.8 0.8 0]],
-		light_radius = 50,
+        light_color = [[0.8 0.8 0]],
+        light_radius = 50,
       },
 
       damage                  = {
@@ -103,7 +103,7 @@ unitDef = {
       minIntensity            = 1,
       noSelfDamage            = true,
       range                   = 150,
-      reloadtime              = 0.25,
+      reloadtime              = 0.233,
       rgbColor                = [[1 1 0]],
       soundStart              = [[weapon/laser/small_laser_fire]],
       soundTrigger            = true,
@@ -135,6 +135,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ spiderscout = unitDef })
+} }

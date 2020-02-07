@@ -1,4 +1,4 @@
-unitDef = {
+return { energyfusion = {
   unitname                      = [[energyfusion]],
   name                          = [[Fusion Reactor]],
   description                   = [[Medium Powerplant (+35)]],
@@ -15,7 +15,7 @@ unitDef = {
 
   customParams                  = {
     pylonrange = 150,
-	removewait = 1,
+    removewait = 1,
   },
 
   energyMake                    = 35,
@@ -55,6 +55,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ energyfusion = unitDef })
+} }

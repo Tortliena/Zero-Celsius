@@ -1,9 +1,9 @@
-unitDef = {
+return { spidercrabe = {
   unitname               = [[spidercrabe]],
   name                   = [[Crab]],
   description            = [[Heavy Riot/Skirmish Spider - Curls into Armored Form When Stationary]],
-  acceleration           = 0.22,
-  brakeRate              = 0.18,
+  acceleration           = 0.66,
+  brakeRate              = 1.08,
   buildCostMetal         = 1600,
   buildPic               = [[spidercrabe.png]],
   canGuard               = true,
@@ -16,9 +16,9 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	aimposoffset   = [[0 0 0]],
-	midposoffset   = [[0 -10 0]],
-	modelradius    = [[30]],
+    aimposoffset   = [[0 0 0]],
+    midposoffset   = [[0 -10 0]],
+    modelradius    = [[30]],
   },
 
   damageModifier         = 0.25,
@@ -46,7 +46,7 @@ unitDef = {
 
     explosiongenerators = {
     --  [[custom:spidercrabe_FLARE]],
-	  [[custom:LARGE_MUZZLE_FLASH_FX]],
+      [[custom:LARGE_MUZZLE_FLASH_FX]],
       [[custom:spidercrabe_FLASH]],
       [[custom:spidercrabe_WhiteLight]],
     },
@@ -80,8 +80,8 @@ unitDef = {
       craterMult              = 0.5,
 
       customParams            = {
-		light_color = [[1.5 1.13 0.6]],
-		light_radius = 450,
+        light_color = [[1.5 1.13 0.6]],
+        light_radius = 450,
       },
 
       damage                  = {
@@ -126,6 +126,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ spidercrabe = unitDef })
+} }

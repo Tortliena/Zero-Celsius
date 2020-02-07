@@ -1,9 +1,9 @@
-unitDef = {
+return { veharty = {
   unitname            = [[veharty]],
   name                = [[Badger]],
   description         = [[Artillery Minelayer Rover]],
-  acceleration        = 0.0282,
-  brakeRate           = 0.08,
+  acceleration        = 0.14,
+  brakeRate           = 0.80,
   buildCostMetal      = 260,
   builder             = false,
   buildPic            = [[veharty.png]],
@@ -13,7 +13,7 @@ unitDef = {
   category            = [[LAND]],
   selectionVolumeOffsets = [[0 0 0]],
   selectionVolumeScales  = [[42 42 42]],
-  selectionVolumeType    = [[ellipsoid]], 
+  selectionVolumeType    = [[ellipsoid]],
   corpse              = [[DEAD]],
 
   customParams        = {
@@ -81,12 +81,14 @@ unitDef = {
         reaim_time = 8, -- COB
         damage_vs_shield = [[220]],
         damage_vs_feature = [[220]],
-		spawns_name = "wolverine_mine",
-		spawns_expire = 60,
-		
-		light_radius = 0,
+
+        spawns_name = "wolverine_mine",
+        spawns_expire = 60,
+        spawn_blocked_by_shield = 1,
+        
+        light_radius = 0,
       },
-	  
+      
       damage                  = {
         default = 20,
         planes  = 20,
@@ -104,7 +106,7 @@ unitDef = {
       reloadtime              = 5.5,
       soundHit                = [[weapon/cannon/wolverine_hit]],
       soundStart              = [[weapon/cannon/wolverine_fire]],
-	  soundHitVolume          = 8,
+      soundHitVolume          = 8,
       soundStartVolume        = 8,
       turret                  = true,
       weaponType              = [[Cannon]],
@@ -133,6 +135,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ veharty = unitDef })
+} }

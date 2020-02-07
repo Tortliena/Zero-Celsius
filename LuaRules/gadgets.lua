@@ -139,6 +139,10 @@ local callInLists = {
 	-- Misc Synced CallIns
 	"Explosion",
 
+	-- LUS callins
+	"ScriptFireWeapon",
+	"ScriptEndBurst",
+
 	-- LuaRules CallIns (note: the *PreDamaged calls belong here too)
 	"CommandFallback",
 	"AllowCommand",
@@ -351,6 +355,18 @@ function gadgetHandler:LoadGadget(filename)
   end
   if (err == false) then
     return nil -- gadget asked for a quiet death
+  end
+
+  -- raw access to gadgetHandler
+  if (gadget.GetInfo and gadget:GetInfo().script) then
+    gadget.scriptCallins = {
+      ScriptFireWeapon = function (_, unitID, unitDefID, weaponNum)
+        self:ScriptFireWeapon(unitID, unitDefID, weaponNum)
+      end,
+      ScriptEndBurst = function (_, unitID, unitDefID, weaponNum)
+        self:ScriptEndBurst(unitID, unitDefID, weaponNum)
+      end,
+    }
   end
 
   -- raw access to gadgetHandler
@@ -1128,6 +1144,18 @@ function gadgetHandler:SunChanged()
   return
 end
 
+function gadgetHandler:ScriptFireWeapon(unitID, unitDefID, weaponNum)
+  for _,g in r_ipairs(self.ScriptFireWeaponList) do
+    g:ScriptFireWeapon(unitID, unitDefID, weaponNum)
+  end
+end
+
+function gadgetHandler:ScriptEndBurst(unitID, unitDefID, weaponNum)
+  for _,g in r_ipairs(self.ScriptEndBurstList) do
+    g:ScriptEndBurst(unitID, unitDefID, weaponNum)
+  end
+end
+
 function gadgetHandler:CommandFallback(unitID, unitDefID, unitTeam,
                                        cmdID, cmdParams, cmdOptions, cmdTag)
   for _,g in r_ipairs(self.CommandFallbackList) do
@@ -1138,19 +1166,6 @@ function gadgetHandler:CommandFallback(unitID, unitDefID, unitTeam,
     end
   end
   return true  -- remove the command
-end
-
-
-function gadgetHandler:AllowCommand(unitID, unitDefID, unitTeam,
-                                    cmdID, cmdParams, cmdOptions, cmdTag, synced)
-  for _,g in r_ipairs(self.AllowCommandList) do
-
-	if (not g:AllowCommand(unitID, unitDefID, unitTeam,
-                           cmdID, cmdParams, cmdOptions, cmdTag, synced)) then
-      return false
-    end
-  end
-  return true
 end
 
 function gadgetHandler:AllowStartPosition(playerID, teamID, readyState, cx, cy, cz, rx, ry, rz)
@@ -2120,29 +2135,44 @@ end
 local AllowCommand_WantedCommand = {}
 local AllowCommand_WantedUnitDefID = {}
 
-function gadgetHandler:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag, synced) 	-- ours
---function gadgetHandler:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag, synced)	-- base
-  for _,g in r_ipairs(self.AllowCommandList) do
-	if not AllowCommand_WantedCommand[g] then
-		AllowCommand_WantedCommand[g] = (g.AllowCommand_GetWantedCommand and g:AllowCommand_GetWantedCommand()) or true
-	end
-	if not AllowCommand_WantedUnitDefID[g] then
-		AllowCommand_WantedUnitDefID[g] = (g.AllowCommand_GetWantedUnitDefID and g:AllowCommand_GetWantedUnitDefID()) or true
-	end
-	local wantedCommand = AllowCommand_WantedCommand[g]
-	local wantedUnitDefID = AllowCommand_WantedUnitDefID[g]
 
-	--if g:GetBadCommand() then
-	--	Spring.Echo(g:GetBadCommand())
-	--end
-	if ((wantedCommand == true) or wantedCommand[cmdID]) and
-		((wantedUnitDefID == true) or wantedUnitDefID[unitDefID]) and
-		(not g:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag, synced)) then	-- ours
-	--if (not g:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag, synced)) then	-- base
-      return false
-    end
-  end
-  return true
+local SIZE_LIMIT = 10^8
+local function AllowCommandParams(cmdParams, playerID)
+	for i = 1, #cmdParams do
+		if cmdParams[i] < -SIZE_LIMIT or cmdParams[i] > SIZE_LIMIT then
+			Spring.Echo("Bad command from", (playerID and Spring.GetPlayerInfo(playerID)) or "unknown")
+			return false
+		end
+	end
+	return true
+end
+
+function gadgetHandler:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag, playerID, fromSynced, fromLua)
+	if not AllowCommandParams(cmdParams, playerID) then
+		return false
+	end
+	
+	if not Script.IsEngineMinVersion(104, 0, 1431) then
+		fromSynced = playerID
+	end
+
+	for _,g in r_ipairs(self.AllowCommandList) do
+		if not AllowCommand_WantedCommand[g] then
+			AllowCommand_WantedCommand[g] = (g.AllowCommand_GetWantedCommand and g:AllowCommand_GetWantedCommand()) or true
+		end
+		if not AllowCommand_WantedUnitDefID[g] then
+			AllowCommand_WantedUnitDefID[g] = (g.AllowCommand_GetWantedUnitDefID and g:AllowCommand_GetWantedUnitDefID()) or true
+		end
+		local wantedCommand = AllowCommand_WantedCommand[g]
+		local wantedUnitDefID = AllowCommand_WantedUnitDefID[g]
+
+		if ((wantedCommand == true) or wantedCommand[cmdID]) and
+			((wantedUnitDefID == true) or wantedUnitDefID[unitDefID]) and
+			(not g:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions, cmdTag, fromSynced)) then
+			return false
+		end
+	end
+	return true
 end
 
 -- ours
@@ -2255,11 +2285,26 @@ end
 -- FIXME: NOT IN BASE VERSION
 --
 
-function gadgetHandler:UnitCommand(unitID, unitDefID, unitTeam, cmdID, cmdOpts, cmdParams) -- opts is a bitmask
+if Script.IsEngineMinVersion(104, 0, 1431) then
+
+-- opts is a bitmask
+function gadgetHandler:UnitCommand(unitID, unitDefID, unitTeam, cmdID, cmdOpts, cmdParams, cmdTag, playerID, fromSynced, fromLua)
+  for _,g in r_ipairs(self.UnitCommandList) do
+    g:UnitCommand(unitID, unitDefID, unitTeam, cmdID, cmdOpts, cmdParams, cmdTag, playerID, fromSynced, fromLua)
+  end
+  return
+end
+
+else
+
+ -- opts is a bitmask
+function gadgetHandler:UnitCommand(unitID, unitDefID, unitTeam, cmdID, cmdOpts, cmdParams)
   for _,g in r_ipairs(self.UnitCommandList) do
     g:UnitCommand(unitID, unitDefID, unitTeam, cmdID, cmdOpts, cmdParams)
   end
   return
+end
+
 end
 
 function gadgetHandler:UnitEnteredWater(unitID, unitDefID, unitTeam)

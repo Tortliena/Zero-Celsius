@@ -1,4 +1,4 @@
-unitDef = {
+return { energysingu = {
   unitname                      = [[energysingu]],
   name                          = [[Singularity Reactor]],
   description                   = [[Large Powerplant (+225) - HAZARDOUS]],
@@ -15,7 +15,7 @@ unitDef = {
   category                      = [[SINK UNARMED]],
   collisionVolumeOffsets        = [[0 0 0]],
   collisionVolumeScales         = [[120 120 120]],
-  collisionVolumeType           = [[ellipsoid]], 
+  collisionVolumeType           = [[ellipsoid]],
   corpse                        = [[DEAD]],
 
   customParams                  = {
@@ -38,6 +38,7 @@ unitDef = {
   maxDamage                     = 4000,
   maxSlope                      = 18,
   maxVelocity                   = 0,
+  maxWaterDepth                 = 0,
   minCloakDistance              = 150,
   noAutoFire                    = false,
   objectName                    = [[fus.s3o]],
@@ -85,6 +86,4 @@ unitDef = {
       },
     },
   },
-}
-
-return lowerkeys({ energysingu = unitDef })
+} }

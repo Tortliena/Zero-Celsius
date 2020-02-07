@@ -1,9 +1,9 @@
-unitDef = {
+return { vehaa = {
   unitname               = [[vehaa]],
   name                   = [[Crasher]],
   description            = [[Fast Anti-Air Rover]],
-  acceleration           = 0.05952,
-  brakeRate              = 0.14875,
+  acceleration           = 0.298,
+  brakeRate              = 1.488,
   buildCostMetal         = 220,
   builder                = false,
   buildPic               = [[vehaa.png]],
@@ -17,7 +17,7 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[9]],
+    modelradius    = [[9]],
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -81,12 +81,12 @@ unitDef = {
       craterMult              = 0,
       cylinderTargeting       = 1,
 
-	  customParams        	  = {
-		burst = Shared.BURST_RELIABLE,
+      customParams              = {
+        burst = Shared.BURST_RELIABLE,
 
-		isaa = [[1]],
-		light_color = [[0.5 0.6 0.6]],
-	  },
+        isaa = [[1]],
+        light_color = [[0.5 0.6 0.6]],
+      },
 
       damage                  = {
         default = 29.01,
@@ -129,7 +129,7 @@ unitDef = {
       blocking         = true,
       collisionVolumeOffsets = [[0 0 0]],
       collisionVolumeScales  = [[32 40 52]],
-      collisionVolumeType    = [[box]],      
+      collisionVolumeType    = [[box]],
       featureDead      = [[HEAP]],
       footprintX       = 2,
       footprintZ       = 2,
@@ -146,6 +146,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ vehaa = unitDef })
+} }

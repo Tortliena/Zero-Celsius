@@ -1,10 +1,10 @@
-unitDef = {
+return { hoverassault = {
   unitname            = [[hoverassault]],
   name                = [[Halberd]],
   description         = [[Blockade Runner Hover]],
-  acceleration        = 0.048,
+  acceleration        = 0.24,
   activateWhenBuilt   = true,
-  brakeRate           = 0.043,
+  brakeRate           = 0.43,
   buildCostMetal      = 240,
   builder             = false,
   buildPic            = [[hoverassault.png]],
@@ -14,7 +14,7 @@ unitDef = {
   category            = [[HOVER]],
   collisionVolumeOffsets = [[0 -8 0]],
   collisionVolumeScales  = [[30 34 36]],
-  collisionVolumeType    = [[box]],  
+  collisionVolumeType    = [[box]],
   corpse              = [[DEAD]],
 
   customParams        = {
@@ -74,12 +74,12 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
-	  customParams        	  = {
-		light_camera_height = 1600,
-		light_color = [[0.7 0.7 2.3]],
-		light_radius = 160,
-	  },
-	  
+      customParams              = {
+        light_camera_height = 1600,
+        light_color = [[0.7 0.7 2.3]],
+        light_radius = 160,
+      },
+      
       damage                  = {
         default = 150.1,
         subs    = 7.5,
@@ -133,6 +133,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ hoverassault = unitDef })
+} }

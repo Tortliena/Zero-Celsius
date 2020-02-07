@@ -28,7 +28,7 @@ local SIG_MOVE = 1
 local SIG_AIM = 2
 
 local spGetUnitHeading = Spring.GetUnitHeading
-function Lean()
+local function Lean()
 	SetSignalMask (SIG_MOVE)
 	local lastHeading = spGetUnitHeading (unitID)
 	while true do
@@ -63,7 +63,7 @@ function script.StopMoving()
 end
 
 function script.Create()
-	StartThread(GG.Script.SmokeUnit, {bwheel, fwheel})
+	StartThread(GG.Script.SmokeUnit, unitID, {bwheel, fwheel})
 end
 
 local function RestoreAfterDelay()

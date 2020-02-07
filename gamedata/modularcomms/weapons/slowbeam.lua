@@ -10,6 +10,7 @@ local weaponDef = {
 	craterMult              = 0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		--timeslow_preset = [[commrecon_slowbeam]],
 		timeslow_damagefactor = [[2]],
@@ -19,6 +20,7 @@ local weaponDef = {
 		light_camera_height = 1800,
 		light_color = [[0.6 0.22 0.8]],
 		light_radius = 200,
+		reaim_time = 1,
 	},
 
 	damage                  = {

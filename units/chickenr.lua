@@ -1,10 +1,10 @@
-unitDef = {
+return { chickenr = {
   unitname            = [[chickenr]],
   name                = [[Lobber]],
   description         = [[Artillery]],
-  acceleration        = 0.36,
+  acceleration        = 1.08,
   activateWhenBuilt   = true,
-  brakeRate           = 0.205,
+  brakeRate           = 1.23,
   buildCostEnergy     = 0,
   buildCostMetal      = 0,
   builder             = false,
@@ -79,11 +79,11 @@ unitDef = {
       areaOfEffect            = 32,
       craterBoost             = 0,
       craterMult              = 0,
-			
-			customParams            = {
+            
+            customParams            = {
         light_radius = 0,
       },
-			
+            
       damage                  = {
         default = 240,
       },
@@ -112,6 +112,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chickenr = unitDef })
+} }

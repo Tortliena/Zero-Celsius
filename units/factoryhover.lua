@@ -1,4 +1,4 @@
-unitDef = {
+return { factoryhover = {
   unitname         = [[factoryhover]],
   name             = [[Hovercraft Platform]],
   description      = [[Produces Hovercraft, Builds at 10 m/s]],
@@ -16,8 +16,8 @@ unitDef = {
     [[hoverraid]],
     [[hoverskirm]],
     [[hoverassault]],
-	[[hoverdepthcharge]],
-	[[hoverriot]],
+    [[hoverdepthcharge]],
+    [[hoverriot]],
     [[hoverarty]],
     [[hoveraa]],
   },
@@ -36,14 +36,15 @@ unitDef = {
 
   customParams     = {
     sortName = [[8]],
-	modelradius    = [[60]],
-	default_spacing = 8,
-	aimposoffset   = [[0 0 -32]],
+    modelradius    = [[60]],
+    default_spacing = 8,
+    aimposoffset   = [[0 0 -32]],
     midposoffset    = [[0 0 -32]],
     solid_factory   = [[8]],
+    unstick_help    = [[1]],
     selectionscalemult = 1,
-	factorytab       = 1,
-	shared_energy_gen = 1,
+    factorytab       = 1,
+    shared_energy_gen = 1,
   },
 
   energyUse        = 0,
@@ -60,7 +61,8 @@ unitDef = {
   minCloakDistance = 150,
   moveState        = 1,
   noAutoFire       = false,
-  objectName       = [[ARMFHP.s3o]],
+  objectName       = [[factoryhover.s3o]],
+  script           = [[factoryhover.lua]],
   selfDestructAs   = [[LARGE_BUILDINGEX]],
   showNanoSpray    = false,
   sightDistance    = 273,
@@ -73,11 +75,15 @@ unitDef = {
   featureDefs      = {
 
     DEAD  = {
-      blocking         = false,
+      blocking         = true,
       featureDead      = [[HEAP]],
       footprintX       = 8,
       footprintZ       = 7,
-      object           = [[ARMFHP_DEAD.s3o]],
+      object           = [[factoryhover_dead.s3o]],
+      collisionVolumeOffsets  = [[0 -2 -50]],
+      collisionVolumeScales   = [[124 32 124]],
+      collisionVolumeType     = [[cylY]],
+
     },
 
 
@@ -90,6 +96,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ factoryhover = unitDef })
+} }

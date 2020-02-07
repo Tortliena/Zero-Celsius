@@ -4,10 +4,10 @@ include "constants.lua"
 --------------------------------------------------------------------------------
 -- pieces
 --------------------------------------------------------------------------------
-local base = piece 'base' 
-local turret = piece 'turret' 
-local barrel = piece 'barrel' 
-local flare = piece 'flare' 
+local base = piece 'base'
+local turret = piece 'turret'
+local barrel = piece 'barrel'
+local flare = piece 'flare'
 local leg1 = piece 'leg1'	-- back right
 local leg2 = piece 'leg2' 	-- middle right
 local leg3 = piece 'leg3' 	-- front right
@@ -69,11 +69,11 @@ local function RestoreLegs()
 	Signal(SIG_WALK)
 	SetSignalMask(SIG_WALK)
 	GG.SpiderWalk.restoreLegs(leg1, leg2, leg3, leg4, leg5, leg6,
-		legRaiseSpeed, legForwardSpeed, legMiddleSpeed,legBackwardSpeed)			
+		legRaiseSpeed, legForwardSpeed, legMiddleSpeed,legBackwardSpeed)
 end
 
 function script.Create()
-	StartThread(GG.Script.SmokeUnit, smokePiece)
+	StartThread(GG.Script.SmokeUnit, unitID, smokePiece)
 end
 
 function script.StartMoving()
@@ -108,7 +108,7 @@ end
 function script.BlockShot(num, targetID)
 	if Spring.ValidUnitID(targetID) then
 		local distMult = (Spring.GetUnitSeparation(unitID, targetID) or 0)/1000
-		return GG.OverkillPrevention_CheckBlock(unitID, targetID, 220.1, 75 * distMult)
+		return GG.OverkillPrevention_CheckBlock(unitID, targetID, 260.1, 75 * distMult)
 	end
 	return false
 end

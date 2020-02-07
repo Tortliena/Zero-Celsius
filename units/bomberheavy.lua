@@ -1,4 +1,4 @@
-unitDef = {
+return { bomberheavy = {
   unitname            = [[bomberheavy]],
   name                = [[Likho]],
   description         = [[Singularity Bomber]],
@@ -82,7 +82,7 @@ unitDef = {
       craterMult              = 2,
 
       customParams            = {
-		burst = Shared.BURST_UNRELIABLE,
+        burst = Shared.BURST_UNRELIABLE,
 
         reaim_time = 15, -- Fast update not required (maybe dangerous)
         light_color = [[1.6 0.85 0.38]],
@@ -139,6 +139,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ bomberheavy = unitDef })
+} }

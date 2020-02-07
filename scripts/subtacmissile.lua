@@ -8,10 +8,30 @@ include "constants.lua"
 
 local SIG_AIM = 1
 
-function script.QueryWeapon() return missile end
-function script.AimFromWeapon() return aimpoint end
+function script.QueryWeapon()
+	return missile
+end
+
+function script.AimFromWeapon()
+	return aimpoint
+end
 
 local respawning_rocket = false
+
+local function RestoreAfterDelay ()
+	SetSignalMask (SIG_AIM)
+	Sleep (5000)
+
+	while (Spring.GetUnitRulesParam(unitID, "disarmed") == 1) do
+		Sleep(100)
+	end
+
+	Turn (missile, x_axis, 0, math.rad(30))
+	WaitForTurn (missile, x_axis)
+
+	Turn (door1, z_axis, 0, math.rad(20))
+	Turn (door2, z_axis, 0, math.rad(20))
+end
 
 function script.AimWeapon(num, heading, pitch)
 	Signal (SIG_AIM)
@@ -30,21 +50,6 @@ function script.AimWeapon(num, heading, pitch)
 	WaitForTurn (missile, x_axis)
 	StartThread (RestoreAfterDelay)
 	return true
-end
-
-function RestoreAfterDelay ()
-	SetSignalMask (SIG_AIM)
-	Sleep (5000)
-
-	while (Spring.GetUnitRulesParam(unitID, "disarmed") == 1) do
-		Sleep(100)
-	end
-
-	Turn (missile, x_axis, 0, math.rad(30))
-	WaitForTurn (missile, x_axis)
-
-	Turn (door1, z_axis, 0, math.rad(20))
-	Turn (door2, z_axis, 0, math.rad(20))
 end
 
 function script.FireWeapon()

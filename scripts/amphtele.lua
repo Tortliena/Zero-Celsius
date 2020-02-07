@@ -6,7 +6,7 @@ include 'letsNotFailAtTrig.lua'
 
 local base, pelvis, body = piece('base', 'pelvis', 'body')
 local rthigh, rshin, rfoot, lthigh, lshin, lfoot = piece('rthigh', 'rshin', 'rfoot', 'lthigh', 'lshin', 'lfoot')
-local holder, sphere = piece('holder', 'sphere') 
+local holder, sphere = piece('holder', 'sphere')
 
 local smokePiece = {pelvis}
 --------------------------------------------------------------------------------------
@@ -50,8 +50,8 @@ local function Create_Beacon_Thread(x,z)
 		Turn(body, y_axis, math.rad(i*4), math.rad(40*speedMult))
 		Sleep(100/speedMult)
 		if i == 1 then
-			Spring.GiveOrderToUnit(unitID, CMD.WAIT, {}, {})
-			Spring.GiveOrderToUnit(unitID, CMD.WAIT, {}, {})
+			Spring.GiveOrderToUnit(unitID, CMD.WAIT, {}, 0)
+			Spring.GiveOrderToUnit(unitID, CMD.WAIT, {}, 0)
 		end
 		local stunnedOrInbuild = Spring.GetUnitIsStunned(unitID)
 		local disarm = spGetUnitRulesParam(unitID,"disarmed") == 1
@@ -327,7 +327,7 @@ function script.StopMoving()
 end
 
 function script.Create()
-	StartThread(GG.Script.SmokeUnit, smokePiece)
+	StartThread(GG.Script.SmokeUnit, unitID, smokePiece)
 	--StartThread(Walk)
 	activity_mode(1)
 end

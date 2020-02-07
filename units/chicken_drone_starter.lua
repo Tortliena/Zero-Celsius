@@ -1,10 +1,10 @@
-unitDef = {
+return { chicken_drone_starter = {
   unitname            = [[chicken_drone_starter]],
   name                = [[Drone]],
   description         = [[Morphs Into Chicken Structures]],
-  acceleration        = 0.36,
+  acceleration        = 1.08,
   activateWhenBuilt   = true,
-  brakeRate           = 0.205,
+  brakeRate           = 1.23,
   buildCostEnergy     = 0,
   buildCostMetal      = 0,
   builder             = false,
@@ -16,7 +16,7 @@ unitDef = {
   category            = [[LAND UNARMED]],
 
   customParams        = {
-	statsname = "chicken_drone",
+    statsname = "chicken_drone",
   },
 
   energyMake          = 0,
@@ -63,6 +63,4 @@ unitDef = {
   upright             = false,
   waterline           = 8,
   workerTime          = 0,
-}
-
-return lowerkeys({ chicken_drone_starter = unitDef })
+} }

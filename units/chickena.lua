@@ -1,10 +1,10 @@
-unitDef = {
+return { chickena = {
   unitname            = [[chickena]],
   name                = [[Cockatrice]],
   description         = [[Assault/Anti-Armor]],
-  acceleration        = 0.36,
+  acceleration        = 1.08,
   activateWhenBuilt   = true,
-  brakeRate           = 0.205,
+  brakeRate           = 1.23,
   buildCostEnergy     = 0,
   buildCostMetal      = 0,
   builder             = false,
@@ -76,7 +76,7 @@ unitDef = {
       areaOfEffect            = 24,
       avoidFriendly           = false,
       burst                   = 5,
-      burstrate               = 0.15,
+      burstrate               = 0.133,
       collideFriendly         = false,
       craterBoost             = 1,
       craterMult              = 2,
@@ -130,7 +130,7 @@ unitDef = {
       craterMult              = 0,
 
       damage                  = {
-        default = 1700,
+        default = 1700.1,
       },
 
       explosionGenerator      = [[custom:NONE]],
@@ -154,6 +154,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chickena = unitDef })
+} }

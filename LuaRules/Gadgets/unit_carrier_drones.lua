@@ -19,29 +19,29 @@ function gadget:GetInfo()
 end
 --Version 1.003
 --Changelog:
---24/6/2014 added carrier building drone on emit point. 
+--24/6/2014 added carrier building drone on emit point.
 
 --around 1/1/2017: added hold fire functionality, recall drones button, circular drone leash, drones pay attention to set target
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 include("LuaRules/Configs/customcmds.h.lua")
 
-local AddUnitDamage     = Spring.AddUnitDamage
-local CreateUnit        = Spring.CreateUnit
-local GetCommandQueue   = Spring.GetCommandQueue
-local GetUnitIsStunned  = Spring.GetUnitIsStunned
-local GetUnitPieceMap	= Spring.GetUnitPieceMap
-local GetUnitPiecePosDir= Spring.GetUnitPiecePosDir
-local GetUnitPosition   = Spring.GetUnitPosition
-local GiveOrderToUnit   = Spring.GiveOrderToUnit
-local SetUnitPosition   = Spring.SetUnitPosition
-local SetUnitNoSelect   = Spring.SetUnitNoSelect
-local TransferUnit      = Spring.TransferUnit
+local AddUnitDamage       = Spring.AddUnitDamage
+local CreateUnit          = Spring.CreateUnit
+local GetCommandQueue     = Spring.GetCommandQueue
+local GetUnitIsStunned    = Spring.GetUnitIsStunned
+local GetUnitPieceMap     = Spring.GetUnitPieceMap
+local GetUnitPiecePosDir  = Spring.GetUnitPiecePosDir
+local GetUnitPosition     = Spring.GetUnitPosition
+local GiveOrderToUnit     = Spring.GiveOrderToUnit
+local SetUnitPosition     = Spring.SetUnitPosition
+local SetUnitNoSelect     = Spring.SetUnitNoSelect
+local TransferUnit        = Spring.TransferUnit
 local spGetUnitRulesParam = Spring.GetUnitRulesParam
 local spSetUnitRulesParam = Spring.SetUnitRulesParam
-local spGetGameFrame    = Spring.GetGameFrame
-local random            = math.random
-local CMD_ATTACK		= CMD.ATTACK
+local spGetGameFrame      = Spring.GetGameFrame
+local random              = math.random
+local CMD_ATTACK          = CMD.ATTACK
 
 local emptyTable = {}
 local INLOS_ACCESS = {inlos = true}
@@ -60,6 +60,7 @@ local carrierList = {}
 local droneList = {}
 local drones_to_move = {}
 local killList = {}
+local recall_frame_start = {}
 
 local GiveClampedOrderToUnit = Spring.Utilities.GiveClampedOrderToUnit
 
@@ -152,7 +153,7 @@ local function Drones_InitializeDynamicCarrier(unitID)
 	carrierList[unitID] = InitCarrier(unitID, carrierData, Spring.GetUnitTeam(unitID), maxDronesOverride)
 end
 
--- communicates to unitscript, copied from unit_float_toggle; should be extracted to utility 
+-- communicates to unitscript, copied from unit_float_toggle; should be extracted to utility
 -- preferably that before i PR this
 local function callScript(unitID, funcName, args)
 	local func = Spring.UnitScript.GetScriptEnv(unitID)[funcName]
@@ -233,7 +234,7 @@ function AddUnitToEmptyPad(carrierID, droneType)
 				SitOnPad(unitIDAdded, carrierID, pieceNum, offsets)
 				carrierData.occupiedPieces[pieceNum] = true
 				if carrierData.droneSets[droneType].config.colvolTweaked then --can be used to move collision volume away from carrier to avoid collision
-					Spring.SetUnitMidAndAimPos(unitIDAdded, offsets.colvolMidX, offsets.colvolMidY, offsets.colvolMidZ, offsets.aimX, offsets.aimY, offsets.aimZ, true) 
+					Spring.SetUnitMidAndAimPos(unitIDAdded, offsets.colvolMidX, offsets.colvolMidY, offsets.colvolMidZ, offsets.aimX, offsets.aimY, offsets.aimZ, true)
 					--offset whole colvol & aim point (red dot) above the carrier (use /debugcolvol to check)
 				end
 				return true
@@ -267,12 +268,12 @@ local function StartScript(fn)
 	coroutines[coroutineCount] = co
 end
 
-function UpdateCoroutines() 
+function UpdateCoroutines()
 	coroutineCount = #coroutines
 	local i = 1
 	while (i <= coroutineCount) do
-		local co = coroutines[i] 
-		if (coroutine.status(co) ~= "dead") then 
+		local co = coroutines[i]
+		if (coroutine.status(co) ~= "dead") then
 			assert(coroutine.resume(co))
 			i = i + 1
 		else
@@ -280,7 +281,7 @@ function UpdateCoroutines()
 			coroutines[coroutineCount] = nil
 			coroutineCount = coroutineCount - 1
 		end
-	end 
+	end
 end
 
 local function GetPitchYawRoll(front, top) --This allow compatibility with Spring 91
@@ -296,13 +297,13 @@ local function GetPitchYawRoll(front, top) --This allow compatibility with Sprin
 	
 	--2) Processing TOP's vector to get Roll
 	x, y, z = top[1], top[2], top[3]
-	--rotate coordinate around Y-axis until Yaw value is 0 (a reset) 
+	--rotate coordinate around Y-axis until Yaw value is 0 (a reset)
 	local newX = x* math.cos (-yaw) + z*  math.sin (-yaw)
 	local newY = y
 	local newZ = z* math.cos (-yaw) - x* math.sin (-yaw)
 	x, y, z = newX, newY, newZ
-	--rotate coordinate around X-axis until Pitch value is 0 (a reset) 
-	newX = x 
+	--rotate coordinate around X-axis until Pitch value is 0 (a reset)
+	newX = x
 	newY = y* math.cos (-pitch) + z* math.sin (-pitch)
 	newZ = z* math.cos (-pitch) - y* math.sin (-pitch)
 	x, y, z = newX, newY, newZ
@@ -445,7 +446,7 @@ function SitOnPad(unitID, carrierID, padPieceID, offsets)
 			mcSetPosition(unitID, px + vx + offx, py + vy + offy, pz + vz + offz)
 			mcSetRotation(unitID, pitch, -yaw, roll) --Spring conveniently rotate Y-axis first, X-axis 2nd, and Z-axis 3rd which allow Yaw, Pitch & Roll control.
 			
-			local buildRate = GetBuildRate(carrierID) 
+			local buildRate = GetBuildRate(carrierID)
 			if perSecondCost and oldBuildRate ~= buildRate then
 				oldBuildRate = buildRate
 				GG.StartMiscPriorityResourcing(carrierID, perSecondCost*buildRate, false, miscPriorityKey)
@@ -457,8 +458,8 @@ function SitOnPad(unitID, carrierID, padPieceID, offsets)
 			if (buildRate > 0) and ((not perSecondCost) or (GG.AllowMiscPriorityBuildStep(carrierID, Spring.GetUnitTeam(carrierID), false, resTable) and Spring.UseUnitResource(carrierID, resTable))) then
 				health, _, _, _, buildProgress = Spring.GetUnitHealth(unitID)
 				buildProgress = buildProgress + (build_step*buildRate) --progress
-				Spring.SetUnitHealth(unitID, {health = health + (build_step_health*buildRate), build = buildProgress}) 
-				if buildProgress >= 1 then 
+				Spring.SetUnitHealth(unitID, {health = health + (build_step_health*buildRate), build = buildProgress})
+				if buildProgress >= 1 then
 					callScript(carrierID, "Carrier_droneCompleted", padPieceID)
 					break
 				end
@@ -475,7 +476,7 @@ function SitOnPad(unitID, carrierID, padPieceID, offsets)
 		Spring.SetUnitVelocity(unitID, 0, 0, 0)
 		Spring.SetUnitBlocking(unitID, false, true, true, true, false, true, false)
 		mcDisable(unitID)
-		GG.UpdateUnitAttributes(unitID) --update pending attribute changes in unit_attributes.lua if available 
+		GG.UpdateUnitAttributes(unitID) --update pending attribute changes in unit_attributes.lua if available
 		
 		if droneInfo.config.colvolTweaked then
 			Spring.SetUnitMidAndAimPos(unitID, 0, 0, 0, 0, 0, 0, true)
@@ -527,17 +528,7 @@ local function GetDistance(x1, x2, y1, y2)
 end
 
 local function UpdateCarrierTarget(carrierID, frame)
-	local cmdID, cmdParam_1, cmdParam_2, cmdParam_3
-	if Spring.Utilities.COMPAT_GET_ORDER then
-		local queue = Spring.GetCommandQueue(carrierID, 1)
-		if queue and queue[1] then
-			local par = queue[1].params
-			cmdID, cmdParam_1, cmdParam_2, cmdParam_3 = queue[1].id, par[1], par[2], par[3]
-		end
-	else
-		cmdID, _, _, cmdParam_1, cmdParam_2, cmdParam_3 = Spring.GetUnitCurrentCommand(carrierID)
-	end
-	
+	local cmdID, _, _, cmdParam_1, cmdParam_2, cmdParam_3 = Spring.GetUnitCurrentCommand(carrierID)
 	local droneSendDistance = nil
 	local px, py, pz
 	local target
@@ -546,11 +537,11 @@ local function UpdateCarrierTarget(carrierID, frame)
 	local setTargetOrder = false
 	
 	--checks if there is an active recall order
-	local recallFrame = spGetUnitRulesParam(carrierID,"recall_frame_start")
+	local recallFrame = recall_frame_start[carrierID]
 	if recallFrame then
 		if frame > recallFrame + RECALL_TIMEOUT then
 			--recall has expired
-			spSetUnitRulesParam(carrierID,"recall_frame_start",nil)
+			recall_frame_start[carrierID] = nil
 		else
 			recallDrones = true
 		end
@@ -608,10 +599,10 @@ local function UpdateCarrierTarget(carrierID, frame)
 			if attackOrder or setTargetOrder then
 				-- drones fire at will if carrier has an attack/target order
 				-- a drone bomber probably should not do this
-				GiveOrderToUnit(droneID, CMD.FIRE_STATE, { 2 }, 0) 
+				GiveOrderToUnit(droneID, CMD.FIRE_STATE, { 2 }, 0)
 			else
 				-- update firestate based on that of carrier
-				GiveOrderToUnit(droneID, CMD.FIRE_STATE, { firestate }, 0) 
+				GiveOrderToUnit(droneID, CMD.FIRE_STATE, { firestate }, 0)
 			end
 			
 			if recallDrones then
@@ -632,8 +623,8 @@ local function UpdateCarrierTarget(carrierID, frame)
 				-- return to carrier unless in combat
 				local cQueue = GetCommandQueue(droneID, -1)
 				local engaged = false
-				for i=1, (cQueue and #cQueue or 0) do
-					if cQueue[i].id == CMD.FIGHT and firestate > 0 then
+				for j=1, (cQueue and #cQueue or 0) do
+					if cQueue[j].id == CMD.FIGHT and firestate > 0 then
 						-- if currently fighting AND not on hold fire
 						engaged = true
 						break
@@ -687,7 +678,7 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
 	end
 	
 	if (cmdID == CMD.ATTACK or cmdID == CMD.FIGHT or cmdID == CMD.PATROL or cmdID == CMD_UNIT_SET_TARGET or cmdID == CMD_UNIT_SET_TARGET_CIRCLE) then
-		spSetUnitRulesParam(unitID,"recall_frame_start",nil)
+		recall_frame_start[unitID] = nil
 		return true
 	end
 	
@@ -710,7 +701,7 @@ function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOpt
 		end
 		
 		frame = spGetGameFrame()
-		spSetUnitRulesParam(unitID,"recall_frame_start",frame)
+		recall_frame_start[unitID] = frame
 		
 		return false
 	end
@@ -757,6 +748,7 @@ function gadget:UnitDestroyed(unitID, unitDefID, unitTeam)
 		end
 		generateDrones[unitID] = nil
 		carrierList[unitID] = nil
+		recall_frame_start[unitID] = nil
 	elseif (droneList[unitID]) then
 		local carrierID = droneList[unitID].carrier
 		local setID = droneList[unitID].set
@@ -791,7 +783,7 @@ function gadget:UnitGiven(unitID, unitDefID, newTeam)
 		for i = 1, #carrierList[unitID].droneSets do
 			local set = carrierList[unitID].droneSets[i]
 			for droneID, _ in pairs(set.drones) do
-				-- Only transfer drones which are allied with the carrier. This is to 
+				-- Only transfer drones which are allied with the carrier. This is to
 				-- make carriers and capture interact in a robust, simple way. A captured
 				-- drone will take up a slot on the carrier and attack the carriers allies.
 				-- A captured carrier will need to have its drones killed or captured to
@@ -805,8 +797,8 @@ function gadget:UnitGiven(unitID, unitDefID, newTeam)
 	end
 end
 
-function gadget:GameFrame(n)
-	if (((n+1) % 30) == 0) then
+function gadget:GameFrame(f)
+	if (((f+1) % 30) == 0) then
 		for carrierID, carrier in pairs(carrierList) do
 			if (not GetUnitIsStunned(carrierID)) then
 				for i = 1, #carrier.droneSets do
@@ -843,9 +835,9 @@ function gadget:GameFrame(n)
 			killList[unitID] = nil
 		end
 	end
-	if ((n % DEFAULT_UPDATE_ORDER_FREQUENCY) == 0) then
+	if ((f % DEFAULT_UPDATE_ORDER_FREQUENCY) == 0) then
 		for i, _ in pairs(carrierList) do
-			UpdateCarrierTarget(i, n)
+			UpdateCarrierTarget(i, f)
 		end
 	end
 	UpdateCoroutines() --maintain nanoframe position relative to carrier

@@ -7,6 +7,7 @@ local weaponDef = {
 	craterMult              = 0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		extra_damage_mult = 2.5,
 		slot = [[5]],
 		muzzleEffectFire = [[custom:zeus_fire_fx]],
@@ -14,6 +15,7 @@ local weaponDef = {
 		light_camera_height = 1600,
 		light_color = [[0.85 0.85 1.2]],
 		light_radius = 200,
+		reaim_time = 1,
 	},
 
 	cylinderTargeting       = 0,

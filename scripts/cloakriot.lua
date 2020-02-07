@@ -1,27 +1,27 @@
 
 include "constants.lua"
 
-local chest = piece 'chest' 
-local rflare = piece 'rflare' 
-local lflare = piece 'lflare' 
-local hips = piece 'hips' 
-local lthigh = piece 'lthigh' 
-local rthigh = piece 'rthigh' 
-local head = piece 'head' 
-local lforearm = piece 'lforearm' 
-local rforearm = piece 'rforearm' 
-local rshoulder = piece 'rshoulder' 
-local lshoulder = piece 'lshoulder' 
-local rshin = piece 'rshin' 
-local rfoot = piece 'rfoot' 
-local lshin = piece 'lshin' 
-local lfoot = piece 'lfoot' 
-local lgun = piece 'lgun' 
-local lejector = piece 'lejector' 
-local rejector = piece 'rejector' 
-local rgun = piece 'rgun' 
-local lbelt = piece 'lbelt' 
-local rbelt = piece 'rbelt' 
+local chest = piece 'chest'
+local rflare = piece 'rflare'
+local lflare = piece 'lflare'
+local hips = piece 'hips'
+local lthigh = piece 'lthigh'
+local rthigh = piece 'rthigh'
+local head = piece 'head'
+local lforearm = piece 'lforearm'
+local rforearm = piece 'rforearm'
+local rshoulder = piece 'rshoulder'
+local lshoulder = piece 'lshoulder'
+local rshin = piece 'rshin'
+local rfoot = piece 'rfoot'
+local lshin = piece 'lshin'
+local lfoot = piece 'lfoot'
+local lgun = piece 'lgun'
+local lejector = piece 'lejector'
+local rejector = piece 'rejector'
+local rgun = piece 'rgun'
+local lbelt = piece 'lbelt'
+local rbelt = piece 'rbelt'
 
 local gunBelts = {
 	{
@@ -70,10 +70,10 @@ local function Walk()
 	
 	while true do
 	
-		speedMult = (Spring.GetUnitRulesParam(unitID,"totalMoveSpeedChange") or 1)*PACE
+		local speedMult = (Spring.GetUnitRulesParam(unitID,"totalMoveSpeedChange") or 1)*PACE
 		while speedMult <= 0 do
+			Sleep(200)
 			speedMult = (Spring.GetUnitRulesParam(unitID,"totalMoveSpeedChange") or 1)*PACE
-			Sleep(500)
 		end
 	
 		Move(hips, y_axis, 2.5, 4 * speedMult)
@@ -343,7 +343,7 @@ function script.Create()
 	Hide(rflare)
 	Hide(lflare)
 	
-	StartThread(GG.Script.SmokeUnit, {chest})
+	StartThread(GG.Script.SmokeUnit, unitID, {chest})
 end
 
 function script.StartMoving()

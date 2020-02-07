@@ -97,14 +97,14 @@ local function SinkBubbles()
 end
 
 local function dustBottom()
-	local x,y,z = Spring.GetUnitPiecePosDir(unitID,rffoot)
-	Spring.SpawnCEG("uw_vindiback", x, y+5, z, 0, 0, 0, 0)
-	local x,y,z = Spring.GetUnitPiecePosDir(unitID,rbfoot)
-	Spring.SpawnCEG("uw_vindiback", x, y+5, z, 0, 0, 0, 0)
-	local x,y,z = Spring.GetUnitPiecePosDir(unitID,lffoot)
-	Spring.SpawnCEG("uw_vindiback", x, y+5, z, 0, 0, 0, 0)
-	local x,y,z = Spring.GetUnitPiecePosDir(unitID,lbfoot)
-	Spring.SpawnCEG("uw_vindiback", x, y+5, z, 0, 0, 0, 0)
+	local x1,y1,z1 = Spring.GetUnitPiecePosDir(unitID,rffoot)
+	Spring.SpawnCEG("uw_vindiback", x1, y1+5, z1, 0, 0, 0, 0)
+	local x2,y2,z2 = Spring.GetUnitPiecePosDir(unitID,rbfoot)
+	Spring.SpawnCEG("uw_vindiback", x2, y2+5, z2, 0, 0, 0, 0)
+	local x3,y3,z3 = Spring.GetUnitPiecePosDir(unitID,lffoot)
+	Spring.SpawnCEG("uw_vindiback", x3, y3+5, z3, 0, 0, 0, 0)
+	local x4,y4,z4 = Spring.GetUnitPiecePosDir(unitID,lbfoot)
+	Spring.SpawnCEG("uw_vindiback", x4, y4+5, z4, 0, 0, 0, 0)
 end
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
@@ -291,17 +291,12 @@ function script.Create()
 	
 	Turn(rbleg, x_axis, math.rad(0))
 	Turn(rbfoot, x_axis, math.rad(0))
-	StartThread(GG.Script.SmokeUnit, {turret})
+	StartThread(GG.Script.SmokeUnit, unitID, {turret})
 end
 
 function script.QueryWeapon(num)
 	if num == 1 then
 		if beamCount <= 2 or beamCount >= 48 then
-			if beamCount == 1 then
-				--Spring.SetUnitWeaponState(unitID, 1, "range", 1)
-			elseif beamCount == 2 then
-				--Spring.SetUnitWeaponState(unitID, 1, "range", 600)
-			end
 			return mflare
 		else
 			return gunPieces[gun_1].flare
@@ -325,7 +320,7 @@ local function RestoreAfterDelay()
 	Sleep(6000)
 	Turn(turret, y_axis, 0, math.rad(90))
 	Turn(lbarrel1, x_axis, 0, math.rad(45))
-	Turn(rbarrel1, x_axis, 0, math.rad(45))	
+	Turn(rbarrel1, x_axis, 0, math.rad(45))
 end
 
 function script.AimWeapon(num, heading, pitch)
@@ -395,7 +390,7 @@ function script.Killed(recentDamage, maxHealth)
 		Explode(body, SFX.SHATTER)
 		Explode(turret, SFX.SHATTER)
 		Explode(lbarrel1, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE)
-		Explode(rbarrel2, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE)	
+		Explode(rbarrel2, SFX.FALL + SFX.SMOKE + SFX.FIRE + SFX.EXPLODE)
 		return 2
 	end
 end

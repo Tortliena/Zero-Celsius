@@ -1,11 +1,11 @@
-unitDef = {
+return { staticmex = {
   unitname               = [[staticmex]],
   name                   = [[Metal Extractor]],
   description            = [[Produces Metal]],
   acceleration           = 0,
   activateWhenBuilt      = true,
   brakeRate              = 0,
-  buildCostMetal         = 75,
+  buildCostMetal         = 90,
   builder                = false,
   buildingMask           = 0,
   buildPic               = [[staticmex.png]],
@@ -18,11 +18,11 @@ unitDef = {
   customParams           = {
     occupationStrength = 1,
     pylonrange         = 50,
-	ismex              = 1,
-	aimposoffset       = [[0 -4 0]],
-	midposoffset       = [[0 -10 0]],
-	modelradius        = [[15]],
-	removewait         = 1,
+    ismex              = 1,
+    aimposoffset       = [[0 -4 0]],
+    midposoffset       = [[0 -10 0]],
+    modelradius        = [[15]],
+    removewait         = 1,
     selectionscalemult = 1.4,
   },
 
@@ -35,7 +35,7 @@ unitDef = {
   idleAutoHeal           = 5,
   idleTime               = 1800,
   levelGround            = false,
-  maxDamage              = 400,
+  maxDamage              = 750,
   maxSlope               = 255,
   maxVelocity            = 0,
   maxWaterDepth          = 5000,
@@ -71,6 +71,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ staticmex = unitDef })
+} }

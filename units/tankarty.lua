@@ -1,9 +1,9 @@
-unitDef = {
+return { tankarty = {
   unitname            = [[tankarty]],
   name                = [[Emissary]],
   description         = [[General-Purpose Artillery]],
-  acceleration        = 0.0282,
-  brakeRate           = 0.136,
+  acceleration        = 0.141,
+  brakeRate           = 1.36,
   buildCostMetal      = 700,
   builder             = false,
   buildPic            = [[tankarty.png]],
@@ -28,7 +28,7 @@ unitDef = {
   leaveTracks         = true,
   maxDamage           = 840,
   maxSlope            = 18,
-  maxVelocity         = 2.7,
+  maxVelocity         = 2.4,
   maxWaterDepth       = 22,
   minCloakDistance    = 75,
   movementClass       = [[TANK3]],
@@ -66,17 +66,17 @@ unitDef = {
     CORE_ARTILLERY = {
       name                    = [[Plasma Artillery]],
       accuracy                = 180,
-      areaOfEffect            = 96,
-	  avoidFeature            = false,
-	  avoidGround             = false,
+      areaOfEffect            = 84,
+      avoidFeature            = false,
+      avoidGround             = false,
       craterBoost             = 1,
       craterMult              = 2,
 
       customParams            = {
-		burst = Shared.BURST_RELIABLE,
+        burst = Shared.BURST_RELIABLE,
 
         reaim_time = 8, -- COB
-		light_color = [[1.4 0.8 0.3]],
+        light_color = [[1.4 0.8 0.3]],
       },
 
       damage                  = {
@@ -86,19 +86,19 @@ unitDef = {
       },
 
       edgeEffectiveness       = 0.5,
-	  explosionGenerator      = [[custom:DOT_Pillager_Explo]],
+      explosionGenerator      = [[custom:DOT_Pillager_Explo]],
       impulseBoost            = 0,
       impulseFactor           = 0.4,
       interceptedByShieldType = 1,
-      myGravity               = 0.1,
+      myGravity               = 0.095,
       noSelfDamage            = true,
-      range                   = 1180,
+      range                   = 1120,
       reloadtime              = 7,
       soundHit                = [[weapon/cannon/arty_hit]],
       soundStart              = [[weapon/cannon/pillager_fire]],
       turret                  = true,
       weaponType              = [[Cannon]],
-      weaponVelocity          = 330,
+      weaponVelocity          = 315,
     },
 
   },
@@ -124,6 +124,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ tankarty = unitDef })
+} }

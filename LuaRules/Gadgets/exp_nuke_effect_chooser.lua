@@ -23,17 +23,13 @@ end
 local wantedList = {}
 
 --// find nukes
-for i=1,#WeaponDefs do
+for i = 1, #WeaponDefs do
 	local wd = WeaponDefs[i]
 	--note that area of effect is radius, not diameter here!
 	if (wd.damageAreaOfEffect >= 800 and wd.targetable) then
 		nux[wd.id] = wd.damageAreaOfEffect
 		wantedList[#wantedList + 1] = wd.id
-		if Script.SetWatchExplosion then
-			Script.SetWatchExplosion(wd.id, true)
-		else
-			Script.SetWatchWeapon(wd.id, true)
-		end
+		Script.SetWatchExplosion(wd.id, true)
 	end
 end
 

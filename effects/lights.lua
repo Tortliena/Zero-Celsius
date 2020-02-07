@@ -1,7 +1,3 @@
-Spring = Spring or {}
-Spring.Utilities = Spring.Utilities or {}
-VFS.Include("LuaRules/Utilities/tablefunctions.lua")
-
 local fx = {
   ["light_green"] = {
     light = {
@@ -125,11 +121,12 @@ local altforms = {
 	properties = {particlelife = 5, particlesize = 12},
       },
     },
-  },  
+  },
 }
 
+local suMergeTable = Spring.Utilities.MergeTable
 for cegName, info in pairs(altforms) do
-  fx[cegName] = Spring.Utilities.MergeTable(info.modifications, fx[info.source], true)
+  fx[cegName] = suMergeTable(info.modifications, fx[info.source], true)
 end
 
 return fx

@@ -1,10 +1,10 @@
-unitDef = {
+return { shipcon = {
   unitname               = [[shipcon]],
   name                   = [[Mariner]],
   description            = [[Construction Ship, Builds at 7.5 m/s]],
-  acceleration           = 0.051375,
-  activateWhenBuilt   = true,
-  brakeRate              = 0.061,
+  acceleration           = 0.256,
+  activateWhenBuilt      = true,
+  brakeRate              = 0.61,
   buildCostMetal         = 200,
   buildDistance          = 330,
   builder                = true,
@@ -24,8 +24,9 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[40]],
-	turnatfullspeed = [[1]],
+    modelradius    = [[40]],
+    turnatfullspeed = [[1]],
+    selection_scale = 1.2,
   },
 
   energyUse              = 0,
@@ -72,6 +73,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shipcon = unitDef })
+} }

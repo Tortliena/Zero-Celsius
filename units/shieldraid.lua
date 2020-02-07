@@ -1,9 +1,9 @@
-unitDef = {
+return { shieldraid = {
   unitname               = [[shieldraid]],
   name                   = [[Bandit]],
   description            = [[Medium-Light Raider Bot]],
-  acceleration           = 0.5,
-  brakeRate              = 0.4,
+  acceleration           = 1.5,
+  brakeRate              = 2.4,
   buildCostMetal         = 75,
   buildPic               = [[shieldraid.png]],
   canGuard               = true,
@@ -16,7 +16,7 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[12]],
+    modelradius    = [[12]],
   },
 
   explodeAs              = [[SMALL_UNITEX]],
@@ -26,7 +26,7 @@ unitDef = {
   idleAutoHeal           = 5,
   idleTime               = 1800,
   leaveTracks            = true,
-  maxDamage              = 265,
+  maxDamage              = 320,
   maxSlope               = 36,
   maxVelocity            = 3,
   maxWaterDepth          = 22,
@@ -34,7 +34,7 @@ unitDef = {
   movementClass          = [[KBOT2]],
   noChaseCategory        = [[TERRAFORM FIXEDWING SUB]],
   objectName             = [[mbot.s3o]],
-  script				 = [[shieldraid.lua]],
+  script                 = [[shieldraid.lua]],
   selfDestructAs         = [[SMALL_UNITEX]],
 
   sfxtypes               = {
@@ -45,7 +45,7 @@ unitDef = {
 
   },
 
-  sightDistance          = 500,
+  sightDistance          = 560,
   trackOffset            = 0,
   trackStrength          = 8,
   trackStretch           = 1,
@@ -74,13 +74,13 @@ unitDef = {
       craterMult              = 0,
 
       customParams        = {
-		light_camera_height = 1200,
-		light_radius = 120,
+        light_camera_height = 1200,
+        light_radius = 120,
       },
-	  
+      
       damage                  = {
-        default = 9.53,
-        subs    = 0.61,
+        default = 7.95,
+        subs    = 0.4,
       },
 
       duration                = 0.02,
@@ -91,6 +91,7 @@ unitDef = {
       impulseBoost            = 0,
       impulseFactor           = 0.4,
       interceptedByShieldType = 1,
+      leadLimit               = 0,
       noSelfDamage            = true,
       range                   = 245,
       reloadtime              = 0.1,
@@ -126,6 +127,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shieldraid = unitDef })
+} }

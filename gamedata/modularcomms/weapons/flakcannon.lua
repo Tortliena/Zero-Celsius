@@ -11,12 +11,14 @@ local weaponDef = {
 	cylinderTargeting      = 1,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		muzzleEffectFire = [[custom:HEAVY_CANNON_MUZZLE]],
 		miscEffectFire   = [[custom:RIOT_SHELL_L]],
 		onlyTargetCategory = [[FIXEDWING GUNSHIP]],
 
 		light_radius = 0,
+		reaim_time = 1,
 	},
 
 	damage                  = {

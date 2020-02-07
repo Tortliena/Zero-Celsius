@@ -810,7 +810,7 @@ do
 		end
 
 		--// Planetwars teleport progress
-		if isPwStructure then
+		if ci.isPwStructure then
 			TeleportEnd = GetUnitRulesParam(unitID, "pw_teleport_frame")
 			if TeleportEnd then
 				local prog = 1 - (TeleportEnd - gameFrame)/TELEPORT_CHARGE_NEEDED
@@ -958,7 +958,7 @@ do
 		ci = customInfo[featureDefID]
 
 		health,maxHealth,resurrect = GetFeatureHealth(featureID)
-		_,_,_,_,reclaimLeft        = GetFeatureResources(featureID)
+		_,_,_,_,reclaimLeft        = GetFeatureResources(featureID) -- NB: the two resources' progresses are actually separate (goo can drain just M while keeping E)
 		if (not resurrect) then
 			resurrect = 0
 		end

@@ -7,11 +7,13 @@ local weaponDef = {
 	craterMult              = 0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		muzzleEffectShot = [[custom:BEAMWEAPON_MUZZLE_RED]],
 
 		light_camera_height = 1200,
 		light_radius = 120,
+		reaim_time = 1,
 	},
 
 	damage                  = {

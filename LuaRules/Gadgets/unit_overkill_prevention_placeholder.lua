@@ -140,7 +140,6 @@ function GG.OverkillPreventionPlaceholder_CheckBlock(unitID, targetID, allyTeamI
 	local block = not overlappingAreas
 	
 	if not block then
-		local _,_,_,_,_,_, x, y, z = Spring.GetUnitPosition(targetID, true, true)
 		local gameFrame = Spring.GetGameFrame()
 		local data = {
 			x = x,
@@ -156,16 +155,7 @@ function GG.OverkillPreventionPlaceholder_CheckBlock(unitID, targetID, allyTeamI
 	else
 		local queueSize = spGetCommandQueue(unitID, 0)
 		if queueSize == 1 then
-			local cmdID, cmdOpts, cmdTag, cp_1, cp_2
-			if Spring.Utilities.COMPAT_GET_ORDER then
-				local queue = Spring.GetCommandQueue(unitID, 1)
-				if queue and queue[1] then
-					cmdID, cmdOpts, cmdTag  = queue[1].id, queue[1].options.coded, queue[1].tag
-					cp_1, cp_2 = queue[1].params[1], queue[1].params[2]
-				end
-			else
-				cmdID, cmdOpts, cmdTag, cp_1, cp_2 = Spring.GetUnitCurrentCommand(unitID)
-			end
+			local cmdID, cmdOpts, cmdTag, cp_1, cp_2 = Spring.GetUnitCurrentCommand(unitID)
 			if cmdID == CMD.ATTACK and Spring.Utilities.CheckBit(gadget:GetInfo().name, cmdOpts, CMD.OPT_INTERNAL) and cp_1 and (not cp_2) and cp_1 == targetID then
 				--Spring.Echo("Removing auto-attack command")
 				spGiveOrderToUnit(unitID, CMD.REMOVE, {cmdTag}, 0 )
@@ -291,19 +281,19 @@ local function PreventOverkillToggleCommand(unitID, cmdParams, cmdOptions)
 	return true
 end
 
-function gadget:AllowCommand_GetWantedCommand()	
+function gadget:AllowCommand_GetWantedCommand()
 	return {[CMD_PREVENT_OVERKILL] = true}
 end
 
-function gadget:AllowCommand_GetWantedUnitDefID()	
+function gadget:AllowCommand_GetWantedUnitDefID()
 	return true
 end
 
 function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
-	if (cmdID ~= CMD_PREVENT_OVERKILL) then		
+	if (cmdID ~= CMD_PREVENT_OVERKILL) then
 		return true  -- command was not used
-	end	
-	return PreventOverkillToggleCommand(unitID, cmdParams, cmdOptions)  
+	end
+	return PreventOverkillToggleCommand(unitID, cmdParams, cmdOptions)
 end
 
 -------------------------------------------------------------------------------------

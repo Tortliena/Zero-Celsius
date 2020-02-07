@@ -69,7 +69,7 @@ return {
       },
     },
   },
-  
+
   ["large_green_goo"] = {
     groundflash = {
       circlealpha        = .4,
@@ -394,7 +394,7 @@ return {
       },
     },
   },
-  
+
   ["red_goo"] = {
     groundflash = {
       circlealpha        = .4,
@@ -457,7 +457,7 @@ return {
         sizemod            = 1,
         texture            = [[blooddropwhite]],
       },
-    },  
+    },
   }
 }
 

@@ -5,7 +5,9 @@ local weaponDef = {
 	areaOfEffect            = 64,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		muzzleEffectFire = [[custom:thud_fire_fx]],
+		reaim_time = 1,
 	},
 
 	craterBoost             = 0,

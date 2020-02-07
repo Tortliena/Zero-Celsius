@@ -1,7 +1,3 @@
-Spring = Spring or {}
-Spring.Utilities = Spring.Utilities or {}
-VFS.Include("LuaRules/Utilities/tablefunctions.lua")
-
 local fx = {
 ['sonic'] = {
     groundflash = {
@@ -133,13 +129,14 @@ local altforms = {
       },
       contract = {
      properties = {size = 80, sizegrowth = -24},
-      }, 
+      },
     },
   },
 }
 
+local suMergeTable = Spring.Utilities.MergeTable
 for cegName, info in pairs(altforms) do
-  fx[cegName] = Spring.Utilities.MergeTable(info.modifications, fx[info.source], true)
+  fx[cegName] = suMergeTable(info.modifications, fx[info.source], true)
 end
 
 return fx

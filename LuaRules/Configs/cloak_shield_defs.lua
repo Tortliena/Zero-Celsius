@@ -26,6 +26,7 @@ for name, ud in pairs (UnitDefNames) do
 
 		cloakShieldDefs[name].growRate = tonumber (cp.area_cloak_grow_rate)
 		cloakShieldDefs[name].shrinkRate = tonumber (cp.area_cloak_shrink_rate)
+		cloakShieldDefs[name].selfDecloakDistance = tonumber (cp.area_cloak_self_decloak_distance) or ud.decloakDistance
 		cloakShieldDefs[name].decloakDistance = tonumber (cp.area_cloak_decloak_distance)
 
 		cloakShieldDefs[name].init = (cp.area_cloak_init ~= "0")
@@ -33,7 +34,7 @@ for name, ud in pairs (UnitDefNames) do
 		cloakShieldDefs[name].selfCloak = (cp.area_cloak_self ~= "0")
 		
 		local exception = {}
-		if cloakShieldDefs[name].decloakDistance then	
+		if cloakShieldDefs[name].decloakDistance then
 			for _, eud in pairs (UnitDefs) do
 				if eud.decloakDistance < cloakShieldDefs[name].decloakDistance then
 					exception[eud.id] = true

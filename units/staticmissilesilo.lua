@@ -1,4 +1,4 @@
-unitDef = {
+return { staticmissilesilo = {
   unitname                      = [[staticmissilesilo]],
   name                          = [[Missile Silo]],
   description                   = [[Produces Tactical Missiles, Builds at 10 m/s]],
@@ -24,7 +24,7 @@ unitDef = {
   corpse                        = [[DEAD]],
 
   customParams                  = {
-	nongroundfac = [[1]],
+    nongroundfac = [[1]],
   },
 
   energyUse                     = 0,
@@ -67,6 +67,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ staticmissilesilo = unitDef })
+} }

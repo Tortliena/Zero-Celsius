@@ -1,9 +1,9 @@
-unitDef = {
+return { jumpaa = {
   unitname            = [[jumpaa]],
   name                = [[Toad]],
   description         = [[Heavy Anti-Air Jumper]],
-  acceleration        = 0.18,
-  brakeRate           = 0.2,
+  acceleration        = 0.54,
+  brakeRate           = 1.2,
   buildCostMetal      = 500,
   buildPic            = [[jumpaa.png]],
   canMove             = true,
@@ -19,7 +19,7 @@ unitDef = {
     jump_speed         = 6,
     jump_reload        = 10,
     jump_from_midair   = 0,
-	modelradius    = [[15]],
+    modelradius    = [[15]],
   },
 
   explodeAs           = [[BIG_UNITEX]],
@@ -38,9 +38,9 @@ unitDef = {
   moveState           = 0,
   noChaseCategory     = [[TERRAFORM LAND SINK TURRET SHIP SATELLITE SWIM FLOAT SUB HOVER]],
   objectName          = [[hunchback.s3o]],
-  script			  = [[jumpaa.lua]],
+  script              = [[jumpaa.lua]],
   selfDestructAs      = [[BIG_UNITEX]],
-  sightDistance       = 660,
+  sightDistance       = 900,
   trackOffset         = 0,
   trackStrength       = 8,
   trackStretch        = 1,
@@ -78,13 +78,13 @@ unitDef = {
       craterMult              = 0,
       cylinderTargeting       = 1,
 
-	  customParams        	  = {
-		isaa = [[1]],
-		
-		light_camera_height = 1600,
-		light_color = [[0.9 0.86 0.45]],
-		light_radius = 140,
-	  },
+      customParams              = {
+        isaa = [[1]],
+        
+        light_camera_height = 1600,
+        light_color = [[0.9 0.86 0.45]],
+        light_radius = 140,
+      },
 
       damage                  = {
         default = 0.78,
@@ -125,11 +125,11 @@ unitDef = {
       craterMult              = 0,
       cylinderTargeting       = 1,
 
-	  customParams        	  = {
-		isaa = [[1]],
-		light_color = [[0.2 1.2 1.2]],
-		light_radius = 120,
-	  },
+      customParams              = {
+        isaa = [[1]],
+        light_color = [[0.2 1.2 1.2]],
+        light_radius = 120,
+      },
 
       damage                  = {
         default = 1.636,
@@ -145,7 +145,7 @@ unitDef = {
       laserFlareSize          = 3.25,
       minIntensity            = 1,
       noSelfDamage            = true,
-      range                   = 820,
+      range                   = 850,
       reloadtime              = 0.1,
       rgbColor                = [[0 1 1]],
       soundStart              = [[weapon/laser/rapid_laser]],
@@ -180,6 +180,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ jumpaa = unitDef })
+} }

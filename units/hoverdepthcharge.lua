@@ -1,10 +1,10 @@
-unitDef = {
+return { hoverdepthcharge = {
   unitname            = [[hoverdepthcharge]],
   name                = [[Claymore]],
   description         = [[Anti-Sub Hovercraft]],
-  acceleration        = 0.048,
+  acceleration        = 0.24,
   activateWhenBuilt   = true,
-  brakeRate           = 0.043,
+  brakeRate           = 0.43,
   buildCostMetal      = 330,
   builder             = false,
   buildPic            = [[hoverdepthcharge.png]],
@@ -86,9 +86,9 @@ unitDef = {
       craterBoost             = 1,
       craterMult              = 2,
 
-			customParams = {
-				burst = Shared.BURST_UNRELIABLE,
-			},
+      customParams = {
+        burst = Shared.BURST_UNRELIABLE,
+      },
 
       damage                  = {
         default = 900.5,
@@ -175,6 +175,10 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
+      customParams            = {
+        bogus = 1,
+      },
+
       damage                  = {
         default = 1E-06,
         planes  = 1E-06,
@@ -190,7 +194,7 @@ unitDef = {
       reloadtime              = 8,
       size                    = 1E-06,
       smokeTrail              = false,
-      targetborder            = 1,
+      targetborder            = 0.9,
       
       textures                = {
         [[null]],
@@ -230,6 +234,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ hoverdepthcharge = unitDef })
+} }

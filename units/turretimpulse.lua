@@ -1,4 +1,4 @@
-unitDef = {
+return { turretimpulse = {
   unitname                      = [[turretimpulse]],
   name                          = [[Newton]],
   description                   = [[Gravity Turret]],
@@ -34,7 +34,7 @@ unitDef = {
   objectName                    = [[CORGRAV]],
   onoffable                     = true,
   selfDestructAs                = [[MEDIUM_BUILDINGEX]],
-  sightDistance                 = 506,
+  sightDistance                 = 554, -- Range*1.1 + 48 for radar overshoot
   useBuildingGroundDecal        = true,
   workerTime                    = 0,
   yardMap                       = [[oooo]],
@@ -64,7 +64,7 @@ unitDef = {
       areaOfEffect            = 8,
       avoidFriendly           = false,
       burst                   = 6,
-      burstrate               = 0.01,
+      burstrate               = 0.033,
       coreThickness           = 0.5,
       craterBoost             = 0,
       craterMult              = 0,
@@ -110,7 +110,7 @@ unitDef = {
       areaOfEffect            = 8,
       avoidFriendly           = false,
       burst                   = 6,
-      burstrate               = 0.01,
+      burstrate               = 0.033,
       coreThickness           = 0.5,
       craterBoost             = 0,
       craterMult              = 0,
@@ -172,6 +172,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ turretimpulse = unitDef })
+} }

@@ -1,4 +1,4 @@
-unitDef = {
+return { nebula = {
   unitname               = [[nebula]],
   name                   = [[Nebula]],
   description            = [[Atmospheric Mothership]],
@@ -65,28 +65,28 @@ unitDef = {
 
     {
       def                = [[CANNON]],
-      mainDir            = [[0 1 0]],	-- top
+      mainDir            = [[0 1 0]], -- top
       maxAngleDif        = 210,
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
     {
       def                = [[CANNON]],
-      mainDir            = [[0 -1 0]],	-- bottom
+      mainDir            = [[0 -1 0]], -- bottom
       maxAngleDif        = 210,
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
     {
       def                = [[CANNON]],
-      mainDir            = [[-1 0 0]],	-- left
+      mainDir            = [[-1 0 0]], -- left
       maxAngleDif        = 210,
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
     {
       def                = [[CANNON]],
-      mainDir            = [[1 0 0]],	-- right
+      mainDir            = [[1 0 0]], -- right
       maxAngleDif        = 210,
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
@@ -170,7 +170,7 @@ unitDef = {
       blocking         = true,
       collisionVolumeOffsets = [[0 0 0]],
       collisionVolumeScales  = [[40 50 220]],
-      collisionVolumeType    = [[box]],	  
+      collisionVolumeType    = [[box]],
       featureDead      = [[HEAP]],
       footprintX       = 5,
       footprintZ       = 5,
@@ -187,6 +187,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ nebula = unitDef })
+} }

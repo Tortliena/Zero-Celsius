@@ -116,7 +116,7 @@ end
 
 for name, weaponDef in pairs(WeaponDefs) do
 	if not (weaponDef.customparams.reaim_time or string.find(name, "chicken")) then
-		weaponDef.customparams.reaim_time = 1
+		weaponDef.customparams.reaim_time = 5
 	end
 end
 
@@ -219,7 +219,7 @@ end
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --
--- Set myGravity for Cannons because maps cannot be trusted. Standard is 120, 
+-- Set myGravity for Cannons because maps cannot be trusted. Standard is 120,
 -- gravity of 150 can cause high things (such as HLT) to be unhittable.
 
  for _, weaponDef in pairs(WeaponDefs) do
@@ -299,11 +299,11 @@ end
 
  for _, weaponDef in pairs(WeaponDefs) do
     if weaponDef.texture1 == "largelaserdark" then
-		weaponDef.texture1 = "largelaserdark_long" 
+		weaponDef.texture1 = "largelaserdark_long"
 		weaponDef.tilelength = (weaponDef.tilelength and weaponDef.tilelength*4) or 800
 	end
 	if weaponDef.texture1 == "largelaser" then
-		weaponDef.texture1 = "largelaser_long" 
+		weaponDef.texture1 = "largelaser_long"
 		weaponDef.tilelength = (weaponDef.tilelength and weaponDef.tilelength*4) or 800
 	end
  end
@@ -356,6 +356,9 @@ for _, weaponDef in pairs(WeaponDefs) do
 	if weaponDef.paralyzetime and not weaponDef.paralyzer then
 		weaponDef.customparams.extra_paratime = weaponDef.paralyzetime
 	end
+	if not weaponDef.predictboost then
+		weaponDef.predictboost = 1
+	end
 end
 
 --------------------------------------------------------------------------------
@@ -394,15 +397,3 @@ do
 		end
 	end
 end
-
-for _, wd in pairs (WeaponDefs) do
-	if wd.reloadtime then -- shields and death explosions don't have reloadtime
-		wd.reloadtime = (math.floor(wd.reloadtime * 30 + 1E-5) / 30) + 1E-6 -- sanitize to whole frames (plus leeways because float arithmetic is bonkers)
-	end
-	if not wd.predictboost then
-		wd.predictboost = 1
-	end
-end
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------

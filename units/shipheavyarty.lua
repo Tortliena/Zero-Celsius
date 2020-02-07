@@ -1,10 +1,10 @@
-unitDef = {
+return { shipheavyarty = {
   unitname               = [[shipheavyarty]],
   name                   = [[Shogun]],
   description            = [[Battleship (Heavy Artillery)]],
-  acceleration           = 0.039,
+  acceleration           = 0.195,
   activateWhenBuilt   = true,
-  brakeRate              = 0.0475,
+  brakeRate              = 0.475,
   buildCostMetal         = 5000,
   builder                = false,
   buildPic               = [[shipheavyarty.png]],
@@ -64,7 +64,7 @@ unitDef = {
       def                = [[PLASMA]],
       mainDir            = [[0 0 1]],
       maxAngleDif        = 330,
-	  badTargetCategory  = [[GUNSHIP]],
+      badTargetCategory  = [[GUNSHIP]],
       onlyTargetCategory = [[SWIM LAND SINK TURRET FLOAT SHIP HOVER GUNSHIP]],
     },
 
@@ -73,7 +73,7 @@ unitDef = {
       def                = [[PLASMA]],
       mainDir            = [[0 0 -1]],
       maxAngleDif        = 330,
-	  badTargetCategory  = [[GUNSHIP]],
+      badTargetCategory  = [[GUNSHIP]],
       onlyTargetCategory = [[SWIM LAND SINK TURRET FLOAT SHIP HOVER GUNSHIP]],
     },
 
@@ -82,7 +82,7 @@ unitDef = {
       def                = [[PLASMA]],
       mainDir            = [[0 0 -1]],
       maxAngleDif        = 330,
-	  badTargetCategory  = [[GUNSHIP]],
+      badTargetCategory  = [[GUNSHIP]],
       onlyTargetCategory = [[SWIM LAND SINK TURRET FLOAT SHIP HOVER GUNSHIP]],
     },
 
@@ -95,7 +95,7 @@ unitDef = {
       name                    = [[Long-Range Plasma Battery]],
       areaOfEffect            = 96,
       avoidFeature            = false,
-	  avoidGround             = false,
+      avoidGround             = false,
       burst                   = 3,
       burstrate               = 0.2,
       craterBoost             = 1,
@@ -146,6 +146,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shipheavyarty = unitDef })
+} }

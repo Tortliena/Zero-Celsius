@@ -45,11 +45,7 @@ for wdid = 1, #WeaponDefs do
 
 		if wdcp.nofriendlyfire == "needs hax" then
 			haxWeapons[wdid] = true
-			if Script.SetWatchProjectile then
-				Script.SetWatchProjectile(wdid, true)
-			else
-				Script.SetWatchWeapon(wdid, true)
-			end
+			Script.SetWatchProjectile(wdid, true)
 		end
 	end
 end
@@ -109,7 +105,7 @@ function gadget:UnitPreDamaged_GetWantedWeaponDef()
 	return wantedWeaponList
 end
 
-function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer, 
+function gadget:UnitPreDamaged(unitID, unitDefID, unitTeam, damage, paralyzer,
                             weaponID, attackerID, attackerDefID, attackerTeam, projectileID)
 	if weaponID and noFFWeaponDefs[weaponID] then
 		attackerTeam = attackerTeam or haxProjectiles[projectileID]

@@ -1,9 +1,9 @@
-unitDef = {
+return { hoverskirm2 = {
   unitname            = [[hoverskirm2]],
   name                = [[Trisula]],
   description         = [[Light Assault/Battle Hovercraft]],
-  acceleration        = 0.03,
-  brakeRate           = 0.043,
+  acceleration        = 0.15,
+  brakeRate           = 0.43,
   buildCostMetal      = 180,
   builder             = false,
   buildPic            = [[hoverskirm2.png]],
@@ -13,7 +13,7 @@ unitDef = {
   category            = [[HOVER]],
   collisionVolumeOffsets = [[0 0 0]],
   collisionVolumeScales  = [[50 25 50]],
-  collisionVolumeType    = [[ellipsoid]], 
+  collisionVolumeType    = [[ellipsoid]],
   corpse              = [[DEAD]],
 
   customParams        = {
@@ -119,6 +119,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ hoverskirm2 = unitDef })
+} }

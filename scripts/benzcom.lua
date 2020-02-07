@@ -9,23 +9,23 @@ local pieceMap = Spring.GetUnitPieceMap(unitID)
 local HAS_GATTLING = pieceMap.rgattlingflare and true or false
 local HAS_BONUS_CANNON = pieceMap.bonuscannonflare and true or false
 
-local torso = piece 'torso' 
+local torso = piece 'torso'
 
-local rcannon_flare= HAS_GATTLING and piece('rgattlingflare') or piece('rcannon_flare') 
+local rcannon_flare= HAS_GATTLING and piece('rgattlingflare') or piece('rcannon_flare')
 local barrels= HAS_GATTLING and piece 'barrels' or nil
 local lcannon_flare = HAS_BONUS_CANNON and piece('bonuscannonflare') or piece('lnanoflare')
-local lnanoflare = piece 'lnanoflare' 
-local lnanohand = piece 'lnanohand' 
-local larm = piece 'larm' 
-local rarm = piece 'rarm' 
-local pelvis = piece 'pelvis' 
-local rupleg = piece 'rupleg' 
-local lupleg = piece 'lupleg' 
-local rhand = piece 'rhand' 
-local lleg = piece 'lleg' 
-local lfoot = piece 'lfoot' 
-local rleg = piece 'rleg' 
-local rfoot = piece 'rfoot' 
+local lnanoflare = piece 'lnanoflare'
+local lnanohand = piece 'lnanohand'
+local larm = piece 'larm'
+local rarm = piece 'rarm'
+local pelvis = piece 'pelvis'
+local rupleg = piece 'rupleg'
+local lupleg = piece 'lupleg'
+local rhand = piece 'rhand'
+local lleg = piece 'lleg'
+local lfoot = piece 'lfoot'
+local rleg = piece 'rleg'
+local rfoot = piece 'rfoot'
 
 local smokePiece = {torso}
 local nanoPieces = {lnanoflare}
@@ -76,20 +76,16 @@ local RESTORE_DELAY_DGUN = 2500
 --------------------------------------------------------------------------------
 -- vars
 --------------------------------------------------------------------------------
-local isMoving, isLasering, isDgunning, gunLockOut, shieldOn = false, false, false, false, true
+local isLasering, isDgunning, gunLockOut, shieldOn = false, false, false, true
 local restoreHeading, restorePitch = 0, 0
 
-local flamers = {}
 local starBLaunchers = {}
 local wepTable = UnitDefs[unitDefID].weapons
 wepTable.n = nil
 for index, weapon in pairs(wepTable) do
 	local weaponDef = WeaponDefs[weapon.weaponDef]
-	if weaponDef.type == "Flame" then
-		flamers[index] = true
-	elseif weaponDef.type == "StarburstLauncher" then
+	if weaponDef.type == "StarburstLauncher" then
 		starBLaunchers[index] = true
-		--Spring.Echo("sbl found")
 	end
 end
 wepTable = nil
@@ -127,7 +123,7 @@ local function Walk()
 --			Turn(larm, x_axis, ARM_FRONT_ANGLE, ARM_FRONT_SPEED)
 --			Turn(rarm, x_axis, ARM_BACK_ANGLE, ARM_BACK_SPEED)
 		end
-		WaitForTurn(lupleg, x_axis)		
+		WaitForTurn(lupleg, x_axis)
 		Sleep(0)
 	end
 end
@@ -156,17 +152,15 @@ function script.Create()
 --	Turn(rhand, x_axis, math.rad(41))
 --	Turn(lnanohand, x_axis, math.rad(36))
 	
-	StartThread(GG.Script.SmokeUnit, smokePiece)
+	StartThread(GG.Script.SmokeUnit, unitID, smokePiece)
 	Spring.SetUnitNanoPieces(unitID, nanoPieces)
 end
 
-function script.StartMoving() 
-	isMoving = true
+function script.StartMoving()
 	StartThread(Walk)
 end
 
-function script.StopMoving() 
-	isMoving = false
+function script.StopMoving()
 	StartThread(RestoreLegs)
 end
 
@@ -251,9 +245,6 @@ function script.Shot(num)
 	elseif num == 3 then
 		EmitSfx(lcannon_flare, 1027)
 	end
-	if flamers[num] then
-		--GG.LUPS.FlameShot(unitID, unitDefID, _, num)
-	end
 end
 
 function script.AimFromWeapon(num)
@@ -261,7 +252,7 @@ function script.AimFromWeapon(num)
 end
 
 function script.QueryWeapon(num)
-	if num == 3 then 
+	if num == 3 then
 		return lcannon_flare
 	elseif num == 2 or num == 4 then
 		return pelvis

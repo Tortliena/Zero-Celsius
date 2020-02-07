@@ -1,11 +1,11 @@
-unitDef = {
+return { chicken_dragon = {
   unitname               = [[chicken_dragon]],
   name                   = [[White Dragon]],
   description            = [[Prime Assault Chicken]],
-  acceleration           = 1,
+  acceleration           = 5.0,
   activateWhenBuilt      = true,
   autoHeal               = 0,
-  brakeRate              = 3,
+  brakeRate              = 30.0,
   buildCostEnergy        = 0,
   buildCostMetal         = 0,
   builder                = false,
@@ -116,12 +116,12 @@ unitDef = {
       name                    = [[Blob]],
       areaOfEffect            = 160,
       burst                   = 8,
-      burstrate               = 0.01,
+      burstrate               = 0.033,
       cegTag                  = [[queen_trail]],
       craterBoost             = 0,
       craterMult              = 0,
-			
-			customParams            = {
+            
+            customParams            = {
         light_radius = 0,
       },
 
@@ -262,6 +262,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chicken_dragon = unitDef })
+} }

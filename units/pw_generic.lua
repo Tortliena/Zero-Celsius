@@ -1,4 +1,4 @@
-unitDef = {
+return { pw_generic = {
   unitname                      = [[pw_generic]],
   name                          = [[Generic Neutral Structure]],
   description                   = [[Blank]],
@@ -49,9 +49,9 @@ unitDef = {
       blocking         = true,
       resurrectable    = 0,
       featureDead      = [[HEAP]],
-      --footprintX       = 8,	-- autoset by featuredefs_post
+      --footprintX       = 8, -- autoset by featuredefs_post
       --footprintZ       = 8,
-      object           = [[pw_techlab_dead.dae]],	
+      object           = [[pw_techlab_dead.dae]],
     },
 
     HEAP  = {
@@ -62,6 +62,4 @@ unitDef = {
     },
   },
 
-}
-
-return lowerkeys({ pw_generic = unitDef })
+} }

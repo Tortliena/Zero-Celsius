@@ -1,10 +1,10 @@
-unitDef = {
+return { amphcon = {
   unitname            = [[amphcon]],
   name                = [[Conch]],
   description         = [[Amphibious Construction Bot, Builds at 7.5 m/s]],
-  acceleration        = 0.4,
+  acceleration        = 1.2,
   activateWhenBuilt   = true,
-  brakeRate           = 0.25,
+  brakeRate           = 1.5,
   buildCostMetal      = 150,
   buildDistance       = 128,
   builder             = true,
@@ -69,6 +69,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ amphcon = unitDef })
+} }

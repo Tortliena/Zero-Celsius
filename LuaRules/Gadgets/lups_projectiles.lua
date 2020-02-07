@@ -27,7 +27,7 @@ for i=1,#WeaponDefs do
 			Spring.Log(gadget:GetInfo().name, LOG.WARNING, "malformed projectile Lups definition for weapon " .. wd.name .. "\n" .. err  )
 		end
 		if data then
-			Script.SetWatchWeapon(i, true)
+			Script.SetWatchProjectile(i, true)
 			weapons[i] = data
 		end
 	end
@@ -47,7 +47,7 @@ function gadget:ProjectileCreated(proID, proOwnerID, weaponID)
 		projectiles[proID] = true;
 		SendToUnsynced("lupsProjectiles_AddProjectile", proID, proOwnerID, weaponID)
 	end
-end	
+end
 
 function gadget:ProjectileDestroyed(proID)
 	if projectiles[proID] then
@@ -58,11 +58,7 @@ end
 
 function gadget:Initialize()
 	for weaponID in pairs(weapons) do
-		if Script.SetWatchProjectile then
-			Script.SetWatchProjectile(weaponID, true)
-		else
-			Script.SetWatchWeapon(weaponID, true)
-		end
+		Script.SetWatchProjectile(weaponID, true)
 	end
 end
 
@@ -74,8 +70,7 @@ else
 --------------------------------------------------------------------------------
 
 local Lups
-local LupsAddParticles 
-local SYNCED = SYNCED
+local LupsAddParticles
 
 local projectiles = {}
 

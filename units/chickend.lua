@@ -1,4 +1,4 @@
-unitDef = {
+return { chickend = {
   unitname                      = [[chickend]],
   name                          = [[Chicken Tube]],
   description                   = [[Defense and energy source]],
@@ -37,6 +37,7 @@ unitDef = {
   objectName                    = [[tube.s3o]],
   onoffable                     = true,
   power                         = 120,
+  script                        = [[chickend.lua]],
   selfDestructAs                = [[NOWEAPON]],
 
   sfxtypes                      = {
@@ -118,6 +119,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chickend = unitDef })
+} }

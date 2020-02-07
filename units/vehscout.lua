@@ -1,9 +1,9 @@
-unitDef = {
+return { vehscout = {
   unitname               = [[vehscout]],
   name                   = [[Dart]],
   description            = [[Disruptor Raider/Scout Rover]],
-  acceleration           = 0.14,
-  brakeRate              = 0.1555,
+  acceleration           = 0.7,
+  brakeRate              = 1.555,
   buildCostMetal         = 40,
   builder                = false,
   buildPic               = [[vehscout.png]],
@@ -20,7 +20,7 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[7]],
+    modelradius    = [[7]],
   },
 
   explodeAs              = [[SMALL_UNITEX]],
@@ -42,7 +42,7 @@ unitDef = {
   objectName             = [[vehscout.s3o]],
   script                 = [[vehscout.lua]],
   selfDestructAs         = [[SMALL_UNITEX]],
-  sightDistance          = 580,
+  sightDistance          = 660,
   trackOffset            = 0,
   trackStrength          = 1,
   trackStretch           = 0.1,
@@ -76,15 +76,15 @@ unitDef = {
       craterMult              = 0,
   
       customParams            = {
-	    timeslow_damagefactor = 4,
-		
-		light_camera_height = 2000,
-		light_color = [[0.85 0.33 1]],
-		light_radius = 120,
+        timeslow_damagefactor = 4,
+        
+        light_camera_height = 2000,
+        light_color = [[0.85 0.33 1]],
+        light_radius = 120,
       },
-	  
+      
       damage                  = {
-	    default = 35,
+        default = 35,
       },
   
       explosionGenerator      = [[custom:flash2purple]],
@@ -137,6 +137,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ vehscout = unitDef })
+} }

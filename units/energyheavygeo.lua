@@ -1,4 +1,4 @@
-unitDef = {
+return { energyheavygeo = {
   unitname                      = [[energyheavygeo]],
   name                          = [[Advanced Geothermal]],
   description                   = [[Large Powerplant (+100) - HAZARDOUS]],
@@ -15,7 +15,7 @@ unitDef = {
 
   customParams                  = {
     pylonrange     = 150,
-	removewait     = 1,
+    removewait     = 1,
   },
 
   energyMake                    = 100,
@@ -55,6 +55,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ energyheavygeo = unitDef })
+} }

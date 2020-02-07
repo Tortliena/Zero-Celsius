@@ -1,4 +1,4 @@
-unitDef = {
+return { turrettorp = {
   unitname          = [[turrettorp]],
   name              = [[Urchin]],
   description       = [[Torpedo Launcher]],
@@ -10,15 +10,14 @@ unitDef = {
   builder           = false,
   buildPic          = [[turrettorp.png]],
   category          = [[FLOAT]],
-  collisionVolumeOffsets        = [[0 -5 0]],
-  collisionVolumeScales         = [[42 50 42]],
-
-  collisionVolumeType	        = [[CylY]],
+  collisionVolumeOffsets = [[0 -5 0]],
+  collisionVolumeScales  = [[42 50 42]],
+  collisionVolumeType    = [[CylY]],
   corpse            = [[DEAD]],
 
   customParams      = {
-	aimposoffset   = [[0 15 0]],
-	midposoffset   = [[0 15 0]],
+    aimposoffset   = [[0 15 0]],
+    midposoffset   = [[0 15 0]],
   },
 
   explodeAs         = [[MEDIUM_BUILDINGEX]],
@@ -38,8 +37,8 @@ unitDef = {
   script            = [[turrettorp.lua]],
   selfDestructAs    = [[MEDIUM_BUILDINGEX]],
 
-  sightDistance     = 610,
-  sonarDistance     = 610,
+  sightDistance     = 653, -- Range*1.1 + 48 for radar overshoot
+  sonarDistance     = 653,
   turnRate          = 0,
   waterline         = 1,
   workerTime        = 0,
@@ -118,6 +117,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ turrettorp = unitDef })
+} }

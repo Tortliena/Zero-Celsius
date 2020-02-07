@@ -1,9 +1,9 @@
-unitDef = {
+return { cloakriot = {
   unitname               = [[cloakriot]],
   name                   = [[Reaver]],
   description            = [[Riot Bot]],
-  acceleration           = 0.25,
-  brakeRate              = 0.2,
+  acceleration           = 0.75,
+  brakeRate              = 1.2,
   buildCostMetal         = 220,
   buildPic               = [[cloakriot.png]],
   canGuard               = true,
@@ -20,6 +20,7 @@ unitDef = {
 
   customParams           = {
     modelradius    = [[7]],
+    cus_noflashlight = 1,
   },
 
   explodeAs              = [[SMALL_UNITEX]],
@@ -82,9 +83,9 @@ unitDef = {
       craterMult              = 0.3,
 
       customParams        = {
-		light_camera_height = 1600,
-		light_color = [[0.8 0.76 0.38]],
-		light_radius = 150,
+        light_camera_height = 1600,
+        light_color = [[0.8 0.76 0.38]],
+        light_radius = 150,
       },
 
       damage                  = {
@@ -134,6 +135,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ cloakriot = unitDef })
+} }

@@ -1,10 +1,10 @@
-unitDef = {
+return { chickenblobber = {
   unitname            = [[chickenblobber]],
   name                = [[Blobber]],
   description         = [[Heavy Artillery]],
-  acceleration        = 0.36,
+  acceleration        = 1.08,
   activateWhenBuilt   = true,
-  brakeRate           = 0.205,
+  brakeRate           = 1.23,
   buildCostEnergy     = 0,
   buildCostMetal      = 0,
   builder             = false,
@@ -79,11 +79,11 @@ unitDef = {
       name                    = [[Scatterblob]],
       areaOfEffect            = 96,
       burst                   = 11,
-      burstrate               = 0.01,
+      burstrate               = 0.033,
       craterBoost             = 0,
       craterMult              = 0,
-			
-			customParams            = {
+            
+            customParams            = {
         light_radius = 0,
       },
 
@@ -116,6 +116,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chickenblobber = unitDef })
+} }

@@ -21,14 +21,15 @@ local spGetUnitBasePosition = Spring.GetUnitBasePosition
 local spGetUnitHeading      = Spring.GetUnitHeading
 local spGetUnitDefID        = Spring.GetUnitDefID
 local spSetUnitVelocity     = Spring.SetUnitVelocity
-local spSetUnitLeaveTracks  = Spring.SetUnitLeaveTracks 
+local spSetUnitLeaveTracks  = Spring.SetUnitLeaveTracks
 local spGetUnitVelocity     = Spring.GetUnitVelocity
-local spGetUnitRotation     = Spring.GetUnitRotation 
+local spGetUnitRotation     = Spring.GetUnitRotation
 local spGetUnitHealth       = Spring.GetUnitHealth
 local spSetUnitHealth       = Spring.SetUnitHealth
 local spGetUnitIsStunned    = Spring.GetUnitIsStunned
 local spGetUnitRulesParam   = Spring.GetUnitRulesParam
 local spGetUnitIsDead       = Spring.GetUnitIsDead
+local spUseUnitResource     = Spring.UseUnitResource
 
 local mcSetVelocity         = Spring.MoveCtrl.SetVelocity
 local mcSetRotationVelocity = Spring.MoveCtrl.SetRotationVelocity
@@ -60,9 +61,15 @@ local mobilePadDefs = {
 	[UnitDefNames["shipcarrier"].id] = true,
 }
 
+local padSnapRangeSqr = 80^2
+local resTable = {e = 0, m = 0}
+
 local turnRadius = {}
-local reammoHalfSeconds = {}
+local reammoFrames = {}
+local reammoDrain = {}
+local padRepairBp = {}
 local rotateUnit = {}
+
 for i = 1, #UnitDefs do
 	local movetype = Spring.Utilities.getMovetype(UnitDefs[i])
 	local ud = UnitDefs[i]
@@ -77,16 +84,15 @@ for i = 1, #UnitDefs do
 		turnRadius[i] = 20
 		rotateUnit[i] = false
 	end
-	if ud.customParams.reammoseconds then
-		reammoHalfSeconds[i] = math.ceil(tonumber(ud.customParams.reammoseconds)*2)
+	if ud.customParams.requireammo then
+		reammoFrames[i] = (tonumber(ud.customParams.reammoseconds) or 5)*30
+		reammoDrain[i] = (tonumber(ud.customParams.reammodrain) or 0)/30
+	end
+	
+	if ud.customParams.ispad then
+		padRepairBp[i] = tonumber(ud.customParams.pad_bp) or 2.5
 	end
 end
-
-local padSnapRangeSqr = 80^2
-local REAMMO_TIME = 5*30
-local PAD_ENERGY_DRAIN = 2.5
-
-local REAMMO_HALF_SECONDS = REAMMO_TIME/15
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -103,16 +109,23 @@ local function StartScript(fn)
 	coroutines[#coroutines + 1] = co
 end
 
-local function AbortCheck(unitID, isLanded)
+local function GetBuildRate(unitID)
+	local stunned_or_inbuild = spGetUnitIsStunned(unitID)
+	if stunned_or_inbuild then
+		return 0
+	end
+	return spGetUnitRulesParam(unitID, "totalBuildPowerChange") or 1
+end
+
+local function AbortCheck(unitID, padID, isLanded)
 	if (not landingUnit[unitID]) or landingUnit[unitID].abort then
 		if not spGetUnitIsDead(unitID) then
 			spSetUnitLeaveTracks(unitID, true)
 			if isLanded then
 				spSetUnitVelocity(unitID, 0, 0, 0)
-				Spring.SetUnitResourcing(unitID, "uue", 0)
-				
+				GG.StopMiscPriorityResourcing(padID, miscPriorityKey)
 				-- activate unit and its jets. An attempt at the Vulture-losing-radar bug.
-				Spring.SetUnitCOBValue(unitID, COB.ACTIVATION, 1) 
+				Spring.SetUnitCOBValue(unitID, COB.ACTIVATION, 1)
 			end
 			mcDisable(unitID)
 			unitMovectrled[unitID] = nil
@@ -135,11 +148,13 @@ local function SitOnPad(unitID)
 	
 	local ppx, ppy, ppz, pdx, pdy, pdz = Spring.GetUnitPiecePosDir(landData.padID, landData.padPieceID)
 	
-	local unitDefID = Spring.GetUnitDefID(unitID)
-	local ud = UnitDefs[unitDefID]
-	local cost = ud.metalCost
-	local maxHP = ud.health
-	local healPerHalfSecond = 2*PAD_ENERGY_DRAIN*maxHP/(cost*2)
+	local unitDefID        = Spring.GetUnitDefID(unitID)
+	local ud               = UnitDefs[unitDefID]
+	local cost             = ud.metalCost
+	local maxHP            = ud.health
+	local healPerFrame     = 2*landData.repairBp*maxHP/(30*cost)
+	local repairFrameDrain = landData.repairBp/30
+	local reammoMaxTime     = reammoFrames[unitDefID]
 	
 	if not unitMovectrled[unitID] then
 		mcEnable(unitID)
@@ -158,6 +173,7 @@ local function SitOnPad(unitID)
 	-- Spring.Echo(pdz)
 	-- Spring.Echo(padHeading*180/PI)
 	
+	local miscPriorityKey = "p" .. unitID
 	local headingDiff = heading - padHeading
 	
 	spSetUnitVelocity(unitID, 0, 0, 0)
@@ -168,15 +184,19 @@ local function SitOnPad(unitID)
 	Spring.SetUnitCOBValue(unitID, COB.ACTIVATION, 0)
 	
 	local function SitLoop()
+		-- read unitrulesparam for save/load handling
+		local reammoProgress = GG.RequireRefuel(unitID) and (Spring.GetUnitRulesParam(unitID, "reammoProgress") or 0) * reammoMaxTime
 		local landDuration = 0
-		local reammoProgress = GG.RequireRefuel(unitID)	-- read unitrulesparam for save/load handling
-			and (Spring.GetUnitRulesParam(unitID, "reammoProgress") or 0) * (reammoHalfSeconds[unitDefID] or REAMMO_HALF_SECONDS)
-		local drainingEnergy = false
+		local oldBuildRate = 0
+		local oldUpdateCost = 0
+		local updateRate = 1
 		
+		local health, buildRate, updateCost, drainScale, padTeamID
 		while true do
-			if AbortCheck(unitID, true) then
+			if AbortCheck(unitID, landData.padID, true) then
 				return
 			end
+			padTeamID = Spring.GetUnitTeam(landData.padID)
 			
 			if landData.mobilePad then
 				local px, py, pz, dx, dy, dz = Spring.GetUnitPiecePosDir(landData.padID, landData.padPieceID)
@@ -188,59 +208,55 @@ local function SitOnPad(unitID)
 				mcSetRotation(unitID,0,-(headingDiff+newPadHeading),0)
 			end
 			
-			landDuration = landDuration + 1
-			
-			if landDuration%15 == 0 then
-				local stunned_or_inbuild = spGetUnitIsStunned(landData.padID) or (spGetUnitRulesParam(landData.padID,"disarmed") == 1)
-				if stunned_or_inbuild then
-					if drainingEnergy then
-						Spring.SetUnitResourcing(unitID, "uue" ,0)
-						drainingEnergy = false
-					end
+			buildRate = GetBuildRate(landData.padID)
+			updateCost = ((reammoProgress and (reammoDrain[unitDefID] or 0)) or repairFrameDrain)*GG.REPAIR_RESOURCE_MULT
+			if updateCost ~= oldUpdateCost or oldBuildRate ~= buildRate then
+				oldBuildRate = buildRate
+				oldUpdateCost = updateCost
+				if updateCost > 0 then
+					GG.StartMiscPriorityResourcing(landData.padID, buildRate*updateCost*30, not GG.REPAIR_COSTS_METAL, miscPriorityKey)
 				else
-					local buildPowerMult = spGetUnitRulesParam(landData.padID,"totalBuildPowerChange") or 1
-					if reammoProgress then
-						reammoProgress = reammoProgress + buildPowerMult
-						local maxProgress = (reammoHalfSeconds[unitDefID] or REAMMO_HALF_SECONDS)
-						if reammoProgress >= maxProgress then
-							reammoProgress = false
-							GG.RefuelComplete(unitID)
-							Spring.SetUnitRulesParam(unitID, "reammoProgress", nil, LOS_ACCESS)
-						else
-							Spring.SetUnitRulesParam(unitID, "reammoProgress", reammoProgress/maxProgress, LOS_ACCESS)
-						end
-					end
-					if not reammoProgress then
-						if GG.HasCombatRepairPenalty(unitID) then
-							buildPowerMult = buildPowerMult/4
-						end
-						local hp = spGetUnitHealth(unitID)
-						if hp < maxHP then
-							if drainingEnergy ~= buildPowerMult then
-								Spring.SetUnitResourcing(unitID, "uue" ,PAD_ENERGY_DRAIN*buildPowerMult)
-								drainingEnergy = buildPowerMult
-							end
-							local _,_,_,energyUse = Spring.GetUnitResources(unitID)
-							spSetUnitHealth(unitID, min(maxHP, hp + healPerHalfSecond*energyUse/PAD_ENERGY_DRAIN))
-						else
-							if drainingEnergy then
-								Spring.SetUnitResourcing(unitID, "uue" ,0)
-								drainingEnergy = false
-							end
-							break
-						end
-					end
+					GG.StopMiscPriorityResourcing(landData.padID, miscPriorityKey)
 				end
 			end
 			
+			if (updateCost > 0) then
+				updateRate = GG.GetMiscPrioritySpendScale(landData.padID, padTeamID)
+				resTable.e = updateCost*updateRate
+				if GG.REPAIR_COSTS_METAL then
+					resTable.m = resTable.e
+				end
+			else
+				updateRate = 1
+			end
+			
+			if reammoProgress then
+				if (updateRate > 0) and ((updateCost == 0) or spUseUnitResource(landData.padID, resTable)) then
+					reammoProgress = reammoProgress + updateRate
+					if reammoProgress > reammoMaxTime then
+						reammoProgress = false
+						GG.RefuelComplete(unitID)
+						Spring.SetUnitRulesParam(unitID, "reammoProgress", nil, LOS_ACCESS)
+					else
+						Spring.SetUnitRulesParam(unitID, "reammoProgress", reammoProgress/reammoMaxTime, LOS_ACCESS)
+					end
+				end
+			else
+				health = spGetUnitHealth(unitID)
+				if health < maxHP and (updateRate > 0) and ((updateCost == 0) or spUseUnitResource(landData.padID, resTable)) then
+					spSetUnitHealth(unitID, min(maxHP, health + updateRate*healPerFrame))
+				else
+					GG.StopMiscPriorityResourcing(landData.padID, miscPriorityKey)
+					break
+				end
+			end
+			
+			landDuration = landDuration + 1
 			-- Check crashing every 10s as safety for a rare bug. Otherwise the pad will be oocupied forever.
 			if landDuration%300 == 0 then
 				if Spring.GetUnitMoveTypeData(unitID).aircraftState == "crashing" then
-					if drainingEnergy then
-						Spring.SetUnitResourcing(unitID, "uue" ,0)
-						drainingEnergy = false
-						Spring.DestroyUnit(unitID)
-					end
+					GG.StopMiscPriorityResourcing(landData.padID, miscPriorityKey)
+					Spring.DestroyUnit(unitID)
 				end
 			end
 			
@@ -249,9 +265,9 @@ local function SitOnPad(unitID)
 		
 		spSetUnitLeaveTracks(unitID, true)
 		spSetUnitVelocity(unitID, 0, 0, 0)
-		Spring.SetUnitResourcing(unitID, "uue" ,0)
+		GG.StopMiscPriorityResourcing(landData.padID, miscPriorityKey)
 		mcDisable(unitID)
-		GG.UpdateUnitAttributes(unitID) --update pending attribute changes in unit_attributes.lua if available 
+		GG.UpdateUnitAttributes(unitID) --update pending attribute changes in unit_attributes.lua if available
 		unitMovectrled[unitID] = nil
 		landingUnit[unitID] = nil
 		
@@ -291,7 +307,7 @@ local function CircleToLand(unitID, goal)
 	
 	local heading = spGetUnitHeading(unitID)*HEADING_TO_RAD
 	
-	-- Find position of focus points for left or right turning circles 
+	-- Find position of focus points for left or right turning circles
 	local leftFocus = {
 		[1] = start[1] + turnCircleRadius*sin(heading + PI/2),
 		[3] = start[3] + turnCircleRadius*cos(heading + PI/2)
@@ -303,8 +319,8 @@ local function CircleToLand(unitID, goal)
 	}
 	
 	-- Decide upon direction to turn
-	local leftDistSq = (goal[1] - leftFocus[1])^2 + (goal[3] - leftFocus[3])^2 
-	local rightDistSq = (goal[1] - rightFocus[1])^2 + (goal[3] - rightFocus[3])^2 
+	local leftDistSq = (goal[1] - leftFocus[1])^2 + (goal[3] - leftFocus[3])^2
+	local rightDistSq = (goal[1] - rightFocus[1])^2 + (goal[3] - rightFocus[3])^2
 	
 	--Spring.MarkerAddPoint(leftFocus[1],0,leftFocus[3],sqrt(leftDistSq))
 	--Spring.MarkerAddPoint(rightFocus[1],0,rightFocus[3],sqrt(rightDistSq))
@@ -511,6 +527,7 @@ function GG.SendBomberToPad(unitID, padID, padPieceID)
 		mobilePad = padDefID and mobilePadDefs[padDefID],
 		padID = padID,
 		padPieceID = padPieceID,
+		repairBp = padRepairBp[padDefID],
 	}
 	
 	local px, py, pz = Spring.GetUnitPiecePosDir(padID, padPieceID)
@@ -523,16 +540,16 @@ function GG.LandAborted(unitID)
 	end
 end
 
-local function UpdateCoroutines() 
-	local newCoroutines = {} 
-	for i=1, #coroutines do 
-		local co = coroutines[i] 
-		if (coroutine.status(co) ~= "dead") then 
-			newCoroutines[#newCoroutines + 1] = co 
-		end 
-	end 
-	coroutines = newCoroutines 
-	for i=1, #coroutines do 
+local function UpdateCoroutines()
+	local newCoroutines = {}
+	for i=1, #coroutines do
+		local co = coroutines[i]
+		if (coroutine.status(co) ~= "dead") then
+			newCoroutines[#newCoroutines + 1] = co
+		end
+	end
+	coroutines = newCoroutines
+	for i=1, #coroutines do
 		assert(coroutine.resume(coroutines[i]))
 	end
 end

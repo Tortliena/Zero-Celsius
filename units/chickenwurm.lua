@@ -1,10 +1,10 @@
-unitDef = {
+return { chickenwurm = {
   unitname            = [[chickenwurm]],
   name                = [[Wurm]],
   description         = [[Burrowing Flamer (Assault/Riot)]],
-  acceleration        = 0.36,
+  acceleration        = 1.08,
   activateWhenBuilt   = true,
-  brakeRate           = 0.205,
+  brakeRate           = 1.23,
   buildCostEnergy     = 0,
   buildCostMetal      = 0,
   builder             = false,
@@ -16,7 +16,7 @@ unitDef = {
   category            = [[LAND]],
 
   customParams        = {
-	fireproof	   = 1,
+    fireproof         = 1,
   },
 
   explodeAs           = [[jumpraid_PYRO_DEATH]],
@@ -86,19 +86,19 @@ unitDef = {
       name                    = [[Napalm Blob]],
       areaOfEffect            = 128,
       burst                   = 1,
-      burstrate               = 0.01,
+      burstrate               = 0.033,
       craterBoost             = 0,
       craterMult              = 0,
-	  
-	  customParams        	  = {
-	    setunitsonfire = "1",
-		burntime = 180,
+      
+      customParams              = {
+        setunitsonfire = "1",
+        burntime = 180,
 
-		area_damage = 1,
-		area_damage_radius = 128,
-		area_damage_dps = 30,
-		area_damage_duration = 20,
-	  },
+        area_damage = 1,
+        area_damage_radius = 128,
+        area_damage_dps = 30,
+        area_damage_duration = 20,
+      },
 
       damage                  = {
         default = 50,
@@ -131,9 +131,9 @@ unitDef = {
       areaOfEffect            = 128,
       craterBoost             = 0,
       craterMult              = 0,
-	  
-	  customParams        	  = {
-	  },
+      
+      customParams              = {
+      },
 
       damage                  = {
         default = 250,
@@ -156,10 +156,8 @@ unitDef = {
       turret                  = true,
       weaponType              = [[Cannon]],
       weaponVelocity          = 600,
-      waterWeapon	      = true,
+      waterWeapon             = true,
     },
   },
 
-}
-
-return lowerkeys({ chickenwurm = unitDef })
+} }

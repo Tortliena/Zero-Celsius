@@ -5,16 +5,18 @@ local weaponDef = {
 	avoidFeature            = false,
 	beamTTL                 = 12,
 	burst                   = 16,
-	burstRate               = 0.1875,
+	burstRate               = 0.166,
 	commandFire             = true,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		muzzleEffectShot = [[custom:YELLOW_LIGHTNING_MUZZLE]],
 		slot = [[3]],
 		manualfire = 1,
 
 		light_color = [[0.7 0.7 0.2]],
 		light_radius = 320,
+		reaim_time = 1,
 	},
 
 	craterBoost             = 0,

@@ -12,6 +12,7 @@ function widget:GetInfo()
 end
 
 local spGetUnitTeam = Spring.GetUnitTeam
+local spGetMyTeamID = Spring.GetMyTeamID
 local spSendCommands = Spring.SendCommands
 
 local specOld = false
@@ -27,10 +28,10 @@ options={
 		name = "Select Next Player",
 		desc = "Quickly select next player. Is useful when spectating using COFC's Follow Player Cursor mode & when this button is hotkeyed.",
 		type = 'button',
-		OnChange = function(self) SelectNextPlayer() end, 
+		OnChange = function(self) SelectNextPlayer() end,
 	},
 	specviewselection = {
-		type='radioButton', 
+		type='radioButton',
 		name='Spectator View Selection',
 		items = {
 			{name = 'View Chosen Player',key='viewchosenplayer', desc="Point of view of current player, and you can only select the current player's units.", hotkey=nil},
@@ -75,7 +76,8 @@ function widget:SelectionChanged(selection)
   if selection and #selection > 0 then
     -- I cannot read users mind, use first unit
     team = spGetUnitTeam(selection[1])
-    if team then
+    local lastTeam = spGetMyTeamID()
+    if team and team ~= lastTeam then
       spSendCommands("specteam "..team)
     end
   end
@@ -93,7 +95,7 @@ SelectNextPlayer = function ()
 	for i=1, #playerTableSortTeamID do
 		local teamID = playerTableSortTeamID[i][3]
 		local isSpec = playerTableSortTeamID[i][5]
-		if ( isSpring91 ) then isSpec = ( isSpec==1 ) 
+		if ( isSpring91 ) then isSpec = ( isSpec==1 )
 		end
 		if (not isSpec ) then
 			if not firstPlayerIndex then --if spectator portion has finished: mark this index
@@ -114,7 +116,7 @@ SelectNextPlayer = function ()
 				if teamIndexGoto > #playerTableSortTeamID then  --if player list is at end: go to first index
 					teamIndexGoto = firstPlayerIndex
 				end
-				local isSpec = playerTableSortTeamID[teamIndexGoto][5] 
+				local isSpec = playerTableSortTeamID[teamIndexGoto][5]
 				if ( isSpring91 ) then isSpec = ( isSpec==1 )
 				end
 				if (not isSpec ) then --not spectator

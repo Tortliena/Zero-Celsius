@@ -1,10 +1,10 @@
-unitDef = {
+return { subraider = {
   unitname               = [[subraider]],
   name                   = [[Seawolf]],
   description            = [[Attack Submarine (Stealth Raider)]],
-  acceleration           = 0.06,
+  acceleration           = 0.3,
   activateWhenBuilt      = true,
-  brakeRate              = 0.2,
+  brakeRate              = 2.0,
   buildCostMetal         = 220,
   builder                = false,
   buildPic               = [[subraider.png]],
@@ -18,9 +18,9 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[13]],
-	aimposoffset   = [[0 -5 0]],
-	midposoffset   = [[0 -5 0]],
+    modelradius    = [[13]],
+    aimposoffset   = [[0 -5 0]],
+    midposoffset   = [[0 -5 0]],
     turnatfullspeed = [[1]],
   },
 
@@ -81,7 +81,7 @@ unitDef = {
       cegTag                  = [[torptrailpurple]],
 
       customparams = {
-		burst = Shared.BURST_RELIABLE,
+        burst = Shared.BURST_RELIABLE,
 
         timeslow_damagefactor = 2,
       },
@@ -130,6 +130,10 @@ unitDef = {
       collideFriendly         = false,
       craterBoost             = 0,
       craterMult              = 0,
+
+      customParams            = {
+        bogus = 1,
+      },
 
       damage                  = {
         default = 0.1,
@@ -181,6 +185,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ subraider = unitDef })
+} }

@@ -6,9 +6,11 @@ local weaponDef = {
 	craterMult              = 3,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		muzzleEffectFire = [[custom:RAIDMUZZLE]],
 		--miscEffectFire = [[custom:RIOT_SHELL_L]],
+		reaim_time = 1,
 	},
 
 	damage                  = {

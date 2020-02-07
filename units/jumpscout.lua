@@ -1,10 +1,10 @@
-unitDef = {
+return { jumpscout = {
   unitname               = [[jumpscout]],
   name                   = [[Puppy]],
   description            = [[Walking Missile]],
-  acceleration           = 0.24,
+  acceleration           = 0.72,
   activateWhenBuilt      = true,
-  brakeRate              = 0.72,
+  brakeRate              = 4.32,
   buildCostMetal         = 50,
   builder                = false,
   buildPic               = [[jumpscout.png]],
@@ -59,7 +59,7 @@ unitDef = {
     },
 
   },
-  sightDistance          = 560,
+  sightDistance          = 640,
   trackOffset            = 0,
   trackStrength          = 8,
   trackStretch           = 0.6,
@@ -88,9 +88,9 @@ unitDef = {
       craterBoost             = 1,
       craterMult              = 2,
 
-			customParams = {
-				burst = Shared.BURST_RELIABLE,
-			},
+            customParams = {
+                burst = Shared.BURST_RELIABLE,
+            },
 
       damage                  = {
         default = 410.1,
@@ -132,8 +132,8 @@ unitDef = {
       footprintZ       = 3,
       object           = [[debris2x2a.s3o]],
     },
-	
-	HEAP      = {
+    
+    HEAP      = {
       blocking         = false,
       footprintX       = 2,
       footprintZ       = 2,
@@ -142,6 +142,4 @@ unitDef = {
 
   },
   
-}
-
-return lowerkeys({ jumpscout = unitDef })
+} }

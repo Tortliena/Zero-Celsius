@@ -7,10 +7,12 @@ local weaponDef = {
 	craterMult              = 2,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		muzzleEffectFire = [[custom:HEAVY_CANNON_MUZZLE]],
 		miscEffectFire = [[custom:RIOT_SHELL_H]],
 
 		light_color = [[1.4 0.8 0.3]],
+		reaim_time = 1,
 	},
 
 	damage                  = {

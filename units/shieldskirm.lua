@@ -1,9 +1,9 @@
-unitDef = {
+return { shieldskirm = {
   unitname               = [[shieldskirm]],
   name                   = [[Rogue]],
   description            = [[Skirmisher Bot (Indirect Fire)]],
-  acceleration           = 0.25,
-  brakeRate              = 0.2,
+  acceleration           = 0.75,
+  brakeRate              = 1.2,
   buildCostMetal         = 120,
   buildPic               = [[shieldskirm.png]],
   canGuard               = true,
@@ -16,9 +16,9 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	aimposoffset   = [[0 5 0]],
-	midposoffset   = [[0 5 0]],
-	modelradius    = [[14]],
+    aimposoffset   = [[0 5 0]],
+    midposoffset   = [[0 5 0]],
+    modelradius    = [[14]],
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -71,16 +71,16 @@ unitDef = {
     STORM_ROCKET = {
       name                    = [[Heavy Rocket]],
       areaOfEffect            = 75,
-      cegTag                  = [[missiletrailred]],
+      cegTag                  = [[rocket_trail_bar_flameboosted]],
       craterBoost             = 1,
       craterMult              = 2,
 
       customParams        = {
-		burst = Shared.BURST_RELIABLE,
+        burst = Shared.BURST_RELIABLE,
 
-		light_camera_height = 1800,
+        light_camera_height = 1800,
       },
-	  
+      
       damage                  = {
         default = 350,
         planes  = 350,
@@ -97,13 +97,12 @@ unitDef = {
       predictBoost            = 0.75,
       range                   = 530,
       reloadtime              = 7,
-      smokeTrail              = true,
+      smokeTrail              = false,
       soundHit                = [[explosion/ex_med4]],
       soundHitVolume          = 8,
       soundStart              = [[weapon/missile/missile2_fire_bass]],
       soundStartVolume        = 7,
       startVelocity           = 192,
-      texture2                = [[darksmoketrail]],
       tracks                  = false,
       trajectoryHeight        = 0.6,
       turnrate                = 1000,
@@ -133,6 +132,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shieldskirm = unitDef })
+} }

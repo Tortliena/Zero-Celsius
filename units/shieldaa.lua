@@ -1,9 +1,9 @@
-unitDef = {
+return { shieldaa = {
   unitname               = [[shieldaa]],
   name                   = [[Vandal]],
   description            = [[Anti-Air Bot]],
-  acceleration           = 0.45,
-  brakeRate              = 1.35,
+  acceleration           = 1.35,
+  brakeRate              = 8.1,
   buildCostMetal         = 90,
   buildPic               = [[shieldaa.png]],
   canGuard               = true,
@@ -75,13 +75,13 @@ unitDef = {
       craterMult              = 2,
       cylinderTargeting       = 1,
 
-	  customParams        	  = {
-		burst = Shared.BURST_RELIABLE,
+      customParams              = {
+        burst = Shared.BURST_RELIABLE,
 
-		isaa = [[1]],
-		light_color = [[0.5 0.6 0.6]],
-		light_radius = 380,
-	  },
+        isaa = [[1]],
+        light_color = [[0.5 0.6 0.6]],
+        light_radius = 380,
+      },
 
       damage                  = {
         default = 7.2,
@@ -134,6 +134,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shieldaa = unitDef })
+} }

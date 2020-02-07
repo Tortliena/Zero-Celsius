@@ -1,9 +1,9 @@
-unitDef = {
+return { cloakraid = {
   unitname               = [[cloakraid]],
   name                   = [[Glaive]],
   description            = [[Light Raider Bot]],
-  acceleration           = 0.5,
-  brakeRate              = 0.4,
+  acceleration           = 1.5,
+  brakeRate              = 2.4,
   buildCostMetal         = 65,
   buildPic               = [[cloakraid.png]],
   canGuard               = true,
@@ -16,7 +16,8 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[16]],
+    modelradius    = [[16]],
+    cus_noflashlight = 1,
   },
 
   explodeAs              = [[SMALL_UNITEX]],
@@ -26,7 +27,7 @@ unitDef = {
   idleAutoHeal           = 20,
   idleTime               = 150,
   leaveTracks            = true,
-  maxDamage              = 200,
+  maxDamage              = 240,
   maxSlope               = 36,
   maxVelocity            = 3.85,
   maxWaterDepth          = 22,
@@ -47,7 +48,7 @@ unitDef = {
 
   },
 
-  sightDistance          = 500,
+  sightDistance          = 560,
   trackOffset            = 0,
   trackStrength          = 8,
   trackStretch           = 0.9,
@@ -79,13 +80,13 @@ unitDef = {
       craterMult              = 0,
 
       customParams        = {
-		light_camera_height = 1200,
-		light_color = [[0.8 0.76 0.38]],
-		light_radius = 120,
+        light_camera_height = 1200,
+        light_color = [[0.8 0.76 0.38]],
+        light_radius = 120,
       },
 
       damage                  = {
-        default = 12,
+        default = 10,
         subs    = 0.567,
       },
 
@@ -95,10 +96,11 @@ unitDef = {
       impulseFactor           = 0.4,
       intensity               = 0.7,
       interceptedByShieldType = 1,
+      leadLimit               = 0,
       noGap                   = false,
       noSelfDamage            = true,
       range                   = 185,
-      reloadtime              = 0.31,
+      reloadtime              = 0.3,
       rgbColor                = [[1 0.95 0.4]],
       separation              = 1.5,
       size                    = 1.75,
@@ -134,6 +136,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ cloakraid = unitDef })
+} }

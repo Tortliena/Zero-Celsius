@@ -15,6 +15,22 @@ local spKillTeam = Spring.KillTeam
 local spSetTeamRulesParam = Spring.SetTeamRulesParam
 local spGetPlayerList = Spring.GetPlayerList
 
+local function ResignTeam(teamID)
+	spKillTeam(teamID)
+	spSetTeamRulesParam(teamID, "WasKilled", 1)
+end
+
+local function ResignAllyTeam(allyTeamID)
+	for i, teamID in pairs (Spring.GetTeamList(allyTeamID)) do
+		ResignTeam (teamID)
+	end
+end
+
+function gadget:Initialize()
+	GG.ResignTeam = ResignTeam
+	GG.ResignAllyTeam = ResignAllyTeam
+end
+
 function gadget:RecvLuaMsg (msg, playerID)
 	if msg ~= "forceresign"
 	or Spring.GetGameFrame() <= 0 -- causes dedi server to think the game is over (apparently)
@@ -28,8 +44,7 @@ function gadget:RecvLuaMsg (msg, playerID)
 		return
 	end
 
-	spKillTeam(teamID)
-	spSetTeamRulesParam(teamID, "WasKilled", 1)
+	ResignTeam(teamID)
 end
 
 function gadget:GotChatMsg (msg, senderID)
@@ -42,7 +57,7 @@ function gadget:GotChatMsg (msg, senderID)
 		if (senderID == 255) then -- Springie
 			allowed = true
 		else
-			local playerkeys = select (10, spGetPlayerInfo(senderID))
+			local playerkeys = select (11, spGetPlayerInfo(senderID))
 			if (playerkeys and playerkeys.admin and (playerkeys.admin == "1")) then
 				allowed = true
 			end
@@ -55,8 +70,7 @@ function gadget:GotChatMsg (msg, senderID)
 			local personID = people[i]
 			local nick, _, _, teamID = spGetPlayerInfo(personID, false)
 			if (target == nick) then
-				spKillTeam (teamID)
-				spSetTeamRulesParam (teamID, "WasKilled", 1)
+				ResignTeam (teamID)
 				return
 			end
 		end

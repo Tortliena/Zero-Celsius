@@ -1,10 +1,10 @@
-unitDef = {
+return { cloakjammer = {
   unitname               = [[cloakjammer]],
   name                   = [[Iris]],
   description            = [[Area Cloaker/Jammer Walker]],
-  acceleration           = 0.25,
+  acceleration           = 0.75,
   activateWhenBuilt      = true,
-  brakeRate              = 0.75,
+  brakeRate              = 4.5,
   buildCostMetal         = 600,
   buildPic               = [[cloakjammer.png]],
   canMove                = true,
@@ -20,8 +20,9 @@ unitDef = {
     area_cloak_upkeep = 15,
     area_cloak_radius = 440,
     area_cloak_decloak_distance = 75,
-	
-	priority_misc = 2, -- High
+    
+    priority_misc = 2, -- High
+    cus_noflashlight = 1,
   },
 
   energyUse              = 1.5,
@@ -70,6 +71,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ cloakjammer = unitDef })
+} }

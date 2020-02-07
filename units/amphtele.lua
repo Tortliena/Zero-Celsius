@@ -1,10 +1,10 @@
-unitDef = {
+return { amphtele = {
   unitname               = [[amphtele]],
   name                   = [[Djinn]],
   description            = [[Amphibious Teleport Bridge]],
-  acceleration           = 0.25,
+  acceleration           = 0.75,
   activateWhenBuilt      = true,
-  brakeRate              = 0.75,
+  brakeRate              = 4.5,
   buildCostMetal         = 750,
   buildPic               = [[amphtele.png]],
   canGuard               = true,
@@ -20,9 +20,9 @@ unitDef = {
     amph_regen = 30,
     amph_submerged_at = 40,
 
-	teleporter = 1,
-	teleporter_throughput = 120, -- mass per second
-	teleporter_beacon_spawn_time = 9,
+    teleporter = 1,
+    teleporter_throughput = 120, -- mass per second
+    teleporter_beacon_spawn_time = 9,
   },
 
   explodeAs              = [[BIG_UNIT]],
@@ -69,6 +69,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ amphtele = unitDef })
+} }

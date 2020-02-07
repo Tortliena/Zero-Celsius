@@ -72,7 +72,7 @@ local function LoadCommData()
 			end
 		end
 	end
-	if err then 
+	if err then
 		Spring.Log(GetInfo().name, "warning", 'Modular Comms API warning: ' .. err)
 	end
 	
@@ -83,7 +83,7 @@ local function LoadCommData()
 	local players = Spring.GetPlayerList()
 	for i = 1, #players do
 		local playerID = players[i]
-		local playerName, active, spectator, teamID, allyTeamID, _, _, country, rank, customKeys = Spring.GetPlayerInfo(playerID)
+		local playerName, active, spectator, teamID, allyTeamID, _, _, country, rank, _, customKeys = Spring.GetPlayerInfo(playerID)
 		
 		if (not spectator) then
 			local playerCommProfileIDs	-- [playerID] = {[commProfileID1] = {}, [commProfileID2] = {}, ...}
@@ -105,12 +105,12 @@ local function LoadCommData()
 					end
 				end
 			end
-			if err then 
+			if err then
 				Spring.Log(GetInfo().name, "warning", 'Modular Comms API warning: ' .. err)
 			end
 			
 			newCommProfileIDsByPlayerID[playerID] = playerCommProfileIDs
-			local playerCommProfiles = {} 
+			local playerCommProfiles = {}
 			for i = 1, #playerCommProfileIDs do
 				local profileID = playerCommProfileIDs[i]
 				playerCommProfiles[profileID] = newCommProfilesByProfileID[profileID]

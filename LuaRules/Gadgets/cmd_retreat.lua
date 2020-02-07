@@ -36,7 +36,7 @@ local CommandDesc = {
 	name        = 'Retreat',
 	action      = 'retreat',
 	tooltip 	= Tooltips[DefaultState + 1],
-	params  = { 'Retreat Off', 'Retreat Off', 'Retreat 30%', 'Retreat 65%', 'Retreat 99%' }, 
+	params  = { 'Retreat Off', 'Retreat Off', 'Retreat 30%', 'Retreat 65%', 'Retreat 99%' },
 }
 local StateCount = #CommandDesc.params-1
 
@@ -83,7 +83,7 @@ local isPlane = {}
 local havens = {}
 local RADIUS = 160 --retreat zone radius
 local DIAM = RADIUS * 2
-local RADSQ = RADIUS * RADIUS 
+local RADSQ = RADIUS * RADIUS
 
 local ignoreAllowCommand = false
 
@@ -123,11 +123,11 @@ local function FindClosestHaven(teamID, sx, sz)
 	local cHavenID
 	local havensTeam = havens[teamID]
 	if not havensTeam then
-		return -1, -1, -1 
+		return -1, -1, -1
 	end
 	for havenID = 1, havensTeam.count do
 		local hx, hz = havensTeam.data[havenID].x, havensTeam.data[havenID].z
-		if hx then 
+		if hx then
 			local dSquared = (hx - sx)^2 + (hz - sz)^2
 			if (dSquared < closestDistSqr) then
 				closestDistSqr = dSquared
@@ -137,8 +137,8 @@ local function FindClosestHaven(teamID, sx, sz)
 			end
 		end
 	end
-	if (not cx) then 
-		return -1, -1, -1 
+	if (not cx) then
+		return -1, -1, -1
 	end
 	return cx, cz, closestDistSqr, cHavenID
 end
@@ -245,14 +245,14 @@ local function IsUnitIdle(unitID)
 end
 
 local function GiveRearmOrders(unitID)
-	local unitIsIdle = IsUnitIdle(unitID) 
+	local unitIsIdle = IsUnitIdle(unitID)
 	local insertIndex = 0
 	
 	ignoreAllowCommand = true
 	local success = GG.RequestRearm(unitID, nil, true)
 	ignoreAllowCommand = false
 
-	if success then 
+	if success then
 		isRetreating[unitID] = true
 		retreaterHasRearm[unitID] = true
 		
@@ -273,21 +273,15 @@ local function GiveRearmOrders(unitID)
 end
 
 local function GiveRetreatOrders(unitID, hx,hz)
-	local unitIsIdle = IsUnitIdle(unitID) 
+	local unitIsIdle = IsUnitIdle(unitID)
 	local insertIndex = 0
 	local hy = Spring.GetGroundHeight(hx, hz)
 	
 	spGiveOrderToUnit(unitID, CMD.INSERT, { insertIndex, CMD.WAIT, CMD.OPT_SHIFT}, CMD.OPT_ALT) --SHIFT W
 	GiveClampedOrderToUnit(unitID, CMD.INSERT, { insertIndex, CMD_RAW_MOVE, CMD.OPT_INTERNAL, hx, hy, hz}, CMD.OPT_ALT) -- ALT makes the 0 positional
 	
-	local tag1, tag2
-	if Spring.Utilities.COMPAT_GET_ORDER then
-		local cmds = Spring.GetCommandQueue(unitID, 2)
-		tag1, tag2 = cmds[1].tag, cmds[2] and cmds[2].tag
-	else
-		_, _, tag1 = Spring.GetUnitCurrentCommand(unitID)
-		_, _, tag2 = Spring.GetUnitCurrentCommand(unitID, 2)
-	end
+	local _, _, tag1 = Spring.GetUnitCurrentCommand(unitID)
+	local _, _, tag2 = Spring.GetUnitCurrentCommand(unitID, 2)
 	
 	isRetreating[unitID] = true
 	retreaterTagsMove[unitID] = tag1
@@ -364,14 +358,14 @@ end
 -- is our health low enough that we want to retreat?
 local function CheckSetWantRetreat(unitID)
 	local health, maxHealth = spGetUnitHealth(unitID)
-	if not health then 
+	if not health then
 		ResetRetreatData(unitID)
 		retreatables[unitID] = nil
 		return
 	end
 	
-	if not retreatState[unitID] or retreatState[unitID] == 0 then 
-		return 
+	if not retreatState[unitID] or retreatState[unitID] == 0 then
+		return
 	end
 	
 	local healthRatio = health / maxHealth
@@ -389,7 +383,7 @@ end
 -- Command Handling
 --------------------------------------------------------------------------------
 
-local function SetRetreatState(unitID, state, retID) 
+local function SetRetreatState(unitID, state, retID)
 	local cmdDescID = spFindUnitCmdDesc(unitID, retID)
 	if (cmdDescID) then
 		CommandDesc.params[1] = state
@@ -401,11 +395,11 @@ local function SetRetreatState(unitID, state, retID)
 		retreatState[unitID] = state
 		SetWantRetreat(unitID, nil)
 	end
-end 
+end
 
 function RetreatCommand(unitID, cmdID, cmdParams, cmdOptions)
 	local state = cmdParams[1]
-	if cmdOptions.right then 
+	if cmdOptions.right then
 		state = 0
 	elseif state == 0 then  --note: this means that to set "Retreat Off" (state = 0) you need to use the "right" modifier, whether the command is given by the player using an ui button or by Lua
 		state = 1
@@ -438,7 +432,7 @@ function gadget:UnitCreated(unitID, unitDefID, teamID, builderID, _, _)
 		else
 			isPlane[unitID] = nil
 		end
-	end	
+	end
 end
 
 function gadget:UnitDestroyed(unitID)
@@ -453,7 +447,7 @@ function gadget:RecvSkirmishAIMessage(aiTeam, dataStr)
 			Spring.SendLuaRulesMsg(dataStr.."|"..aiTeam)
 		end)
 	end
-end	
+end
 
 function gadget:RecvLuaMsg(msg, playerID)
 	local msg_table = Spring.Utilities.ExplodeString('|', msg)
@@ -490,7 +484,7 @@ function gadget:RecvLuaMsg(msg, playerID)
 	if not z then
 		return
 		--fixme, yell at players
-	end 
+	end
 	ToggleHaven( teamID, x, z )
 end
 
@@ -510,7 +504,7 @@ local interruptingCommands = { -- fixme: some common header should probably cont
 function gadget:AllowCommand(unitID, unitDefID, unitTeam, cmdID, cmdParams, cmdOptions)
 	
 	if cmdID == CMD_RETREAT then
-		RetreatCommand(unitID, cmdID, cmdParams, cmdOptions)  
+		RetreatCommand(unitID, cmdID, cmdParams, cmdOptions)
 		return false  -- command was used
 	end
 
@@ -600,8 +594,8 @@ local function WrapToLuaUI_Haven(_,teamID)
 	local spectating = Spring.GetSpectatingState()
 	if not spectating then
 		local allyTeamID = select(6, Spring.GetTeamInfo(teamID, false))
-		if (allyTeamID ~= spGetLocalAllyTeamID()) then 
-			return 
+		if (allyTeamID ~= spGetLocalAllyTeamID()) then
+			return
 		end
 	end
 	if (Script.LuaUI('HavenUpdate')) then

@@ -1,4 +1,4 @@
-if (not gadgetHandler:IsSyncedCode()) then 
+if (not gadgetHandler:IsSyncedCode()) then
     return
 end
 
@@ -109,7 +109,7 @@ local function addFloat(unitID, unitDefID, isFlying,transportCall)
 					transportCall = transportCall or 0,
 				}
 				local headingInRadian = Spring.GetUnitHeading(unitID)*RAD_PER_ROT
-				Spring.SetUnitRotation(unitID, 0, -headingInRadian, 0) --this force unit to stay upright/prevent tumbling.TODO: remove negative sign if Spring no longer mirror input anymore 
+				Spring.SetUnitRotation(unitID, 0, -headingInRadian, 0) --this force unit to stay upright/prevent tumbling.TODO: remove negative sign if Spring no longer mirror input anymore
 			end
 		end
 	end
@@ -130,7 +130,7 @@ local function setSurfaceState(unitID, unitDefID, surfacing)
 	if not stun then
 		data.surfacing = surfacing
 	else
-		data.paraData.want = surfacing 
+		data.paraData.want = surfacing
 		if not data.paraData.para then
 			local def = floatDefs[data.unitDefID]
 			if def.sinkOnPara then
@@ -170,7 +170,7 @@ GG.Floating_UnitTeleported = GG.Floating_UnitTeleported or function() end
 local function checkAlwaysFloat(unitID)
 	if not select(1, Spring.GetUnitIsStunned(unitID)) then
 		local unitDefID = Spring.GetUnitDefID(unitID)
-		local cmdID = Spring.Utilities.GetUnitFirstCommand(unitID)
+		local cmdID = Spring.GetUnitCurrentCommand(unitID)
 		local moving = cmdID and sinkCommand[cmdID]
 		if not moving then
 			addFloat(unitID, unitDefID)
@@ -204,15 +204,7 @@ function gadget:GameFrame(f)
 				local _,dy = Spring.GetUnitVelocity(unitID)
 				data.speed = dy --Note: data.speed is designed for speed on y axis
 				data.isFlying = false
-				local cmdID, cmdOpts, cmdTag
-				if Spring.Utilities.COMPAT_GET_ORDER then
-					local queue = Spring.GetCommandQueue(unitID, 1)
-					if queue and queue[1] then
-						cmdID, cmdOpts, cmdTag = queue[1].id, queue[1].options.coded, queue[1].tag
-					end
-				else
-					cmdID, cmdOpts, cmdTag = Spring.GetUnitCurrentCommand(unitID)
-				end
+				local cmdID, cmdOpts, cmdTag = Spring.GetUnitCurrentCommand(unitID)
 				if cmdID then
 					if (cmdID == CMD.MOVE or cmdID == CMD_RAW_MOVE or cmdID == CMD_RAW_BUILD) and cmdOpts == CMD.OPT_RIGHT then --Note: not sure what is "coded == 16" and "right" is but we want to remove any MOVE command as soon as amphfloater touch down so that it doesn't try to return to old position
 						Spring.GiveOrderArrayToUnitArray( {unitID},{
@@ -250,7 +242,7 @@ function gadget:GameFrame(f)
 				if def.sinkOnPara and not data.paraData.para then
 					stun = stun or select(1, Spring.GetUnitIsStunned(unitID))
 					if stun then
-						data.paraData.want = data.surfacing 
+						data.paraData.want = data.surfacing
 						data.surfacing = false
 						data.paraData.para = true
 					end
@@ -260,24 +252,16 @@ function gadget:GameFrame(f)
 			-- Check if the unit should sink
 			if checkOrder then
 				if data.transportCall>0 then
-					local cmdID = Spring.Utilities.GetUnitFirstCommand(unitID)
+					local cmdID = Spring.GetUnitCurrentCommand(unitID)
 					local moving = cmdID and sinkCommand[cmdID]
 					setSurfaceState(unitID, data.unitDefID, not moving)
 					data.transportCall = data.transportCall - 1
 				elseif floatState[unitID] == FLOAT_ALWAYS then
-					local cmdID = Spring.Utilities.GetUnitFirstCommand(unitID)
+					local cmdID = Spring.GetUnitCurrentCommand(unitID)
 					local moving = cmdID and sinkCommand[cmdID]
 					setSurfaceState(unitID, data.unitDefID, not moving)
 				elseif floatState[unitID] == FLOAT_ATTACK then
-					local cmdID, cmdOpts
-					if Spring.Utilities.COMPAT_GET_ORDER then
-						local queue = Spring.GetCommandQueue(unitID, 1)
-						if queue and queue[1] then
-							cmdID, cmdOpts = queue[1].id, queue[1].options.coded
-						end
-					else
-						cmdID, cmdOpts = Spring.GetUnitCurrentCommand(unitID)
-					end
+					local cmdID, cmdOpts = Spring.GetUnitCurrentCommand(unitID)
 					local moving = cmdID and (cmdID == CMD.MOVE or cmdID == CMD_RAW_MOVE) and not Spring.Utilities.CheckBit(gadget:GetInfo().name, cmdOpts, CMD.OPT_INTERNAL)
 					setSurfaceState(unitID, data.unitDefID, (not moving and aimWeapon[unitID]) or false)
 				elseif floatState[unitID] == FLOAT_NEVER then
@@ -353,7 +337,7 @@ function gadget:GameFrame(f)
 					callScript(unitID, "Float_stopOnFloor")
 					removeFloat(unitID)
 					
-					i = i - 1 
+					i = i - 1
 				end
 			end
 
@@ -361,7 +345,7 @@ function gadget:GameFrame(f)
 			local _,dy = Spring.GetUnitVelocity(unitID)
 			local dyCorrection = data.speed+GRAVITY-dy
 			local headingInRadian = Spring.GetUnitHeading(unitID)*RAD_PER_ROT --get current heading
-			Spring.SetUnitRotation(unitID, 0, -headingInRadian, 0) --restore current heading. This force unit to stay upright/prevent tumbling.TODO: remove negative sign if Spring no longer mirror input anymore 
+			Spring.SetUnitRotation(unitID, 0, -headingInRadian, 0) --restore current heading. This force unit to stay upright/prevent tumbling.TODO: remove negative sign if Spring no longer mirror input anymore
 			Spring.AddUnitImpulse(unitID, 0,-4,0) --Note: -4/+4 hax is for impulse capacitor  (Spring 91 only need -1/+1, Spring 94 require at least -4/+4). TODO: remove -4/+4 hax if no longer needed
 			Spring.AddUnitImpulse(unitID, 0,4+dyCorrection,0)
 			
@@ -396,17 +380,17 @@ local function FloatToggleCommand(unitID, cmdParams, cmdOptions)
 	end
 end
 
-function gadget:AllowCommand_GetWantedCommand()	
+function gadget:AllowCommand_GetWantedCommand()
 	return {[CMD_UNIT_FLOAT_STATE] = true, [CMD_STOP] = true}
 end
 
-function gadget:AllowCommand_GetWantedUnitDefID()	
+function gadget:AllowCommand_GetWantedUnitDefID()
 	return true
 end
 
 function gadget:AllowCommand(unitID, unitDefID, teamID, cmdID, cmdParams, cmdOptions)
 	if (cmdID == CMD_UNIT_FLOAT_STATE) then
-		FloatToggleCommand(unitID, cmdParams, cmdOptions)  
+		FloatToggleCommand(unitID, cmdParams, cmdOptions)
 		return false  -- command was used
 	elseif (cmdID == CMD_STOP) then
 		if floatState[unitID] == FLOAT_ALWAYS then
@@ -441,15 +425,7 @@ function gadget:Initialize()
 	GG.Floating_AimWeapon= function(unitID)
 		if floatState[unitID] == FLOAT_ATTACK and not select(1, Spring.GetUnitIsStunned(unitID)) then
 			local unitDefID = Spring.GetUnitDefID(unitID)
-			local cmdID, cmdOpts
-			if Spring.Utilities.COMPAT_GET_ORDER then
-				local queue = Spring.GetCommandQueue(unitID, 1)
-				if queue and queue[1] then
-					cmdID, cmdOpts = queue[1].id, queue[1].options.coded
-				end
-			else
-				cmdID, cmdOpts = Spring.GetUnitCurrentCommand(unitID)
-			end
+			local cmdID, cmdOpts = Spring.GetUnitCurrentCommand(unitID)
 			
 			local moving = cmdID and (cmdID == CMD.MOVE or cmdID == CMD_RAW_MOVE or cmdID == CMD_RAW_BUILD) and not Spring.Utilities.CheckBit(gadget:GetInfo().name, cmdOpts, CMD.OPT_INTERNAL)
 			if not moving then

@@ -1,5 +1,5 @@
 local playerID = Spring.GetMyPlayerID()
-local customkeys = playerID and select(10, Spring.GetPlayerInfo(playerID))
+local customkeys = playerID and select(11, Spring.GetPlayerInfo(playerID))
 local rank = (customkeys and tonumber(customkeys.level) or 0) or select(9, Spring.GetPlayerInfo(playerID, false))
 
 function widget:GetInfo()
@@ -179,8 +179,8 @@ local function MakeTip(unitID, tip)
 
 	local img = nil
 	if not options.cartoonBubbles.value then
-		--str = str:gsub("\n"," ")	
-		img = Panel:New { 
+		--str = str:gsub("\n"," ")
+		img = Panel:New {
 			width = textWidth + 4,
 			height = textHeight + 4 + fontSize,
 			x = x - (textWidth + 8)/2;

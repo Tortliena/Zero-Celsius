@@ -1,4 +1,4 @@
-unitDef = {
+return { droneheavyslow = {
   unitname            = [[droneheavyslow]],
   name                = [[Viper]],
   description         = [[Advanced Battle Drone]],
@@ -35,7 +35,7 @@ unitDef = {
   
   customParams        = {
 
-	is_drone = 1,
+    is_drone = 1,
   },
   
   
@@ -74,16 +74,16 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
   
-      customParams			= {
-	    timeslow_damagefactor = [[2]],
-		
-		light_camera_height = 2000,
-		light_color = [[0.85 0.33 1]],
-		light_radius = 150,
+      customParams            = {
+        timeslow_damagefactor = [[2]],
+        
+        light_camera_height = 2000,
+        light_color = [[0.85 0.33 1]],
+        light_radius = 150,
       },
-	  
+      
       damage                  = {
-	    default = 200,
+        default = 200,
       },
   
       explosionGenerator      = [[custom:flash2purple]],
@@ -115,6 +115,4 @@ unitDef = {
     },
   },
 
-}
-
-return lowerkeys({ droneheavyslow = unitDef })
+} }

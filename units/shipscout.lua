@@ -1,10 +1,10 @@
-unitDef = {
+return { shipscout = {
   unitname               = [[shipscout]],
   name                   = [[Cutter]],
   description            = [[Picket Ship (Disarming Scout)]],
-  acceleration           = 0.0984,
+  acceleration           = 0.492,
   activateWhenBuilt      = true,
-  brakeRate              = 0.0475,
+  brakeRate              = 0.475,
   buildCostMetal         = 70,
   builder                = false,
   buildPic               = [[shipscout.png]],
@@ -76,10 +76,10 @@ unitDef = {
         disarmDamageMult = 5.0,
         disarmDamageOnly = 0,
         disarmTimer      = 3, -- seconds
-		
-		light_color = [[1 1 1]],
+        
+        light_color = [[1 1 1]],
       },
-	  
+      
       damage                  = {
         default = 35,
         subs    = 5,
@@ -132,6 +132,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shipscout = unitDef })
+} }

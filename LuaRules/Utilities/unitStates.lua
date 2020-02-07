@@ -1,5 +1,4 @@
 local REVERSE_COMPAT = not Spring.Utilities.IsCurrentVersionNewerThan(104, 1120)
-local REVERSE_COMPAT_ORDER = not Spring.Utilities.IsCurrentVersionNewerThan(104, 1140)
 
 function Spring.Utilities.GetUnitRepeat(unitID)
 	if REVERSE_COMPAT then
@@ -51,16 +50,6 @@ function Spring.Utilities.GetUnitTrajectoryState(unitID)
 	return trajectory
 end
 
-function Spring.Utilities.GetUnitFirstCommand(unitID)
-	if REVERSE_COMPAT_ORDER then
-		local cQueue = Spring.GetCommandQueue(unitID, 1)
-		return cQueue and cQueue[1] and cQueue[1].id
-	end
-
-	local cmdID = Spring.GetUnitCurrentCommand(unitID)
-	return cmdID
-end
-
 function Spring.Utilities.CheckBit(name, number, bit)
 	if not number then
 		Spring.Echo("Name", name)
@@ -68,3 +57,10 @@ function Spring.Utilities.CheckBit(name, number, bit)
 	return number and (number%(2*bit) >= bit)
 end
 
+function Spring.Utilities.IsBitSet(number, bit)
+	return number and (number%(2*bit) >= bit)
+end
+
+function Spring.Utilities.AndBit(number, bit)
+	return number + ((Spring.Utilities.IsBitSet(number, bit) and 0) or bit)
+end

@@ -1,10 +1,10 @@
-unitDef = {
+return { dynrecon1 = {
   unitname            = [[dynrecon1]],
   name                = [[Recon Commander]],
   description         = [[High Mobility Commander]],
-  acceleration        = 0.25,
+  acceleration        = 0.75,
   activateWhenBuilt   = true,
-  brakeRate           = 0.45,
+  brakeRate           = 2.7,
   buildCostMetal      = 1200,
   buildDistance       = 144,
   builder             = true,
@@ -19,7 +19,7 @@ unitDef = {
   category            = [[LAND]],
   collisionVolumeOffsets = [[0 0 0]],
   collisionVolumeScales  = [[45 50 45]],
-  collisionVolumeType    = [[CylY]],  
+  collisionVolumeType    = [[CylY]],
   corpse              = [[DEAD]],
 
   customParams        = {
@@ -28,16 +28,16 @@ unitDef = {
     jump_speed         = 6,
     jump_reload        = 20,
     jump_from_midair   = 1,
-	level = [[1]],
-	statsname = [[dynrecon1]],
-	soundok = [[heavy_bot_move]],
-	soundselect = [[bot_select]],
-	soundbuild = [[builder_start]],
+    level = [[1]],
+    statsname = [[dynrecon1]],
+    soundok = [[heavy_bot_move]],
+    soundselect = [[bot_select]],
+    soundbuild = [[builder_start]],
     commtype = [[3]],
-	modelradius    = [[25]],
+    modelradius    = [[25]],
     aimposoffset   = [[0 10 0]],
-	dynamic_comm   = 1,
-	shared_energy_gen = 1,
+    dynamic_comm   = 1,
+    shared_energy_gen = 1,
   },
 
   energyStorage       = 500,
@@ -49,7 +49,7 @@ unitDef = {
   idleTime            = 0,
   leaveTracks         = true,
   losEmitHeight       = 40,
-  maxDamage           = 2400,
+  maxDamage           = 3250,
   maxSlope            = 36,
   maxVelocity         = 1.45,
   maxWaterDepth       = 5000,
@@ -64,10 +64,10 @@ unitDef = {
   sfxtypes            = {
 
     explosiongenerators = {
-	  [[custom:NONE]],
-	  [[custom:NONE]],
+      [[custom:NONE]],
+      [[custom:NONE]],
       [[custom:RAIDMUZZLE]],
-	  [[custom:NONE]],
+      [[custom:NONE]],
       [[custom:VINDIBACK]],
       [[custom:FLASH64]],
     },
@@ -106,6 +106,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ dynrecon1 = unitDef })
+} }

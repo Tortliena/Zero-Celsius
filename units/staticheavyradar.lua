@@ -1,4 +1,4 @@
-unitDef = {
+return { staticheavyradar = {
   unitname                      = [[staticheavyradar]],
   name                          = [[Advanced Radar]],
   description                   = [[Long-Range Radar]],
@@ -18,8 +18,8 @@ unitDef = {
 
   customParams                  = {
     modelradius    = [[16]],
-	removewait     = 1,
-	priority_misc  = 2, -- High
+    removewait     = 1,
+    priority_misc  = 2, -- High
   },
 
   energyUse                     = 3,
@@ -63,6 +63,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ staticheavyradar = unitDef })
+} }

@@ -8,6 +8,7 @@ local weaponDef = {
 	craterMult              = 0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 
 		light_camera_height = 1800,
@@ -17,6 +18,7 @@ local weaponDef = {
 		light_fade_offset = 10,
 		light_beam_mult_frames = 9,
 		light_beam_mult = 8,
+		reaim_time = 1,
 	},
 
 	damage                  = {

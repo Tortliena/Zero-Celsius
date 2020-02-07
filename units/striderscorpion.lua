@@ -1,9 +1,9 @@
-unitDef = {
+return { striderscorpion = {
   unitname               = [[striderscorpion]],
   name                   = [[Scorpion]],
   description            = [[Cloaked Infiltration Strider]],
-  acceleration           = 0.26,
-  brakeRate              = 0.78,
+  acceleration           = 0.78,
+  brakeRate              = 4.68,
   buildCostMetal         = 3000,
   builder                = false,
   buildPic               = [[striderscorpion.png]],
@@ -14,12 +14,16 @@ unitDef = {
   category               = [[LAND]],
   cloakCost              = 2,
   cloakCostMoving        = 10,
+  collisionVolumeOffsets        = [[0 8 0]],
+  collisionVolumeScales         = [[60 20 80]],
+  collisionVolumeType           = [[box]],
   selectionVolumeOffsets = [[0 0 0]],
   selectionVolumeScales  = [[85 85 85]],
   selectionVolumeType    = [[ellipsoid]],
   corpse                 = [[DEAD]],
 
   customParams           = {
+    aimposoffset = [[0 10 0]],
   },
 
   explodeAs              = [[CRAWL_BLASTSML]],
@@ -28,7 +32,7 @@ unitDef = {
   iconType               = [[t3spidergeneric]],
   idleAutoHeal           = 5,
   idleTime               = 1800,
-  initCloaked			 = true,
+  initCloaked            = true,
   leaveTracks            = true,
   maxDamage              = 12000,
   maxSlope               = 72,
@@ -39,7 +43,7 @@ unitDef = {
   noAutoFire             = false,
   noChaseCategory        = [[TERRAFORM FIXEDWING SATELLITE SUB]],
   objectName             = [[scorpion.s3o]],
-  script				 = [[striderscorpion.lua]],
+  script                 = [[striderscorpion.lua]],
   selfDestructAs         = [[CRAWL_BLASTSML]],
 
   sfxtypes               = {
@@ -48,7 +52,7 @@ unitDef = {
       [[custom:zeusmuzzle]],
       [[custom:zeusgroundflash]],
       [[custom:YELLOW_LIGHTNING_MUZZLE]],
-      [[custom:YELLOW_LIGHTNING_GROUNDFLASH]],	  
+      [[custom:YELLOW_LIGHTNING_GROUNDFLASH]],
     },
 
   },
@@ -56,7 +60,7 @@ unitDef = {
   trackOffset            = 0,
   trackStrength          = 10,
   trackStretch           = 1,
-  trackType				 = [[crossFoot]],
+  trackType              = [[crossFoot]],
   trackWidth             = 76,
   turnRate               = 400,
   workerTime             = 0,
@@ -67,7 +71,7 @@ unitDef = {
       def                = [[FAKELASER]],
       mainDir            = [[0 0 1]],
       maxAngleDif        = 30,
-    },  
+    },
     
     {
       def                = [[LIGHTNING]],
@@ -78,24 +82,24 @@ unitDef = {
     {
       def                = [[MULTILIGHTNING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
-    },	
-	
+    },
+    
     {
       def                = [[PARTICLEBEAM]],
-	  mainDir            = [[-0.2 0 1]],
+      mainDir            = [[-0.2 0 1]],
       maxAngleDif        = 240,
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
-	
+    
     {
       def                = [[PARTICLEBEAM]],
-	  mainDir            = [[0.2 0 1]],
+      mainDir            = [[0.2 0 1]],
       maxAngleDif        = 240,
       badTargetCategory  = [[FIXEDWING]],
       onlyTargetCategory = [[FIXEDWING LAND SINK TURRET SHIP SWIM FLOAT GUNSHIP HOVER]],
     },
-	
+    
   },
 
 
@@ -109,12 +113,17 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
+      customParams            = {
+        bogus = 1,
+        reaim_time = 1,
+      },
+
       damage                  = {
         default = 0,
         subs    = 0,
       },
 
-      duration                = 0.11,
+      duration                = 0.1,
       edgeEffectiveness       = 0.99,
       explosionGenerator      = [[custom:flash1green]],
       fireStarter             = 70,
@@ -127,7 +136,7 @@ unitDef = {
       minIntensity            = 1,
       noSelfDamage            = true,
       range                   = 450,
-      reloadtime              = 0.11,
+      reloadtime              = 0.1,
       rgbColor                = [[0 1 0]],
       soundStart              = [[weapon/laser/laser_burn5]],
       soundTrigger            = true,
@@ -150,11 +159,12 @@ unitDef = {
 
       customParams            = {
         extra_damage = 1080,
-		
-		light_camera_height = 1600,
-		light_color = [[0.85 0.85 1.2]],
-		light_radius = 200,
+        
+        light_camera_height = 1600,
+        light_color = [[0.85 0.85 1.2]],
+        light_radius = 200,
         gui_draw_range = 450,
+        reaim_time = 1,
       },
 
       cylinderTargeting      = 0,
@@ -184,22 +194,23 @@ unitDef = {
       weaponType              = [[LightningCannon]],
       weaponVelocity          = 400,
     },
-	
+    
     MULTILIGHTNING = {
       name                    = [[Multi-Stunner]],
       areaOfEffect            = 160,
       avoidFeature            = false,
-	  burst					  = 20,
-	  burstRate				  = 0.1,
-	  commandFire			  = true,
+      burst                   = 20,
+      burstRate               = 0.1,
+      commandFire             = true,
       craterBoost             = 0,
       craterMult              = 0,
       cylinderTargeting      = 0,
 
       customParams            = {
-		light_color = [[0.7 0.7 0.2]],
-		light_radius = 320,
+        light_color = [[0.7 0.7 0.2]],
+        light_radius = 320,
         gui_draw_range = 450,
+        reaim_time = 1,
       },
 
       damage                  = {
@@ -223,13 +234,13 @@ unitDef = {
       rgbColor                = [[1 1 0.25]],
       soundStart              = [[weapon/lightning_fire]],
       soundTrigger            = false,
-	  sprayAngle			  = 2048,
+      sprayAngle              = 2048,
       texture1                = [[lightning]],
       thickness               = 10,
       turret                  = true,
       weaponType              = [[LightningCannon]],
       weaponVelocity          = 450,
-    },	
+    },
 
     PARTICLEBEAM = {
       name                    = [[Auto Particle Beam]],
@@ -239,12 +250,13 @@ unitDef = {
       coreThickness           = 0.5,
       craterBoost             = 0,
       craterMult              = 0,
-	  
+      
       customParams            = {
-		light_color = [[0.9 0.22 0.22]],
-		light_radius = 80,
+        light_color = [[0.9 0.22 0.22]],
+        light_radius = 80,
+        reaim_time = 1,
       },
-	  
+      
       damage                  = {
         default = 70.01,
         subs    = 3,
@@ -277,6 +289,9 @@ unitDef = {
       featureDead      = [[HEAP]],
       footprintX       = 2,
       footprintZ       = 2,
+      collisionVolumeOffsets        = [[0 -5 0]],
+      collisionVolumeScales         = [[60 20 80]],
+      collisionVolumeType           = [[box]],
       object           = [[scorpion_dead.s3o]],
     },
     HEAP  = {
@@ -288,6 +303,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ striderscorpion = unitDef })
+} }

@@ -1,11 +1,10 @@
-unitDef = {
-
+return { shiptorpraider = {
   unitname            = [[shiptorpraider]],
   name                = [[Hunter]],
   description         = [[Torpedo-Boat (Raider)]],
-  acceleration        = 0.048,
+  acceleration        = 0.24,
   activateWhenBuilt   = true,
-  brakeRate           = 0.043,
+  brakeRate           = 0.43,
   buildCostMetal      = 100,
   builder             = false,
   buildPic            = [[shiptorpraider.png]],
@@ -19,8 +18,8 @@ unitDef = {
   corpse              = [[DEAD]],
 
   customParams        = {
-	modelradius    = [[14]],
-	turnatfullspeed = [[1]],
+    modelradius    = [[14]],
+    turnatfullspeed = [[1]],
   },
 
 
@@ -42,8 +41,8 @@ unitDef = {
   objectName          = [[SHIPTORPRAIDER]],
   script              = [[shiptorpraider.lua]],
   selfDestructAs      = [[SMALL_UNITEX]],
-  sightDistance       = 450,
-  sonarDistance       = 450,
+  sightDistance       = 560,
+  sonarDistance       = 560,
   turnRate            = 800,
   waterline           = 0,
   workerTime          = 0,
@@ -68,16 +67,15 @@ unitDef = {
       avoidFriendly           = false,
       bouncerebound           = 0.5,
       bounceslip              = 0.5,
-	  burnblow                = 1,
-
-      canAttackGround		  = false,	-- workaround for range hax
+      burnblow                = 1,
+      canAttackGround          = false, -- workaround for range hax
       collideFriendly         = false,
       craterBoost             = 0,
       craterMult              = 0,
 
-			customParams = {
-				burst = Shared.BURST_RELIABLE,
-			},
+            customParams = {
+                burst = Shared.BURST_RELIABLE,
+            },
 
       damage                  = {
 
@@ -93,8 +91,8 @@ unitDef = {
       impulseBoost            = 1,
       impulseFactor           = 0.9,
       interceptedByShieldType = 1,
-	  flightTime              = 0.9,
-	  leadlimit               = 0,
+      flightTime              = 0.9,
+      leadlimit               = 0,
       model                   = [[wep_m_ajax.s3o]],
       myGravity               = 10.1,
       numbounce               = 4,
@@ -142,7 +140,4 @@ unitDef = {
 
   },
 
-}
-
-
-return lowerkeys({ shiptorpraider = unitDef })
+} }

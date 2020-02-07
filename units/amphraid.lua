@@ -1,10 +1,10 @@
-unitDef = {
+return { amphraid = {
   unitname               = [[amphraid]],
   name                   = [[Duck]],
   description            = [[Amphibious Raider Bot (Anti-Sub)]],
-  acceleration           = 0.18,
+  acceleration           = 0.54,
   activateWhenBuilt      = true,
-  brakeRate              = 0.375,
+  brakeRate              = 2.25,
   buildCostMetal         = 80,
   buildPic               = [[amphraid.png]],
   canGuard               = true,
@@ -13,7 +13,7 @@ unitDef = {
   category               = [[LAND SINK]],
   selectionVolumeOffsets = [[0 0 0]],
   selectionVolumeScales  = [[30 30 30]],
-  selectionVolumeType    = [[ellipsoid]], 
+  selectionVolumeType    = [[ellipsoid]],
   corpse                 = [[DEAD]],
 
   customParams           = {
@@ -43,8 +43,8 @@ unitDef = {
     },
   },
 
-  sightDistance          = 500,
-  sonarDistance          = 500,
+  sightDistance          = 560,
+  sonarDistance          = 560,
   trackOffset            = 0,
   trackStrength          = 8,
   trackStretch           = 1,
@@ -75,12 +75,12 @@ unitDef = {
       craterBoost             = 1,
       craterMult              = 2,
 
-	  customparams = {
-		burst = Shared.BURST_RELIABLE,
+      customparams = {
+        burst = Shared.BURST_RELIABLE,
 
-		light_color = [[1 0.6 0.2]],
-		light_radius = 180,
-	  },
+        light_color = [[1 0.6 0.2]],
+        light_radius = 180,
+      },
 
       damage                  = {
         default = 115,
@@ -92,7 +92,7 @@ unitDef = {
       impulseBoost            = 0,
       impulseFactor           = 0.4,
       interceptedByShieldType = 1,
-	  leadlimit               = 0,
+      leadlimit               = 0,
       model                   = [[wep_m_ajax.s3o]],
       noSelfDamage            = true,
       projectiles             = 2,
@@ -133,11 +133,11 @@ unitDef = {
       impulseBoost            = 0,
       impulseFactor           = 0.4,
       interceptedByShieldType = 1,
-	  leadlimit               = 0,
+      leadlimit               = 0,
       model                   = [[wep_m_ajax.s3o]],
       numbounce               = 4,
       noSelfDamage            = true,
-      projectiles	      	  = 2,
+      projectiles             = 2,
       range                   = 150,
       reloadtime              = 4,
       soundHit                = [[explosion/wet/ex_underwater]],
@@ -175,6 +175,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ amphraid = unitDef })
+} }

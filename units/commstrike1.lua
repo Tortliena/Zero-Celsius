@@ -1,10 +1,10 @@
-unitDef = {
+return { commstrike1 = {
   unitname               = [[commstrike1]],
   name                   = [[Strike Commander]],
   description            = [[Mobile Assault Commander]],
-  acceleration           = 0.18,
+  acceleration           = 0.54,
   activateWhenBuilt      = true,
-  brakeRate              = 0.375,
+  brakeRate              = 2.25,
   buildCostMetal         = 1200,
   buildDistance          = 128,
   builder                = true,
@@ -23,13 +23,13 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	level = [[1]],
-	statsname = [[dynstrike1]],
-	soundok = [[heavy_bot_move]],
-	soundselect = [[bot_select]],
-	soundbuild = [[builder_start]],
-	commtype = [[1]],
-	--decorationicons = {chest = "friendly", shoulders = "arrows-dot"},
+    level = [[1]],
+    statsname = [[dynstrike1]],
+    soundok = [[heavy_bot_move]],
+    soundselect = [[bot_select]],
+    soundbuild = [[builder_start]],
+    commtype = [[1]],
+    --decorationicons = {chest = "friendly", shoulders = "arrows-dot"},
     aimposoffset   = [[0 15 0]],
   },
 
@@ -57,8 +57,8 @@ unitDef = {
   sfxtypes               = {
 
     explosiongenerators = {
-    	[[custom:BEAMWEAPON_MUZZLE_BLUE]],
-		[[custom:NONE]],
+        [[custom:BEAMWEAPON_MUZZLE_BLUE]],
+        [[custom:NONE]],
     },
 
   },
@@ -105,7 +105,7 @@ unitDef = {
         subs    = 0,
       },
 
-      duration                = 0.11,
+      duration                = 0.1,
       edgeEffectiveness       = 0.99,
       explosionGenerator      = [[custom:flash1green]],
       fireStarter             = 70,
@@ -117,7 +117,7 @@ unitDef = {
       laserFlareSize          = 5.53,
       minIntensity            = 1,
       range                   = 300,
-      reloadtime              = 0.11,
+      reloadtime              = 0.1,
       rgbColor                = [[0 1 0]],
       soundStart              = [[weapon/laser/laser_burn5]],
       soundTrigger            = true,
@@ -147,7 +147,7 @@ unitDef = {
         subs    = 0.8,
       },
 
-      duration                = 0.11,
+      duration                = 0.1,
       edgeEffectiveness       = 0.99,
       explosionGenerator      = [[custom:flash1blue]],
       fireStarter             = 70,
@@ -159,7 +159,7 @@ unitDef = {
       laserFlareSize          = 3,
       minIntensity            = 1,
       range                   = 300,
-      reloadtime              = 0.11,
+      reloadtime              = 0.1,
       rgbColor                = [[0 1 1]],
       soundStart              = [[weapon/laser/pulse_laser3]],
       soundTrigger            = true,
@@ -196,6 +196,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ commstrike1 = unitDef })
+} }

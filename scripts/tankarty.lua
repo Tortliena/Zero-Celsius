@@ -4,14 +4,14 @@ local dynamicRockData
 include "trackControl.lua"
 include "pieceControl.lua"
 
-local main = piece 'main' 
-local turret = piece 'turret' 
-local outer = piece 'outer' 
-local inner = piece 'inner' 
-local sleeve = piece 'sleeve' 
-local barrel = piece 'barrel' 
-local flare = piece 'flare' 
-local breech = piece 'breech' 
+local main = piece 'main'
+local turret = piece 'turret'
+local outer = piece 'outer'
+local inner = piece 'inner'
+local sleeve = piece 'sleeve'
+local barrel = piece 'barrel'
+local flare = piece 'flare'
+local breech = piece 'breech'
 local smoke = piece 'smoke'
 
 local gunHeading = 0
@@ -141,7 +141,7 @@ function script.Create()
 	while (select(5, Spring.GetUnitHealth(unitID)) < 1) do
 		Sleep (250)
 	end
-	StartThread (GG.Script.SmokeUnit, smokePiece)
+	StartThread (GG.Script.SmokeUnit, unitID, smokePiece)
 end
 
 local function RestoreAfterDelay()
@@ -181,6 +181,14 @@ function script.FireWeapon()
 	Move(breech, z_axis, 0, BREECH_SPEED)
 end
 
+function script.BlockShot(num, targetID)
+	if Spring.ValidUnitID(targetID) then
+		local distMult = (Spring.GetUnitSeparation(unitID, targetID) or 0)/1120
+		return GG.OverkillPrevention_CheckBlock(unitID, targetID, 600, 120 * distMult, false, false, true)
+	end
+	return false
+end
+
 function script.AimFromWeapon(num)
 	return barrel
 end
@@ -194,7 +202,6 @@ function script.Killed(recentDamage, maxHealth)
 	if (severity < 0.25) then
 		return 1
 	elseif (severity < 0.5) then
-		corpsetype = 1
 		Explode(barrel, SFX.FALL)
 		Explode(breech, SFX.FALL)
 		Explode(sleeve, SFX.FALL)

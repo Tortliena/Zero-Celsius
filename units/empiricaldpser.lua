@@ -1,4 +1,4 @@
-unitDef = {
+return { empiricaldpser = {
   unitname                = [[empiricaldpser]],
   name                    = [[Empirical DPS thing]],
   description             = [[Shoot at it for science.]],
@@ -14,7 +14,7 @@ unitDef = {
   iconType                = [[mahlazer]],
   idleAutoHeal            = 5,
   idleTime                = 1800,
-  maxDamage               = 15000,
+  maxDamage               = 150000,
   maxSlope                = 18,
   maxVelocity             = 0,
   maxWaterDepth           = 0,
@@ -26,6 +26,4 @@ unitDef = {
   useBuildingGroundDecal  = true,
   workerTime              = 0,
   yardMap                 = [[yyyy]],
-}
-
-return lowerkeys({ empiricaldpser = unitDef })
+} }

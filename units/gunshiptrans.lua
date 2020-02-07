@@ -1,4 +1,4 @@
-unitDef = {
+return { gunshiptrans = {
   unitname            = [[gunshiptrans]],
   name                = [[Charon]],
   description         = [[Air Transport]],
@@ -26,9 +26,9 @@ unitDef = {
 
   customParams        = {
     airstrafecontrol  = [[1]],
-	midposoffset      = [[0 0 0]],
-	modelradius       = [[15]],
-	islighttransport  = 1,
+    midposoffset      = [[0 0 0]],
+    modelradius       = [[15]],
+    islighttransport  = 1,
   },
 
   explodeAs           = [[GUNSHIPEX]],
@@ -84,6 +84,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ gunshiptrans = unitDef })
+} }

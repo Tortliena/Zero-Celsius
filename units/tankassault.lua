@@ -1,9 +1,9 @@
-unitDef = {
+return { tankassault = {
   unitname            = [[tankassault]],
   name                = [[Minotaur]],
   description         = [[Assault Tank]],
-  acceleration        = 0.0237,
-  brakeRate           = 0.04786,
+  acceleration        = 0.119,
+  brakeRate           = 0.479,
   buildCostMetal      = 850,
   builder             = false,
   buildPic            = [[tankassault.png]],
@@ -13,13 +13,13 @@ unitDef = {
   category            = [[LAND]],
   collisionVolumeOffsets = [[0 0 0]],
   collisionVolumeScales  = [[50 50 50]],
-  collisionVolumeType    = [[ellipsoid]],  
+  collisionVolumeType    = [[ellipsoid]],
   corpse              = [[DEAD]],
 
   customParams        = {
-	aimposoffset   = [[0 0 0]],
-	midposoffset   = [[0 0 0]],
-	modelradius    = [[25]],
+    aimposoffset   = [[0 0 0]],
+    midposoffset   = [[0 0 0]],
+    modelradius    = [[25]],
   },
 
   explodeAs           = [[BIG_UNITEX]],
@@ -125,6 +125,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ tankassault = unitDef })
+} }

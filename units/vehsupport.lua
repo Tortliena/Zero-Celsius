@@ -1,9 +1,9 @@
-unitDef = {
+return { vehsupport = {
   unitname               = [[vehsupport]],
   name                   = [[Fencer]],
   description            = [[Deployable Missile Rover (must stop to fire)]],
-  acceleration           = 0.0354,
-  brakeRate              = 0.0358,
+  acceleration           = 0.177,
+  brakeRate              = 0.358,
   buildCostMetal         = 140,
   builder                = false,
   buildPic               = [[vehsupport.png]],
@@ -20,8 +20,8 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[13]],
-	chase_everything = [[1]], -- Does not get stupidtarget added to noChaseCats
+    modelradius    = [[13]],
+    chase_everything = [[1]], -- Does not get stupidtarget added to noChaseCats
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -84,8 +84,8 @@ unitDef = {
       craterMult              = 0,
 
       customParams        = {
-		light_camera_height = 2000,
-		light_radius = 200,
+        light_camera_height = 2000,
+        light_radius = 200,
       },
 
       damage                  = {
@@ -101,7 +101,7 @@ unitDef = {
       interceptedByShieldType = 2,
       model                   = [[wep_m_frostshard.s3o]],
       range                   = 600,
-      reloadtime              = 0.75,
+      reloadtime              = 0.733,
       smokeTrail              = true,
       soundHit                = [[explosion/ex_med17]],
       soundStart              = [[weapon/missile/missile_fire11]],
@@ -138,6 +138,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ vehsupport = unitDef })
+} }

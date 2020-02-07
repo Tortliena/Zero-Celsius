@@ -1,4 +1,4 @@
-unitDef = {
+return { turretsunlance = {
   unitname                      = [[turretsunlance]],
   name                          = [[Sunlance]],
   description                   = [[Anti-Tank Turret - Requires 25 Power]],
@@ -17,7 +17,7 @@ unitDef = {
   customParams                  = {
     keeptooltip    = [[any string I want]],
     neededlink     = 25,
-    pylonrange     = 50,	
+    pylonrange     = 50,
   },
 
   explodeAs                     = [[LARGE_BUILDINGEX]],
@@ -70,12 +70,12 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
-      customParams			= {
-		timeslow_damage = [[2500]],
+      customParams            = {
+        timeslow_damage = [[2500]],
       },
-	
+    
       damage                  = {
-		default = 1400,
+        default = 1400,
       },
 
       explosionGenerator      = [[custom:flash2purple]],
@@ -129,6 +129,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ turretsunlance = unitDef })
+} }

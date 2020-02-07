@@ -1,4 +1,4 @@
-unitDef = {
+return { staticrearm = {
   unitname            = [[staticrearm]],
   name                = [[Airpad]],
   description         = [[Repairs and Rearms Aircraft, repairs at 2.5 e/s per pad]],
@@ -23,10 +23,11 @@ unitDef = {
 
   customParams        = {
     pad_count = 4,
-	nobuildpower   = 1,
-	notreallyafactory = 1,
-	selection_rank  = [[1]],
+    nobuildpower   = 1,
+    notreallyafactory = 1,
+    selection_rank  = [[1]],
     selectionscalemult = 1,
+    ispad         = 1,
   },
 
   explodeAs           = [[LARGE_BUILDINGEX]],
@@ -40,7 +41,7 @@ unitDef = {
   maxVelocity         = 0,
   minCloakDistance    = 150,
   objectName          = [[airpad.s3o]],
-  script			  = [[staticrearm.lua]],
+  script              = [[staticrearm.lua]],
   selfDestructAs      = [[LARGE_BUILDINGEX]],
   showNanoSpray       = false,
   sightDistance       = 273,
@@ -68,6 +69,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ staticrearm = unitDef })
+} }

@@ -1,9 +1,9 @@
-unitDef = {
+return { cloakassault = {
   unitname               = [[cloakassault]],
   name                   = [[Knight]],
   description            = [[Lightning Assault Bot]],
-  acceleration           = 0.2,
-  brakeRate              = 0.6,
+  acceleration           = 0.6,
+  brakeRate              = 3.6,
   buildCostMetal         = 350,
   buildPic               = [[cloakassault.png]],
   canGuard               = true,
@@ -19,7 +19,8 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[12]],
+    modelradius    = [[12]],
+    cus_noflashlight = 1,
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -38,7 +39,7 @@ unitDef = {
   movementClass          = [[KBOT3]],
   noChaseCategory        = [[TERRAFORM FIXEDWING SUB]],
   objectName             = [[spherezeus.s3o]],
-  script		         = [[cloakassault.lua]],
+  script                 = [[cloakassault.lua]],
   selfDestructAs         = [[BIG_UNITEX]],
 
   sfxtypes               = {
@@ -50,7 +51,7 @@ unitDef = {
 
   },
 
-  sightDistance          = 325,
+  sightDistance          = 385,
   trackOffset            = 0,
   trackStrength          = 8,
   trackStretch           = 0.8,
@@ -79,16 +80,16 @@ unitDef = {
 
       customParams            = {
         extra_damage = 600,
-		
-		light_camera_height = 1600,
-		light_color = [[0.85 0.85 1.2]],
-		light_radius = 200,
+        
+        light_camera_height = 1600,
+        light_color = [[0.85 0.85 1.2]],
+        light_radius = 200,
       },
 
       cylinderTargeting      = 0,
 
       damage                  = {
-        default        = 240,
+        default        = 230,
       },
 
       duration                = 10,
@@ -100,7 +101,7 @@ unitDef = {
       intensity               = 12,
       interceptedByShieldType = 1,
       paralyzeTime            = 1,
-      range                   = 280,
+      range                   = 350,
       reloadtime              = 2.2,
       rgbColor                = [[0.5 0.5 1]],
       soundStart              = [[weapon/more_lightning_fast]],
@@ -135,6 +136,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ cloakassault = unitDef })
+} }

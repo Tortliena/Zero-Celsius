@@ -7,6 +7,10 @@ local function DistSq(x1,z1,x2,z2)
 	return (x1 - x2)*(x1 - x2) + (z1 - z2)*(z1 - z2)
 end
 
+local function Dist3D(x1,y1,z1,x2,y2,z2)
+	return sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2) + (z1 - z2)*(z1 - z2))
+end
+
 local function Mult(b, v)
 	return {b*v[1], b*v[2]}
 end
@@ -83,7 +87,8 @@ end
 
 -- Projection of v1 onto v2
 local function Project(v1, v2)
-	return Mult(Dot(v1, v2), Unit(v2))
+	local uV2 = Unit(v2)
+	return Mult(Dot(v1, uV2), uV2)
 end
 
 -- The normal of v1 onto v2. Returns such that v1 = normal + projection
@@ -108,6 +113,7 @@ end
 
 Spring.Utilities.Vector = {
 	DistSq = DistSq,
+	Dist3D = Dist3D,
 	Mult = Mult,
 	AbsVal = AbsVal,
 	Unit = Unit,

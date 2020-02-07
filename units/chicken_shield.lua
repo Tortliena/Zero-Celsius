@@ -1,10 +1,10 @@
-unitDef = {
+return { chicken_shield = {
   unitname            = [[chicken_shield]],
   name                = [[Blooper]],
   description         = [[Shield/Anti-Air]],
-  acceleration        = 0.36,
+  acceleration        = 1.08,
   activateWhenBuilt   = true,
-  brakeRate           = 0.205,
+  brakeRate           = 1.23,
   buildCostEnergy     = 0,
   buildCostMetal      = 0,
   builder             = false,
@@ -88,7 +88,7 @@ unitDef = {
       avoidFriendly           = false,
       burst                   = 3,
       burstrate               = 0.2,
-	  canAttackGround		  = false,
+      canAttackGround         = false,
       collideFriendly         = false,
       craterBoost             = 0,
       craterMult              = 0,
@@ -200,6 +200,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ chicken_shield = unitDef })
+} }

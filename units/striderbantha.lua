@@ -1,9 +1,9 @@
-unitDef = {
+return { striderbantha = {
   unitname               = [[striderbantha]],
   name                   = [[Paladin]],
   description            = [[Ranged Support Strider]],
-  acceleration           = 0.1047,
-  brakeRate              = 0.2212,
+  acceleration           = 0.314,
+  brakeRate              = 1.327,
   buildCostMetal         = 10000,
   builder                = false,
   buildPic               = [[striderbantha.png]],
@@ -20,8 +20,8 @@ unitDef = {
   customParams           = {
     extradrawrange = 465,
     aimposoffset   = [[0 -8 0]],
-	midposoffset   = [[0 -8 0]],
-	modelradius    = [[17]],
+    midposoffset   = [[0 -8 0]],
+    modelradius    = [[17]],
   },
 
   explodeAs              = [[ATOMIC_BLAST]],
@@ -96,10 +96,11 @@ unitDef = {
       craterMult              = 0,
       
       customParams            = {
-		burst = Shared.BURST_RELIABLE,
+        burst = Shared.BURST_RELIABLE,
 
-		light_color = [[1.25 0.8 1.75]],
-		light_radius = 320,
+        light_color = [[1.25 0.8 1.75]],
+        light_radius = 320,
+        reaim_time = 1,
       },
 
       damage                  = {
@@ -115,7 +116,7 @@ unitDef = {
       interceptedByShieldType = 1,
       largeBeamLaser          = true,
       laserFlareSize          = 16.94,
-	  leadLimit               = 18,
+      leadLimit               = 18,
       minIntensity            = 1,
       range                   = 950,
       reloadtime              = 10,
@@ -132,7 +133,7 @@ unitDef = {
       weaponType              = [[BeamLaser]],
       weaponVelocity          = 1500,
     },
-	
+    
     EMP_MISSILE = {
       name                    = [[EMP Missiles]],
       areaOfEffect            = 128,
@@ -148,8 +149,9 @@ unitDef = {
       
       customParams            = {
         combatrange = 900,
-		light_color = [[0.65 0.65 0.18]],
-		light_radius = 380,
+        light_color = [[0.65 0.65 0.18]],
+        light_radius = 380,
+        reaim_time = 1,
       },
 
       damage                  = {
@@ -186,7 +188,7 @@ unitDef = {
       weaponVelocity          = 250,
       wobble                  = 18000,
     },
-	
+    
     LIGHTNING      = {
       name                    = [[Lightning Cannon]],
       areaOfEffect            = 8,
@@ -195,10 +197,11 @@ unitDef = {
 
       customParams            = {
         extra_damage = 960,
-		
-		light_camera_height = 2200,
-		light_color = [[0.85 0.85 1.2]],
-		light_radius = 200,
+        
+        light_camera_height = 2200,
+        light_color = [[0.85 0.85 1.2]],
+        light_radius = 200,
+        reaim_time = 1,
       },
 
       damage                  = {
@@ -227,7 +230,7 @@ unitDef = {
       weaponType              = [[LightningCannon]],
       weaponVelocity          = 400,
     },
-	
+    
   },
 
 
@@ -251,6 +254,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ striderbantha = unitDef })
+} }

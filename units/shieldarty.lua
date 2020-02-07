@@ -1,9 +1,9 @@
-unitDef = {
+return { shieldarty = {
   unitname               = [[shieldarty]],
   name                   = [[Racketeer]],
   description            = [[Disarming Artillery]],
-  acceleration           = 0.25,
-  brakeRate              = 0.75,
+  acceleration           = 0.75,
+  brakeRate              = 4.5,
   buildCostMetal         = 350,
   buildPic               = [[SHIELDARTY.png]],
   canGuard               = true,
@@ -69,17 +69,17 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
-	  customParams        = {
-		burst = Shared.BURST_RELIABLE,
+      customParams        = {
+        burst = Shared.BURST_RELIABLE,
 
-	    disarmDamageMult = 1,
-		disarmDamageOnly = 1,
-		disarmTimer      = 6, -- seconds
-	  
-		light_camera_height = 1500,
-		light_color = [[1 1 1]],
-	  },
-	  
+        disarmDamageMult = 1,
+        disarmDamageOnly = 1,
+        disarmTimer      = 6, -- seconds
+      
+        light_camera_height = 1500,
+        light_color = [[1 1 1]],
+      },
+      
       damage                  = {
         default        = 2500,
       },
@@ -133,6 +133,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shieldarty = unitDef })
+} }

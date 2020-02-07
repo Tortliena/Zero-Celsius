@@ -30,23 +30,24 @@ local teamResourceShare = {}
 local allyTeamResourceShares = {}
 local unitAlreadyFinished = {}
 
-local spAddTeamResource   = Spring.AddTeamResource
-local spEcho              = Spring.Echo
-local spGetGameSeconds    = Spring.GetGameSeconds
-local spGetPlayerInfo     = Spring.GetPlayerInfo
-local spGetTeamInfo       = Spring.GetTeamInfo
-local spGetTeamList       = Spring.GetTeamList
-local spGetTeamResources  = Spring.GetTeamResources
-local spGetTeamUnits      = Spring.GetTeamUnits
-local spGetUnitAllyTeam   = Spring.GetUnitAllyTeam
-local spGetUnitDefID      = Spring.GetUnitDefID
-local spGetUnitTeam       = Spring.GetUnitTeam
-local spGetPlayerList     = Spring.GetPlayerList
-local spTransferUnit      = Spring.TransferUnit
-local spUseTeamResource   = Spring.UseTeamResource
-local spGetUnitIsBuilding = Spring.GetUnitIsBuilding
-local spGetUnitHealth     = Spring.GetUnitHealth
-local spSetUnitHealth     = Spring.SetUnitHealth
+local spAddTeamResource     = Spring.AddTeamResource
+local spEcho                = Spring.Echo
+local spGetGameSeconds      = Spring.GetGameSeconds
+local spGetPlayerInfo       = Spring.GetPlayerInfo
+local spGetTeamInfo         = Spring.GetTeamInfo
+local spGetTeamList         = Spring.GetTeamList
+local spGetTeamResources    = Spring.GetTeamResources
+local spGetTeamUnits        = Spring.GetTeamUnits
+local spGetUnitAllyTeam     = Spring.GetUnitAllyTeam
+local spGetUnitDefID        = Spring.GetUnitDefID
+local spGetUnitTeam         = Spring.GetUnitTeam
+local spGetPlayerList       = Spring.GetPlayerList
+local spTransferUnit        = Spring.TransferUnit
+local spUseTeamResource     = Spring.UseTeamResource
+local spGetUnitIsBuilding   = Spring.GetUnitIsBuilding
+local spGetUnitHealth       = Spring.GetUnitHealth
+local spSetUnitHealth       = Spring.SetUnitHealth
+local spSetPlayerRulesParam = Spring.SetPlayerRulesParam
 
 local useAfkDetection = (Spring.GetModOptions().enablelagmonitor ~= "0")
 
@@ -137,7 +138,7 @@ local function GetPlayerActivity(playerID, onlyActive)
 	if not playerID then
 		return false
 	end
-	local name, active, spec, team, allyTeam, ping, _, _, _, customKeys = spGetPlayerInfo(playerID)
+	local name, active, spec, team, allyTeam, ping, _, _, _, _, customKeys = spGetPlayerInfo(playerID)
 	
 	if onlyActive then
 		if (active and ping <= PING_TIMEOUT) then
@@ -154,10 +155,15 @@ local function GetPlayerActivity(playerID, onlyActive)
 	
 	if useAfkDetection and (lastActionTime >= TO_AFK_THRESHOLD or lastActionTime >= FROM_AFK_THRESHOLD and playerIsAfk[playerID]) then
 		playerIsAfk[playerID] = true
+		spSetPlayerRulesParam(playerID, "lagmonitor_lagging", 1)
 		return false
 	end
-
+	
+	if playerIsAfk[playerID] then
+		spSetPlayerRulesParam(playerID, "lagmonitor_lagging", nil)
+	end
 	playerIsAfk[playerID] = false
+	
 	return customKeys.elo and tonumber(customKeys.elo) or 0
 end
 
@@ -259,7 +265,7 @@ local function DoUnitGiveAway(allyTeamID, recieveTeamID, giveAwayTeams, doPlayer
 		local givePlayerID = doPlayerLineage and TeamIDToPlayerID(giveTeamID)
 		
 		-- Energy share is not set because the storage needs to be full for full overdrive.
-		-- Also energy income is mostly private and a large energy influx to the rest of the 
+		-- Also energy income is mostly private and a large energy influx to the rest of the
 		-- team is likely to be wasted or overdriven inefficently.
 		
 		local units = spGetTeamUnits(giveTeamID) or {}
@@ -373,7 +379,7 @@ local function InitializeAiTeamRulesParams()
 	local teamList = Spring.GetTeamList()
 	for i = 1, #teamList do
 		local teamID = teamList[i]
-		local _, leaderID, _, isAiTeam, _, _, customKeys = spGetTeamInfo(teamID)
+		local _, leaderID, _, isAiTeam, _, _, _, customKeys = spGetTeamInfo(teamID)
 		if isAiTeam then
 			Spring.SetTeamRulesParam(teamList[i], "initialIsAiTeam", 1)
 		end

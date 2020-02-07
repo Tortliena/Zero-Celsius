@@ -46,7 +46,7 @@ end
 
 
 
-function AnimationControl()
+local function AnimationControl()
 
 	local current_tracks = 0
 	
@@ -186,7 +186,7 @@ local function Recoil()
 	Move(barrel2, z_axis, 0, 10)
 end
 
-function script.Shot(num)		
+function script.Shot(num)
 	--[[
 	Turn(firepoint, y_axis, math.rad(25))
 	EmitSfx(firepoint, GG.Script.FIRE_W2)
@@ -200,22 +200,16 @@ end
 function script.Killed(severity, maxHealth)
 	severity = severity / maxHealth
 	if severity <= 0.25 then
-	
-		corpsetype = 1
 		Explode(main, SFX.NONE)
 		Explode(turret, SFX.NONE)
 		return 1
 	end
 	if severity <= 0.50 then
-	
-		corpsetype = 1
 		Explode(main, SFX.NONE)
 		Explode(turret,SFX.NONE)
 		Explode(barrel1, SFX.FALL + SFX.SMOKE + SFX.FIRE)
 		return 1
 	else
-	
-		corpsetype = 2
 		Explode(main, SFX.NONE)
 		Explode(turret, SFX.NONE)
 		Explode(barrel2, SFX.FALL + SFX.SMOKE + SFX.FIRE)
@@ -241,5 +235,5 @@ function script.Create()
 	end
 	
 	StartThread(AnimationControl)
-	StartThread(GG.Script.SmokeUnit, smokePiece)
+	StartThread(GG.Script.SmokeUnit, unitID, smokePiece)
 end

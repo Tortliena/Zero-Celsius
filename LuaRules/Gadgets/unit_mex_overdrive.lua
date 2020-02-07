@@ -57,7 +57,11 @@ local enableMexPayback = isReturnOfInvestment
 
 include("LuaRules/Configs/constants.lua")
 
-local QUADFIELD_SQUARE_SIZE = 300 -- set to be twice the largest pylon range (so a pylon can be in 4 quads at most)
+--[[ Set to be twice the largest link range except Pylon, so a regular linking building can be in 4 quads at most.
+     Pylons can belong to more quads but they are comparatively rare and would inflate this value too much.
+     A potential optimisation here would be to measure if limiting this value to Solar radius would help even further
+     since Solar/Wind/Mex make up the majority of linkables. ]]
+local QUADFIELD_SQUARE_SIZE = 300
 
 for i = 1, #UnitDefs do
 	local udef = UnitDefs[i]
@@ -106,7 +110,7 @@ end
 
 local MIN_STORAGE = 0.5
 local PAYBACK_FACTOR = 0.5
-local MEX_REFUND_SHARE = 0.5 -- refund starts at 50%
+local MEX_REFUND_SHARE = 0.5 -- refund starts at 50% of base income and linearly goes to 0% over time
 
 local paybackDefs = { -- cost is how much to pay back
 	[UnitDefNames["energywind"].id] = {cost = UnitDefNames["energywind"].metalCost*PAYBACK_FACTOR},
@@ -727,7 +731,6 @@ local function RemovePylon(unitID)
 		mexes[allyTeamID][mexGridID][mid] = orgMetal
 		mexByID[unitID].gridID = mexGridID
 		if mexGridID ~= 0 then
-			local ai = allyTeamInfo[allyTeamID]
 			ai.mexCount = ai.mexCount + 1
 			ai.mexMetal = ai.mexMetal + orgMetal
 			ai.mexSquaredSum = ai.mexSquaredSum + (orgMetal * orgMetal)
@@ -857,20 +860,20 @@ local function OptimizeOverDrive(allyTeamID,allyTeamData,allyE,maxGridCapacity)
 							allyE = allyE - gridE
 							energyWasted = allyE
 							for unitID, orgMetal in pairs(allyTeamMexes[i]) do --re-distribute the grid energy to Mex (again! except taking account the limited energy of the grid)
-								local stunned_or_inbuld = spGetUnitIsStunned(unitID) or (spGetUnitRulesParam(unitID,"disarmed") == 1)
-								if stunned_or_inbuld then
+								local this_stunned_or_inbuld = spGetUnitIsStunned(unitID) or (spGetUnitRulesParam(unitID,"disarmed") == 1)
+								if this_stunned_or_inbuld then
 									orgMetal = 0
 								end
-								local incomeFactor = spGetUnitRulesParam(unitID,"resourceGenerationFactor")
-								if incomeFactor then
-									orgMetal = orgMetal*incomeFactor
+								local thisIncomeFactor = spGetUnitRulesParam(unitID,"resourceGenerationFactor")
+								if thisIncomeFactor then
+									orgMetal = orgMetal*thisIncomeFactor
 								end
-								local mexE = gridE*(orgMetal * orgMetal)/ gridMetalSquared
-								local metalMult = energyToExtraM(mexE)
+								local thisMexE = gridE*(orgMetal * orgMetal)/ gridMetalSquared
+								local metalMult = energyToExtraM(thisMexE)
 								local thisMexM = orgMetal + orgMetal * metalMult
 
-								spSetUnitRulesParam(unitID, "overdrive", 1+mexE/5, inlosTrueTable)
-								spSetUnitRulesParam(unitID, "overdrive_energyDrain", mexE, inlosTrueTable)
+								spSetUnitRulesParam(unitID, "overdrive", 1+thisMexE/5, inlosTrueTable)
+								spSetUnitRulesParam(unitID, "overdrive_energyDrain", thisMexE, inlosTrueTable)
 								spSetUnitRulesParam(unitID, "current_metalIncome", thisMexM, inlosTrueTable)
 								spSetUnitRulesParam(unitID, "overdrive_proportion", metalMult, inlosTrueTable)
 
@@ -999,8 +1002,8 @@ function gadget:GameFrame(n)
 			local allyTeamSharedEnergyIncome = allyTeamData.innateEnergy
 			local teamEnergy = {}
 			
-			for i = 1, allyTeamData.teams do
-				local teamID = allyTeamData.team[i]
+			for j = 1, allyTeamData.teams do
+				local teamID = allyTeamData.team[j]
 				-- Calculate total energy and misc. metal income from units and structures
 				local genList = generatorList[allyTeamID][teamID]
 				local gen = generator[allyTeamID][teamID]
@@ -1124,7 +1127,7 @@ function gadget:GameFrame(n)
 					te.extraFreeStorage = math.max(0, averageSpare - te.inc)
 					
 					-- This prevents full overdrive until everyone has full energy storage.
-					allyTeamEnergyMaxCurMax = allyTeamEnergyMaxCurMax + math.max(te.max + te.extraFreeStorage, te.cur) 
+					allyTeamEnergyMaxCurMax = allyTeamEnergyMaxCurMax + math.max(te.max + te.extraFreeStorage, te.cur)
 					
 					-- Save from energy from being sent to overdrive if we are stalling and have below average energy income.
 					local holdBack = math.max(0, te.extraFreeStorage - te.cur)
@@ -1262,7 +1265,7 @@ function gadget:GameFrame(n)
 					if te.energyProducerOrUser then
 						te.overdriveEnergyNet = te.overdriveEnergyNet + energyToRefund*te.freeStorage/totalFreeStorage
 					end
-		end
+				end
 				energyWasted = 0
 			else
 				for i = 1, allyTeamData.teams do
@@ -1708,9 +1711,9 @@ local function OverdriveDebugToggle()
 			for i=1,#allyTeamList do
 				local allyTeamID = allyTeamList[i]
 				local list = pylonList[allyTeamID]
-				for i = 1, list.count do
-					local unitID = list.data[i]
-					UnitEcho(unitID, i .. ", " .. unitID)
+				for j = 1, list.count do
+					local unitID = list.data[j]
+					UnitEcho(unitID, j .. ", " .. unitID)
 				end
 			end
 		end
@@ -1718,7 +1721,7 @@ local function OverdriveDebugToggle()
 end
 
 local function OverdriveDebugEconomyToggle(cmd, line, words, player)
-	if not Spring.IsCheatingEnabled() then 
+	if not Spring.IsCheatingEnabled() then
 		return
 	end
 	local allyTeamID = tonumber(words[1])

@@ -11,6 +11,7 @@ local weaponDef = {
 	craterMult              = 0,
 
 	customParams            = {
+		is_unit_weapon = 1,
 		slot = [[5]],
 		muzzleEffectFire = [[custom:RAIDMUZZLE]],
 		flamethrower = [[1]],
@@ -24,6 +25,7 @@ local weaponDef = {
 		light_fade_time = 10,
 		light_beam_mult_frames = 5,
 		light_beam_mult = 5,
+		reaim_time = 1,
 	},
 
 	damage                  = {

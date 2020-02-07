@@ -1,9 +1,9 @@
-unitDef = {
+return { spiderriot = {
   unitname               = [[spiderriot]],
   name                   = [[Redback]],
   description            = [[Riot Spider]],
-  acceleration           = 0.22,
-  brakeRate              = 0.66,
+  acceleration           = 0.66,
+  brakeRate              = 3.96,
   buildCostMetal         = 240,
   buildPic               = [[spiderriot.png]],
   canGuard               = true,
@@ -12,7 +12,7 @@ unitDef = {
   category               = [[LAND]],
   collisionVolumeOffsets = [[0 5 0]],
   collisionVolumeScales  = [[36 36 36]],
-  collisionVolumeType    = [[ellipsoid]], 
+  collisionVolumeType    = [[ellipsoid]],
   corpse                 = [[DEAD]],
 
   customParams           = {
@@ -66,8 +66,8 @@ unitDef = {
       craterMult              = 0,
 
       customParams            = {
-		light_color = [[0.9 0.22 0.22]],
-		light_radius = 80,
+        light_color = [[0.9 0.22 0.22]],
+        light_radius = 80,
       },
 
       damage                  = {
@@ -92,7 +92,7 @@ unitDef = {
       turret                  = true,
       weaponType              = [[BeamLaser]],
     },
-	
+    
   },
 
   featureDefs            = {
@@ -114,6 +114,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ spiderriot = unitDef })
+} }

@@ -1,9 +1,9 @@
-unitDef = {
+return { tankcon = {
   unitname               = [[tankcon]],
   name                   = [[Welder]],
   description            = [[Armed Construction Tank, Builds at 7.5 m/s]],
-  acceleration           = 0.066,
-  brakeRate              = 1.5,
+  acceleration           = 0.33,
+  brakeRate              = 15.0,
   buildCostMetal         = 200,
   buildDistance          = 180,
   builder                = true,
@@ -22,15 +22,16 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	aimposoffset   = [[0 0 0]],
-	midposoffset   = [[0 -10 0]],
-	modelradius    = [[30]],
+    aimposoffset   = [[0 0 0]],
+    midposoffset   = [[0 -10 0]],
+    modelradius    = [[30]],
+    selection_scale = 1.2,
   },
 
   energyUse              = 0,
   explodeAs              = [[BIG_UNITEX]],
-  footprintX             = 3,
-  footprintZ             = 3,
+  footprintX             = 2,
+  footprintZ             = 2,
   iconType               = [[builder]],
   idleAutoHeal           = 5,
   idleTime               = 1800,
@@ -40,7 +41,7 @@ unitDef = {
   maxVelocity            = 2.1,
   maxWaterDepth          = 22,
   minCloakDistance       = 75,
-  movementClass          = [[TANK3]],
+  movementClass          = [[TANK2]],
   moveState              = 0,
   noAutoFire             = false,
   noChaseCategory        = [[TERRAFORM FIXEDWING SATELLITE SUB]],
@@ -88,8 +89,8 @@ unitDef = {
       craterMult              = 0,
 
       customParams        = {
-		light_camera_height = 1200,
-		light_radius = 120,
+        light_camera_height = 1200,
+        light_radius = 120,
       },
 
       damage                  = {
@@ -142,6 +143,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ tankcon = unitDef })
+} }

@@ -50,6 +50,18 @@ Spring.ScaledGetMouseState = function()
 	local mx, my, left, right, mid, offscreen = Spring.GetMouseState()
 	return mx/((WG and WG.uiScale) or 1), my/((WG and WG.uiScale) or 1), left, right, mid, offscreen
 end
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+local oldGetGroundExtremes = Spring.GetGroundExtremes
+
+Spring.GetGroundExtremes = function()
+	local minOverride = Spring.GetGameRulesParam("ground_min_override")
+	if minOverride then
+		return minOverride, Spring.GetGameRulesParam("ground_max_override")
+	end
+	return oldGetGroundExtremes()
+end
 
 -----------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
@@ -68,7 +80,7 @@ if Script.IsEngineMinVersion(104, 0, 50) then
 	end
 end
 
-if Script.IsEngineMinVersion(104, 0, 536) then
+if not Script.IsEngineMinVersion(104, 0, 536) then
 	local origGetPlayerInfo = Spring.GetPlayerInfo
 	Spring.GetPlayerInfo = function (playerID)
 		if not playerID then
@@ -77,6 +89,12 @@ if Script.IsEngineMinVersion(104, 0, 536) then
 		local r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11 = origGetPlayerInfo(playerID)
 		return r1, r2, r3, r4, r5, r6, r7, r8, r9, r11, r10
 	end
+end
+
+if not Script.IsEngineMinVersion(104, 0, 1100) then
+	Script.SetWatchProjectile  = Script.SetWatchWeapon
+	Script.SetWatchExplosion   = Script.SetWatchWeapon
+	Script.SetWatchAllowTarget = Script.SetWatchWeapon
 end
 
 if not Script.IsEngineMinVersion(104, 0, 1143) then
@@ -99,7 +117,7 @@ if not Script.IsEngineMinVersion(104, 0, 1143) then
 	end
 end
 
-if Script.IsEngineMinVersion(104, 0, 1166) then
+if not Script.IsEngineMinVersion(104, 0, 1166) then
 	local origGetTeamInfo = Spring.GetTeamInfo
 	Spring.GetTeamInfo = function (p1, p2)
 		local r1, r2, r3, r4, r5, r6, r7, r8 = origGetTeamInfo(p1, p2)

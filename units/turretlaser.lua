@@ -1,4 +1,4 @@
-unitDef = {
+return { turretlaser = {
   unitname                      = [[turretlaser]],
   name                          = [[Lotus]],
   description                   = [[Light Laser Tower]],
@@ -19,6 +19,7 @@ unitDef = {
 
   customParams                  = {
     aimposoffset   = [[0 22 0]],
+    cus_noflashlight = 1,
   },
 
   explodeAs                     = [[SMALL_BUILDINGEX]],
@@ -46,7 +47,7 @@ unitDef = {
     },
 
   },
-  sightDistance                 = 520,
+  sightDistance                 = 554,  -- Range*1.1 + 48 for radar overshoot
   turnRate                      = 0,
   useBuildingGroundDecal        = true,
   waterline                     = 5,
@@ -74,13 +75,13 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
-	  customparams = {
-		stats_hide_damage = 1, -- continuous laser
-		stats_hide_reload = 1,
-		
-		light_color = [[0.4 1.1 1.1]],
-		light_radius = 120,
-	  },
+      customparams = {
+        stats_hide_damage = 1, -- continuous laser
+        stats_hide_reload = 1,
+        
+        light_color = [[0.4 1.1 1.1]],
+        light_radius = 120,
+      },
 
       damage                  = {
         default = 7.15,
@@ -137,6 +138,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ turretlaser = unitDef })
+} }

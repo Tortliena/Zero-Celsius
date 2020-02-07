@@ -1,4 +1,4 @@
-unitDef = {
+return { turretriot = {
   unitname                      = [[turretriot]],
   name                          = [[Stardust]],
   description                   = [[Anti-Swarm Turret]],
@@ -44,7 +44,7 @@ unitDef = {
 
   },
 
-  sightDistance                 = 451,
+  sightDistance                 = 499, -- Range*1.1 + 48 for radar overshoot
   useBuildingGroundDecal        = true,
   yardMap                       = [[ooo ooo ooo]],
 
@@ -72,11 +72,11 @@ unitDef = {
       craterBoost             = 0.15,
       craterMult              = 0.3,
 
-	  customparams = {
-		light_color = [[0.8 0.76 0.38]],
-		light_radius = 180,
-		proximity_priority = 5, -- Don't use this unless required as it causes O(N^2) seperation checks per slow update.
-	  },
+      customparams = {
+        light_color = [[0.8 0.76 0.38]],
+        light_radius = 180,
+        proximity_priority = 5, -- Don't use this unless required as it causes O(N^2) seperation checks per slow update.
+      },
 
       damage                  = {
         default = 45,
@@ -116,7 +116,7 @@ unitDef = {
       object           = [[afury_dead.s3o]],
     },
 
-	HEAP  = {
+    HEAP  = {
       blocking         = false,
       footprintX       = 3,
       footprintZ       = 3,
@@ -125,6 +125,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ turretriot = unitDef })
+} }

@@ -1,9 +1,9 @@
-unitDef = {
+return { vehheavyarty = {
   unitname            = [[vehheavyarty]],
   name                = [[Impaler]],
   description         = [[Precision Artillery Rover]],
-  acceleration        = 0.042,
-  brakeRate           = 0.08,
+  acceleration        = 0.21,
+  brakeRate           = 0.8,
   buildCostMetal      = 700,
   builder             = false,
   buildPic            = [[vehheavyarty.png]],
@@ -73,12 +73,12 @@ unitDef = {
       craterBoost             = 1,
       craterMult              = 2,
 
-	  customParams        = {
-		burst = Shared.BURST_RELIABLE,
+      customParams        = {
+        burst = Shared.BURST_RELIABLE,
         reaim_time = 15, -- Some script bug. It does not need fast aim updates anyway.
-		light_camera_height = 2500,
-		light_color = [[1 0.8 0.2]],
-	  },
+        light_camera_height = 2500,
+        light_color = [[1 0.8 0.2]],
+      },
 
       damage         = {
         default = 800.1,
@@ -134,7 +134,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ vehheavyarty = unitDef })
-
+} }

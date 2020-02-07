@@ -1,9 +1,9 @@
-unitDef = {
+return { vehassault = {
   unitname               = [[vehassault]],
   name                   = [[Ravager]],
   description            = [[Assault Rover]],
-  acceleration           = 0.027,
-  brakeRate              = 0.0385,
+  acceleration           = 0.135,
+  brakeRate              = 0.385,
   buildCostMetal         = 250,
   builder                = false,
   buildPic               = [[vehassault.png]],
@@ -13,13 +13,13 @@ unitDef = {
   category               = [[LAND]],
   collisionVolumeOffsets = [[0 -5 0]],
   collisionVolumeScales  = [[42 42 42]],
-  collisionVolumeType    = [[ellipsoid]], 
+  collisionVolumeType    = [[ellipsoid]],
   corpse                 = [[DEAD]],
 
   customParams           = {
-	aimposoffset   = [[0 8 0]],
-	midposoffset   = [[0 3 0]],
-	modelradius    = [[21]],
+    aimposoffset   = [[0 8 0]],
+    midposoffset   = [[0 3 0]],
+    modelradius    = [[21]],
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -80,7 +80,7 @@ unitDef = {
 
       customParams        = {
         reaim_time = 8, -- COB
-		light_camera_height = 1500,
+        light_camera_height = 1500,
       },
 
       damage                  = {
@@ -113,6 +113,9 @@ unitDef = {
       featureDead      = [[HEAP]],
       footprintX       = 2,
       footprintZ       = 2,
+      collisionVolumeOffsets = [[0 -5 0]],
+      collisionVolumeScales  = [[42 42 42]],
+      collisionVolumeType    = [[ellipsoid]],
       object           = [[corraid_dead.s3o]],
     },
 
@@ -126,6 +129,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ vehassault = unitDef })
+} }

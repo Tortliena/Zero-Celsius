@@ -1,4 +1,4 @@
-unitDef = {
+return { staticnuke = {
   unitname                      = [[staticnuke]],
   name                          = [[Trinity]],
   description                   = [[Strategic Nuclear Launcher, Drains 18 m/s, 3 minute stockpile]],
@@ -12,12 +12,15 @@ unitDef = {
   buildingGroundDecalType       = [[staticnuke_aoplane.dds]],
   buildPic                      = [[staticnuke.png]],
   category                      = [[SINK UNARMED]],
+  collisionVolumeOffsets        = [[0 0 0]],
+  collisionVolumeScales         = [[90 55 115]],
+  collisionVolumeType           = [[box]],
   corpse                        = [[DEAD]],
 
   customParams                  = {
-	stockpiletime  = [[180]],
-	stockpilecost  = [[3240]],
-	priority_misc  = 1, -- Medium
+    stockpiletime  = [[180]],
+    stockpilecost  = [[3240]],
+    priority_misc  = 1, -- Medium
   },
 
   explodeAs                     = [[ATOMIC_BLAST]],
@@ -64,19 +67,19 @@ unitDef = {
       craterBoost             = 6,
       craterMult              = 6,
 
-	  customParams        	  = {
-		restrict_in_widgets = 1,
+      customParams              = {
+        restrict_in_widgets = 1,
 
-		light_color = [[2.92 2.64 1.76]],
-		light_radius = 3000,
-	  },
+        light_color = [[2.92 2.64 1.76]],
+        light_radius = 3000,
+      },
 
       damage                  = {
         default = 11501.1,
       },
 
       edgeEffectiveness       = 0.3,
-      explosionGenerator      = [[custom:LONDON_FLAT]],      -- note, spawning of the explosion is handled by exp_nuke_effect_chooser.lua 
+      explosionGenerator      = [[custom:LONDON_FLAT]],      -- note, spawning of the explosion is handled by exp_nuke_effect_chooser.lua
       fireStarter             = 0,
       flightTime              = 180,
       impulseBoost            = 0.5,
@@ -122,6 +125,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ staticnuke = unitDef })
+} }

@@ -1,9 +1,9 @@
-unitDef = {
+return { shieldscout = {
   unitname               = [[shieldscout]],
   name                   = [[Dirtbag]],
   description            = [[Box of Dirt]],
-  acceleration           = 0.2,
-  brakeRate              = 0.6,
+  acceleration           = 0.6,
+  brakeRate              = 3.6,
   buildCostMetal         = 30,
   buildPic               = [[shieldscout.png]],
   canGuard               = true,
@@ -36,7 +36,7 @@ unitDef = {
   leaveTracks            = true,
   maxDamage              = 600,
   maxSlope               = 36,
-  maxVelocity            = 2.5,
+  maxVelocity            = 2.6,
   maxWaterDepth          = 22,
   minCloakDistance       = 75,
   movementClass          = [[KBOT2]],
@@ -45,7 +45,7 @@ unitDef = {
   script                 = [[shieldscout.lua]],
   selfDestructAs         = [[CLOGGER_EXPLODE]],
   selfDestructCountdown  = 0,
-  sightDistance          = 350,
+  sightDistance          = 560,
   trackOffset            = 0,
   trackStrength          = 8,
   trackStretch           = 1,
@@ -79,15 +79,15 @@ unitDef = {
       craterBoost             = 0,
       craterMult              = 0,
 
-	  customParams        	  = {
-		light_radius = 0,
+      customParams              = {
+        light_radius = 0,
         combatrange = 5,
-	  },
+      },
 
       damage                  = {
-        default = 36,
-        planes  = 36,
-        subs    = 3.6,
+        default = 45,
+        planes  = 45,
+        subs    = 4.5,
       },
 
       explosionGenerator      = [[custom:none]],
@@ -103,7 +103,7 @@ unitDef = {
       rgbColor                = [[1 0.25 0]],
       soundStart              = [[explosion/ex_small4_2]],
       soundStartVolume        = 25,
-      targetborder            = 1,
+      targetborder            = 0.9,
       thickness               = 0,
       tolerance               = 1000000,
       turret                  = true,
@@ -144,6 +144,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ shieldscout = unitDef })
+} }

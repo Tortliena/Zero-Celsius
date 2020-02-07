@@ -1,9 +1,9 @@
-unitDef = {
+return { cloakskirm = {
   unitname               = [[cloakskirm]],
   name                   = [[Ronin]],
   description            = [[Skirmisher Bot (Direct-Fire)]],
-  acceleration           = 0.3,
-  brakeRate              = 0.2,
+  acceleration           = 0.9,
+  brakeRate              = 1.2,
   buildCostMetal         = 90,
   buildPic               = [[cloakskirm.png]],
   canGuard               = true,
@@ -16,9 +16,10 @@ unitDef = {
   corpse                 = [[DEAD]],
 
   customParams           = {
-	modelradius    = [[18]],
-	midposoffset   = [[0 6 0]],
-	reload_move_penalty = 0.8,
+    modelradius    = [[18]],
+    midposoffset   = [[0 6 0]],
+    reload_move_penalty = 0.8,
+    cus_noflashlight = 1,
   },
 
   explodeAs              = [[BIG_UNITEX]],
@@ -72,17 +73,17 @@ unitDef = {
       name                    = [[Rocket]],
       areaOfEffect            = 48,
       burnblow                = true,
-      cegTag                  = [[missiletrailredsmall]],
+      cegTag                  = [[rocket_trail_bar]],
       craterBoost             = 0,
       craterMult              = 0,
 
       customParams        = {
-		burst = Shared.BURST_RELIABLE,
+        burst = Shared.BURST_RELIABLE,
 
-		light_camera_height = 1600,
-		light_color = [[0.90 0.65 0.30]],
-		light_radius = 250,
-		reload_move_mod_time = 3,
+        light_camera_height = 1600,
+        light_color = [[0.90 0.65 0.30]],
+        light_radius = 250,
+        reload_move_mod_time = 3,
       },
 
       damage                  = {
@@ -99,13 +100,12 @@ unitDef = {
       noSelfDamage            = true,
       range                   = 455,
       reloadtime              = 3.5,
-      smokeTrail              = true,
+      smokeTrail              = false,
       soundHit                = [[weapon/missile/sabot_hit]],
       soundHitVolume          = 8,
       soundStart              = [[weapon/missile/sabot_fire]],
       soundStartVolume        = 7,
       startVelocity           = 200,
-      texture2                = [[darksmoketrail]],
       tracks                  = false,
       turret                  = true,
       weaponAcceleration      = 200,
@@ -134,6 +134,4 @@ unitDef = {
 
   },
 
-}
-
-return lowerkeys({ cloakskirm = unitDef })
+} }
